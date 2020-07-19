@@ -192,3 +192,53 @@ func (a ByAge) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
 }
 ```
+
+Much like the `Len` function, `Swap` has a *receiver type* with an identifier of `a` and of type `ByAge`
+
+The `Swap` function has two parameters, `i` and `j`, both of type `int`
+
+Inside of `Swap` we see that we are *swapping* the order of the values each time `Swap` is called
+
+The value `a[i]` will be replaced with the value `a[j]`, and the value `a[j]` will be be replaced with teh value `a[i]`
+
+The last function that `Sort` needs is the `Less` function
+
+```go
+func (a ByAge) Less(i, j int) bool {
+	return a[i].Age < a[j].Age
+}
+```
+
+The `Less` function has a *receiver type* with an identifier of `a` and of type `ByAge`
+
+The `Less` function has two parameters, `i` and `j`, both of type `int`
+
+The `Less` function returns a value of type `bool`
+
+> Note: The purpose of this sorting function is to sort from youngest to oldest based on the value of the `Age` field
+
+On the `return` statement we see that we are writing an expression that checks if `a[j].Age` is greater than `a[i].Age`
+
+This is the last step, and helps the `Sort` function determine which values should be swapped using the `Swap` function
+
+Inside of `func` `main` we declare 4 variables using the short declaration operator, all of these variables are assigned a value using a *composite literal* and are of type `person`
+
+```go
+me := Person{"martin", 29}
+brother := Person{"noah", 20}
+sisterOne := Person{"miranda", 26}
+sisterTwo := Person{"alexis", 22}
+```
+
+We create a new variable with the identifier `family` which will be a type of a `slice` of values that are of type `Person`
+
+We assign values to `family` using a composite literal
+
+```go
+family := []Person{me, brother, sisterOne, sisterTwo}
+```
+
+Next, we convert the `family` variable to be of our custom type `ByAge`, this way we can make use of our functions we created that all have *receiver types* of `ByAge`
+
+We pass this `ByAge(family)` value into the `Sort` function as the only argument
+
