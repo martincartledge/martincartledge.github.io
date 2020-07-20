@@ -1,10 +1,8 @@
 ---
 title: Sorting Data in Go
-date: "2020-04-26T22:40:32.169Z"
+date: "2020-07-22T22:40:32.169Z"
 description: "Learning Go - Week 10"
 ---
-
-This is the fifth entry of my weekly series _Learning Go_. Last week I covered a few more pieces of the `Slice` and `Map` type. This week I will be talking about the `Struct` and `Interface` types.
 
 This is the tenth entry of my weekly series _Learning Go_. Last week I talked about [Pointers, Marshalling, and Unmarshalling Data in Go](). This week I will be talking about how to sort your data in a Go Program. Let's get to it.
 
@@ -136,7 +134,7 @@ func main() {
 	me := Person{"martin", 29}
 	brother := Person{"noah", 20}
 	sisterOne := Person{"miranda", 26}
-	sisterTwo := Person{"alexis", 22}
+	sisterTwo := Person{"alexis", 23}
 
 	family := []Person{me, brother, sisterOne, sisterTwo}
 
@@ -227,7 +225,7 @@ Inside of `func` `main` we declare 4 variables using the short declaration opera
 me := Person{"martin", 29}
 brother := Person{"noah", 20}
 sisterOne := Person{"miranda", 26}
-sisterTwo := Person{"alexis", 22}
+sisterTwo := Person{"alexis", 23}
 ```
 
 We create a new variable with the identifier `family` which will be a type of a `slice` of values that are of type `Person`
@@ -241,4 +239,18 @@ family := []Person{me, brother, sisterOne, sisterTwo}
 Next, we convert the `family` variable to be of our custom type `ByAge`, this way we can make use of our functions we created that all have *receiver types* of `ByAge`
 
 We pass this `ByAge(family)` value into the `Sort` function as the only argument
+```go
+sort.Sort(ByAge(family))
+```
 
+On the next line, we are using the `fmt` package to print the value of `family`
+```go
+fmt.Println(family)
+// [{noah 20} {alexis 23} {miranda 26} {martin 29}]
+```
+
+And there it is! Now our data is sorted from youngest to oldest.
+
+## In Summary
+
+Sorting data is an extremely common occurence; therefore, knowing how to sort data effectively and efficiently in Go is paramount. I hope you learned something about using the `sort` package or about writing your own custom sorting function. Next week I will be talking about *Concurrency in Go*. See you then!
