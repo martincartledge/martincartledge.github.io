@@ -62,34 +62,78 @@ func countToFive(wasCalledBy string) {
 	}
 }
 
-func printMessage(message string) {
-	fmt.Println(message)
+func countToThree(wasCalledBy string) {
+	for i := 0; i < 3; i++ {
+		fmt.Println(wasCalledBy, i)
+	}
 }
 
 func main() {
 	countToFive("direct - blocking")
 
-	go countToFive("using a goroutine")
+	go countToFive("I am a goroutine!")
 
-	go printMessage("I am also a goroutine!")
+	go countToThree("I am another goroutine!")
 
 	time.Sleep(time.Second)
 	fmt.Println("exit program")
 }
-//direct - blocking 0
+// direct - blocking 0
 // direct - blocking 1
 // direct - blocking 2
 // direct - blocking 3
 // direct - blocking 4
-// I am also a goroutine!
+// using another goroutine! 0
 // using a goroutine 0
 // using a goroutine 1
 // using a goroutine 2
 // using a goroutine 3
 // using a goroutine 4
-// exit program
+// using another goroutine! 1
+// using another goroutine! 2
 ```
 
 Let's walk through what is happening:
 
-- test
+> Quick note: we are importing the `time` package because we need to *wait* for a second in order to allow our *goroutines* to finish. Remember, they are not blocking (syncronous); therefore, we need to wait for them to finsih their computations.
+
+We import the `time` package that we will use in this example just to wait for our *goroutines* to finish. I have found it is much more common to use a [WaitGroup](), we will discuss these later in the post
+
+```go
+import (
+	"fmt"
+	"time"
+)
+```
+
+Next, we create two functions, `countToFive` and `countToThree`, both of these expect a single paramter `wasCalledBy` which is of type `string`.
+```go
+func countToFive(wasCalledBy string) {
+	for i := 0; i < 5; i++ {
+		fmt.Println(wasCalledBy, i)
+	}
+}
+
+func countToThree(wasCalledBy string) {
+	for i := 0; i < 3; i++ {
+		fmt.Println(wasCalledBy, i)
+	}
+}
+```
+
+Calling our *goroutine* with the `wasCalledBy` argument will help illustrate how Go executes these *goroutines*
+
+Inside of `func` `main` I call the `countToFive` function directly, without making use of a *goroutine*
+
+```go
+func main() {
+	countToFive("direct - blocking")
+```
+
+As the argument says, because I am not using the `go` keyword and creating a *goroutine*, this code will be syncronous and block our thread of execution
+
+On the next line I create a *goroutine*. I do so very easily by calling the same function and placing the `go` keyword in front of the function identifier
+
+```go
+go countToFive("I am a goroutine!")
+```
