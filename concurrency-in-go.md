@@ -1,5 +1,5 @@
 ---
-title: Concurrency in Go
+title: Concurrency in Go Pt 1
 date: "2020-07-29T22:40:32.169Z"
 description: "Learning Go - Week 11"
 ---
@@ -130,10 +130,48 @@ func main() {
 	countToFive("direct - blocking")
 ```
 
-As the argument says, because I am not using the `go` keyword and creating a *goroutine*, this code will be syncronous and block our thread of execution
+As the argument says, I am not using the `go` keyword and creating a *goroutine*; therefore, this code will be syncronous and block our thread of execution
 
 On the next line I create a *goroutine*. I do so very easily by calling the same function and placing the `go` keyword in front of the function identifier
 
 ```go
 go countToFive("I am a goroutine!")
 ```
+
+Next, I fire off another *goroutine* by placing the `go` keyword in front of the function identifier.
+
+```go
+go countToThree("I am another goroutine!")
+```
+
+In order to ensure that our *goroutines* finish, we are using the `time` package in order for us to *sleep* for one second.
+
+```go
+time.Sleep(time.Second)
+```
+
+What do you expect to see in our logs? What order do you expect these *goroutines* to run in?
+
+The output might surpirse you, however, I hope it will illuminate some of the power that *goroutines* can giv e you.
+
+```go
+// direct - blocking 0
+// direct - blocking 1
+// direct - blocking 2
+// direct - blocking 3
+// direct - blocking 4
+// using another goroutine! 0
+// using a goroutine 0
+// using a goroutine 1
+// using a goroutine 2
+// using a goroutine 3
+// using a goroutine 4
+// using another goroutine! 1
+// using another goroutine! 2
+```
+
+The first 5 lines should not surprise you, we are calling a function without using a *goroutine*; therefore, it runs in a syncronous (blocking) manner.
+
+The next few lines should raise some eyebrows however. Do you notice that our `countToThree` function logged an item before `countToFive` did? 
+
+This is the power of *goroutines*. The Go runtime allow us to write code to that can be executed in a concurrent way.
