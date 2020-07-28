@@ -23,22 +23,22 @@
 
 ```js
 // function expression
-var fe = function() {
-  console.log('fe')
+var fe = function () {
+  console.log("fe")
 }
 ```
 
 ```js
 //function declaration
 function fd() {
-  console.log('fd')
+  console.log("fd")
 }
 ```
 
 ```js
 var favFood = "pizza"
 
-var foodThoughts = function() {
+var foodThoughts = function () {
   console.log(favFood)
 
   favFood = "burgers"
@@ -50,11 +50,12 @@ foodThoughts()
 ```
 
 // hoisting - creation phase
+
 ```js
 var favFood = undefined
 var foodThoughts = undefined
 
-foodThoughts = function() {
+foodThoughts = function () {
   console.log(favFood)
   // undefined
 
@@ -66,17 +67,18 @@ foodThoughts = function() {
 
 foodThoughts()
 ```
+
 ### function invocation
 
 ```js
 // function expression
 var canada = () => {
-  console.log('cold')
+  console.log("cold")
 }
 
 // function declaration
 function india() {
-  console.log('warm')
+  console.log("warm")
 }
 
 // function invoication/call/execution
@@ -89,7 +91,7 @@ function marry(p1, p2) {
   return `${p1} is married to ${p2}`
 }
 
-marry('martin', 'kristin')
+marry("martin", "kristin")
 // martin is married to kristin
 ```
 
@@ -114,19 +116,85 @@ marry('martin', 'kristin')
 
 ```js
 function two() {
-  var isValid; // undefined local(variable) environment
+  var isValid // undefined local(variable) environment
 }
 
 function one() {
   var isValid = true // local(variable) environment
-  two(); // new EC
+  two() // new EC
 }
 
-var isValid = false;
+var isValid = false
 
-one();
+one()
 
 // two() -- undefined
 // one() -- true
 // global() -- false
 ```
+
+### scope chain
+
+- global scope is outermost scope
+
+```js
+function sayMyName() {
+  var a = "a"
+  return function findName() {
+    var b = "b"
+    return function printName() {
+      var c = "c"
+      return "martin"
+    }
+  }
+}
+
+sayMyName()()()
+```
+
+```js
+function weird() {
+  height = 50
+  return height
+}
+
+weird()
+
+var hey = function doodle() {
+  return "hey"
+}
+
+hey()
+// hey
+
+doodle()
+// reference error, undefined
+```
+
+### function scope
+
+```js
+function a() {
+  var secret = "12345"
+}
+
+secret
+// not defined
+```
+
+### block scope
+
+```js
+if (5 > 4) {
+  const secret = "12345"
+}
+
+secret
+// not defined
+```
+
+### IIFE Immediately Invoked Function Expression
+
+(function() {
+
+})()
