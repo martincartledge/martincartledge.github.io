@@ -84,9 +84,7 @@ func main() {
 	chat <- "Doing well"
 	chat <- "I started watching Dark"
 	chat <- "It's so good"
-	chat <- "No spoilers please!"
 
-	fmt.Println(<- chat)
 	fmt.Println(<- chat)
 	fmt.Println(<- chat)
 	fmt.Println(<- chat)
@@ -102,3 +100,67 @@ func main() {
 ```
 
 This should right be a surpirse right? As you can see we have 5 messages sent to `chat` and have successfully used `fmt.Println()` to print out each entry. But what happens if we try to add another entry to `chat`?
+
+But what happens if I try to add another `string` value to our _Channel_? Let's take a look:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	chat := make(chan string, 5)
+
+	chat <- "Hey!"
+	chat <- "How's it going?"
+	chat <- "Doing well"
+	chat <- "I started watching Dark"
+	chat <- "It's so good"
+	// added message
+	chat <- "No spoilers please!"
+
+	fmt.Println(<- chat)
+	fmt.Println(<- chat)
+	fmt.Println(<- chat)
+	fmt.Println(<- chat)
+	fmt.Println(<- chat)
+	// added log
+	fmt.Println(<- chat)
+
+	// Hey!
+	// How's it going?
+	// Doing well
+	// I started watching Dark
+	// It's so good
+}
+```
+
+This is the same code, except for this time we are trying to add `No spoilers please!` onto our `chat` _Channel_. Go does not like this. When we try to run our application, Go gives us this error:
+
+```go
+fatal error: all goroutines are asleep - deadlock!
+```
+
+Although errors are commonly looked to as nuisances, Go thoughtfully introcues them to help you prevent unwanted side effects in your application.
+
+## Directional Channels
+
+When you start to use _Channels_, you quickly realize how helpful creating _Channels_ that can only receive values or only send values. Go bakes in this feature into the `chan` type, let me show you a few examples:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	c := make(chan <- int, 1)
+	c <- 29
+	fmt.Println(<-c)
+
+	fmt.Printf("%T\n", c)
+}
+```
