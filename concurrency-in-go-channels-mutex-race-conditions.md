@@ -164,3 +164,66 @@ func main() {
 	fmt.Printf("%T\n", c)
 }
 ```
+
+Inside of `func` `main` we create a new variable with the identifier `c` which is of type `chan` which will contain values of type `int`
+
+Notice we make `c` a _buffered channel_ by passing the value `1` as the second argument to `make`. In this case, our _buffered channel_ can only contain one value.
+
+```go
+c := make(chan <- int, 1)
+```
+
+Next, we send the value `29` onto our `c` Channel
+
+```go
+c <- 29
+```
+
+This seems pretty straight forward, doesn't it? When `fmt.Println(<-c)` is executed we should expect the value `29` to be printed right? Nope. This is _Directional Channels_ doing their job. Remember when we created our `c` Channel? We explicitly told Go that this `c` Channel would only be a _sending_ Channel when we used this syntax `chan <- int`
+
+```go
+fmt.Println(<-c)
+```
+
+When we attempt to run this code, Go stops us and gives us a very informative error message
+
+```go
+invalid operation: <-c (receive from send-only type chan<- int)
+```
+
+Let me show you another example of using a _Directional Channel_
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	c := make(<-chan int, 1)
+	c <- 29
+	fmt.Println(c)
+}
+```
+
+In this example we create a new variable with the identifier `c` which is of type `chan` which will contain values of type `int`; however, in this case we are creating a _Directional Channel_ that can only receieve values
+
+```go
+c := make(<-chan int, 1)
+```
+
+Now, when we try to send the value `29` onto the `c` Channel, we get this error message
+
+```go
+c <- 29
+invalid operation: c <- 29 (send to receive-only type <-chan int)
+```
+
+_Directional Channels_ can play an important role in organizing your code. Now, you can explicitly create a _Sending Channel_ and a `Receiving Channel`. If you add the peace of mind of making both of these Channels _buffered_, then you will gain a lot of predicitability in your code.
+
+Let me show you a more in-depth example of using _buffered, directional channels_
+
+```go
+
+```
