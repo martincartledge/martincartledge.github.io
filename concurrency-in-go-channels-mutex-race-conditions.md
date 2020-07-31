@@ -225,5 +225,58 @@ _Directional Channels_ can play an important role in organizing your code. Now, 
 Let me show you a more in-depth example of using _buffered, directional channels_
 
 ```go
+package main
 
+import (
+	"fmt"
+)
+
+func main() {
+	c := make(chan int, 1)
+
+	send(c)
+
+	receive(c)
+
+}
+
+func send(c chan<- int) {
+	c <- 29
+}
+
+func receive(c <-chan int) {
+	fmt.Println(<-c)
+}
+```
+
+In this example we use a _buffered channel_ and we create two functions: one that sends a value onto our _channel_ and one that receives a value from our _channel_
+
+First things first. We create a new variable with the identifier `c` which is of type `chan` which will contain values of type `int`. the `1` argument in our `make` function makes `c` a _buffered channel_
+
+```go
+c := make(chan int, 1)
+```
+
+Next, we call a function with the identifier `send` and we pass our `c` _channel_ as the only argument, we do the same for a function with the identifier `receieve`
+
+```go
+send(c)
+
+receive(c)
+```
+
+We create a function with the identifier `send` that has a single argument that is a `*sending channel*` (_channel_ that you can only send values to). This _channel_ will contain values of type `int`. Inside of this function we _send_ the value 29 onto our `c` _channel_
+
+```go
+func send(c chan<- int) {
+	c <- 29
+}
+```
+
+We create a function with the identifier `receive` that has a single argument that is a `*receiving channel*` (_channel_ that you can only receieve values from). This _channel_ will contain values of type `int`. Inside of this function we _receive_ the value 29 onto our `c` _channel_ and print that value using the `fmt` package
+
+```go
+func receive(c <-chan int) {
+	fmt.Println(<-c)
+}
 ```
