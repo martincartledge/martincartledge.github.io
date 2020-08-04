@@ -310,11 +310,15 @@ func main() {
 			v++
 			counter = v
 			fmt.Println("count:", counter)
+			// count: 1
+			// count: 1
+			// count: 1
+			// count: 1
+			// count: 1
 			wg.Done()
 		}()
 	}
 	wg.Wait()
-	fmt.Println("count:", counter)
 }
 ```
 
@@ -345,6 +349,51 @@ I am going to use the value of `gs` to iterate; therefore, I want to make sure t
 ```go
 wg.Add(gs)
 ```
+
+Next, we create a `for` loop that will use the value of `gs` in the `condition statement`. Inside of this `for` loop we create an annoymous _Goroutine_ and immeaditely invoke the _Goroutine_.
+
+Inside of our annoymous _Goroutine_ we declare a new variable with the identifier `v` and assigned the value of `counter`
+
+We use the `runtime` package to invoke the `Gosched()` method, thus firing a new _Goroutine_
+
+On the next line we increment our `v` variable and assign the `counter` variable to the `v` variable
+
+We use the `fmt` package to print out the value of `counter` and use the `wg` variable to call the `Done()` method which will let the Go runtime know that our `WaitGroup` is complete
+
+```go
+for i := 0; i < gs; i++ {
+	go func() {
+		v := counter
+		runtime.Gosched()
+		v++
+		counter = v
+		fmt.Println("count:", counter)
+		wg.Done()
+	}()
+}
+```
+
+We repeat this process 5 times total
+
+Outside of the `for` loop, we call the `Wait()` method that we access from the `wg` variable. The `Wait()` method prevents our `main` function from exiting
+
+```go
+wg.Wait()
+```
+
+Once our _WaitGroups_ are all complete our `main` function exits
+
+Did you notice what our `for` loop prints for the value of `counter`? Currently, the value is `1` each iteration. Why is that?
+
+```go
+// count: 1
+// count: 1
+// count: 1
+// count: 1
+// count: 1
+```
+
+Currently, we are immeaditely invoking 5 _Goroutines_ and not telling the Go runtime what to do with them; therefore, they are running, accessing, and updating our `counter` state at random. There is no way to predict the order of these _Goroutines_. There is a way to fix this though!
 
 The concept of only wanting a single _Goroutine_ to access a piece of state at a time, thus avoiding conflicts is called _Mutual Exclusion_. The traditional name for the data structure that shares this methodology is called a _Mutex_
 
@@ -379,6 +428,11 @@ func main() {
 			v++
 			counter = v
 			fmt.Println("count:", counter)
+			// count: 1
+			// count: 2
+			// count: 3
+			// count: 4
+			// count: 5
 			mu.Unlock()
 			wg.Done()
 		}()
@@ -386,3 +440,40 @@ func main() {
 	wg.Wait()
 }
 ```
+
+The code above is the same except for in a few places. Let me illuminate the differences in our code while using a _Mutex_
+
+In order for us to use a _Mutex_ we create a new variable with the identifier `mu` that has a value of of a `Mutex` which we get from the `sync` package
+
+```go
+var mu sync.Mutex
+```
+
+On the first line inside of our annoymous _Goroutine_ we use our `mu` variable to call the `Lock()` method. This method ensures exclusive access to our state. Once we are done updating our state, we call the `Unlock` method which is also supplied from our `mu` variable
+
+```go
+go func() {
+	mu.Lock()
+	v := counter
+	runtime.Gosched()
+	v++
+	counter = v
+	fmt.Println("count:", counter)
+	mu.Unlock()
+	wg.Done()
+}()
+```
+
+Now we can see that our `counter` logs look a lot more like what we would expect
+
+```go
+// count: 1
+// count: 2
+// count: 3
+// count: 4
+// count: 5
+```
+
+## In Summary
+
+Pretty cool huh? Now we can make great use of _Mutexes_ in our Go programs and ensure that we never contaminate our state and create any race conditions. This concludes my _Learning Go_ series. I hope you have enjoyed reading! Although this is the end of this series, you can expect many more posts on Go in the future! In the meantime, consider subscribing to my newsletter where I announce new posts and helpful tools and tips in the software industry. I occasioanlly throw in a picture or two of my Golden Retievers as well.
