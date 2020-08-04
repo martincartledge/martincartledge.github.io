@@ -280,3 +280,109 @@ func receive(c <-chan int) {
 	fmt.Println(<-c)
 }
 ```
+
+## Mutex and Race conditions
+
+So, we have learned about sending and receviing data across _Channels_, but what happens if multiple _Goroutines_ need to access a shared piece of state? The reliability of our state can be comprimised very easily, we do not want that.
+
+Let me show you an example of when multiple _Goroutines_ using a shared piece of state can provide unwanted results
+
+```go
+package main
+
+import (
+	"fmt"
+	"runtime"
+	"sync"
+)
+
+func main() {
+	counter := 0
+
+	const gs = 5
+	var wg sync.WaitGroup
+	wg.Add(gs)
+
+	for i := 0; i < gs; i++ {
+		go func() {
+			v := counter
+			runtime.Gosched()
+			v++
+			counter = v
+			fmt.Println("count:", counter)
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	fmt.Println("count:", counter)
+}
+```
+
+> Note: For the sake of this example, I am going to be using the [runtime]() package to make use of the [`Gosched()`]() method. This method will allow me fire off a new _Goroutine_.
+
+I want to make sure that I am importing the packages I am going to make use of; therefore, I import `fmt`, `runtime`, and the `sync` package
+
+Inside of `func` `main` we declare a new variable with the identifier `counter` that is assigned to the value `0`
+
+```go
+counter := 0
+```
+
+Next, I create a variable with the identifier `gs` (this stands for _Go Schedule_, I will cover this shortly) that is assigned to the value `5`
+
+```go
+const gs = 5
+```
+
+I create a variable with the identifier `wg` and assign it the value of a new _WaitGroup_
+
+```go
+var wg sync.WaitGroup
+```
+
+I am going to use the value of `gs` to iterate; therefore, I want to make sure that I `Add` `5` _WaitGroups_
+
+```go
+wg.Add(gs)
+```
+
+The concept of only wanting a single _Goroutine_ to access a piece of state at a time, thus avoiding conflicts is called _Mutual Exclusion_. The traditional name for the data structure that shares this methodology is called a _Mutex_
+
+The `sync` package, provided by the Go standard library, offers us `sync.Mutex` with two important methods: `Lock` and `Unlock`
+
+Let me show you an example of using `Mutex`
+
+```go
+package main
+
+import (
+	"fmt"
+	"runtime"
+	"sync"
+)
+
+func main() {
+
+	counter := 0
+
+	const gs = 5
+	var wg sync.WaitGroup
+	wg.Add(gs)
+
+	var mu sync.Mutex
+
+	for i := 0; i < gs; i++ {
+		go func() {
+			mu.Lock()
+			v := counter
+			runtime.Gosched()
+			v++
+			counter = v
+			fmt.Println("count:", counter)
+			mu.Unlock()
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+}
+```

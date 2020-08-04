@@ -198,3 +198,174 @@ secret
 (function() {
 
 })()
+
+### `this` Keyword
+
+this is the object that the function is a propety of
+
+- gives methods access to their object
+- execute same code for multiple objects
+- dynamically scoped (where it is called)
+
+```js
+const obj = {
+  name: "martin",
+  sing() {
+    return "lalala" + this.name
+  },
+  singAgain() {
+    return this.sing() + "!"
+  },
+}
+```
+
+```js
+function importantPerson() {
+  console.log(this.name)
+}
+
+const name = "martin"
+
+const obj1 = {
+  name: "kristin",
+  importantPerson: importantPerson,
+}
+
+const obj2 = {
+  name: "nikita",
+  importantPerson: importantPerson,
+}
+
+importantPerson()
+// martin
+
+obj1.importantPerson()
+// kristin
+
+obj2.importantPerson()
+// nikita
+```
+
+```js
+const obj = {
+  name: "kristin",
+  a() {
+    console.log("a", this)
+    // {name: kristin, a: F}
+    var b = function () {
+      console.log("b", this)
+      // global execution context
+    }
+  },
+}
+```
+
+es6 - lexically scoped
+
+```js
+const obj = {
+  name: "kristin",
+  a() {
+    console.log("a", this)
+    // {name: kristin, a: F}
+    var b = () => {
+      console.log("b", this)
+      // {name: kristin, a: F}
+    }
+  },
+}
+```
+
+### call()
+
+- useful for borrowing methods
+
+```js
+function a() {
+  console.log("hi")
+}
+
+a.call()
+// hi
+```
+
+```js
+const wizard = {
+  name: "martin",
+  health: 100,
+  heal(num1, num2) {
+    this.health += num1 + num2
+  },
+}
+
+const archer = {
+  name: "kristin",
+  health: 30,
+}
+
+wizard.heal.call(archer, 50, 30)
+```
+
+### apply()
+
+- take an array of params
+- useful for borrowing methods
+
+```js
+const wizard = {
+  name: "martin",
+  health: 100,
+  heal(num1, num2) {
+    this.health += num1 + num2
+  },
+}
+
+const archer = {
+  name: "kristin",
+  health: 30,
+}
+
+wizard.heal.apply(archer, [50, 30])
+```
+
+### bind()
+
+- returns a new function with certain context and params
+- allows us to store this keyword for later use
+
+```js
+const wizard = {
+  name: "martin",
+  health: 100,
+  heal(num1, num2) {
+    this.health += num1 + num2
+  },
+}
+
+const archer = {
+  name: "kristin",
+  health: 30,
+}
+
+const healArcher = wizard.heal.bind(archer, 50, 30)
+
+healArcher()
+```
+
+### function currying
+
+```js
+function multiply(a, b) {
+  return a * b
+}
+
+let multiplyByTwo = multiply.bind(this, 2)
+
+multiplyByTwo(4)
+// 8
+```
+
+### Context vs Scope
+
+// Scope - function based
+// Context - how a function is invoked
