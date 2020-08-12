@@ -4,7 +4,7 @@ date: "2020-08-05T22:40:32.169Z"
 description: "Learning Go - Week 12"
 ---
 
-This is the twelth entry of my weekly series _Learning Go_. Last week I talked about [using Goroutines and WaitGroups]() to make use of concurrent patterns in Go. This week I will continue to expand on the topic of concurrency by showung you how to use a few more useful features of Go: _Channels and Mutex_. I will also walk you through how you can idenitfy and fix potential race conditions in your code. Let's get to it!
+This is the twelfth entry of my weekly series _Learning Go_. Last week I talked about [using Goroutines and WaitGroups](https://www.martincartledge.io/concurrency-in-go-goroutines-and-wait-groups/) to make use of concurrent patterns in Go. This week I will continue to expand on the topic of concurrency by showing you how to use a few more useful features of Go: _Channels and Mutex_. I will also walk you through how you can identify and fix potential race conditions in your code. Let's get to it!
 
 ## Channels
 
@@ -13,8 +13,8 @@ This is the twelth entry of my weekly series _Learning Go_. Last week I talked a
 Essentially, _Channels_ can be thought of as messengers that you can send to various Goroutines to deliver or retrieve values
 
 - Channels block
-- They are syncronized
-- They have to pass or receieve the value at the same time
+- They are synchronized
+- They have to pass or receive the value at the same time
 
 Channels have two important pieces of syntax `<-` and `->`
 
@@ -48,7 +48,7 @@ Inside of our `func` `main` we use the short declaration operator to create a ne
 c := make(chan int)
 ```
 
-Next, we create an annoymous _Goroutine_. Inside of this _Goroutine_, using the `c <-` syntax we are sending the value `29` onto our `c` _channel_. We use the `()` to immeaditely run this _Goroutine_
+Next, we create an anonymous _Goroutine_. Inside of this _Goroutine_, using the `c <-` syntax we are sending the value `29` onto our `c` _channel_. We use the `()` to immediately run this _Goroutine_
 
 ```go
 go func() {
@@ -56,7 +56,7 @@ go func() {
 }()
 ```
 
-We use the `<- c` syntax to get the value off of our channel and print the value of `c`. When we go, it should be no surpirse that we get the value `29`. Cool! We have successfully sent data to a _channel_ and receieved a value from a _channel_.
+We use the `<- c` syntax to get the value off of our channel and print the value of `c`. When we go, it should be no surprise that we get the value `29`. Cool! We have successfully sent data to a _channel_ and received a value from a _channel_.
 
 ```go
 fmt.Println(<-c)
@@ -65,7 +65,7 @@ fmt.Println(<-c)
 
 What if we want to limit the amount of data that can be sent onto a _Channel_ we create? Go makes this possible by using a feature called _Channel Buffering_
 
-By default, _Channels_ are unbuffered, meaning that there is not limit to the amount of data that can be sent and stored on a _Channel_. As you can imagine, this could get out of hand fairly quickly. Whenever possible, it is always a good idea to use _Channel Buffering_.
+By default, _Channels_ are unbuffered, meaning that there is no limit to the amount of data that can be sent and stored on a _Channel_. As you can imagine, this could get out of hand fairly quickly. Whenever possible, it is always a good idea to use _Channel Buffering_.
 
 Let me show you an example:
 
@@ -99,7 +99,7 @@ func main() {
 }
 ```
 
-This should right be a surpirse right? As you can see we have 5 messages sent to `chat` and have successfully used `fmt.Println()` to print out each entry. But what happens if we try to add another entry to `chat`?
+This should right be a surprise right? As you can see we have 5 messages sent to `chat` and have successfully used `fmt.Println()` to print out each entry. But what happens if we try to add another entry to `chat`?
 
 But what happens if I try to add another `string` value to our _Channel_? Let's take a look:
 
@@ -143,7 +143,7 @@ This is the same code, except for this time we are trying to add `No spoilers pl
 fatal error: all goroutines are asleep - deadlock!
 ```
 
-Although errors are commonly looked to as nuisances, Go thoughtfully introcues them to help you prevent unwanted side effects in your application.
+Although errors are commonly looked to as nuisances, Go thoughtfully introduces them to help you prevent unwanted side effects in your application.
 
 ## Directional Channels
 
@@ -179,7 +179,7 @@ Next, we send the value `29` onto our `c` Channel
 c <- 29
 ```
 
-This seems pretty straight forward, doesn't it? When `fmt.Println(<-c)` is executed we should expect the value `29` to be printed right? Nope. This is _Directional Channels_ doing their job. Remember when we created our `c` Channel? We explicitly told Go that this `c` Channel would only be a _sending_ Channel when we used this syntax `chan <- int`
+This seems pretty straight forward, doesn't it? When `fmt.Println(<-c)` is executed we should expect the value `29` to be printed, right? Nope. This is _Directional Channels_ doing their job. Remember when we created our `c` Channel? We explicitly told Go that this `c` Channel would only be a _sending_ Channel when we used this syntax `chan <- int`
 
 ```go
 fmt.Println(<-c)
@@ -207,7 +207,7 @@ func main() {
 }
 ```
 
-In this example we create a new variable with the identifier `c` which is of type `chan` which will contain values of type `int`; however, in this case we are creating a _Directional Channel_ that can only receieve values
+In this example we create a new variable with the identifier `c` which is of type `chan` which will contain values of type `int`; however, in this case, we are creating a _Directional Channel_ that can only receive values
 
 ```go
 c := make(<-chan int, 1)
@@ -220,7 +220,7 @@ c <- 29
 invalid operation: c <- 29 (send to receive-only type <-chan int)
 ```
 
-_Directional Channels_ can play an important role in organizing your code. Now, you can explicitly create a _Sending Channel_ and a `Receiving Channel`. If you add the peace of mind of making both of these Channels _buffered_, then you will gain a lot of predicitability in your code.
+_Directional Channels_ can play an important role in organizing your code. Now, you can explicitly create a _Sending Channel_ and a `Receiving Channel`. If you add the peace of mind of making both of these Channels _buffered_, then you will gain a lot of predictability in your code.
 
 Let me show you a more in-depth example of using _buffered, directional channels_
 
@@ -257,7 +257,7 @@ First things first. We create a new variable with the identifier `c` which is of
 c := make(chan int, 1)
 ```
 
-Next, we call a function with the identifier `send` and we pass our `c` _channel_ as the only argument, we do the same for a function with the identifier `receieve`
+Next, we call a function with the identifier `send` and we pass our `c` _channel_ as the only argument, we do the same for a function with the identifier `receive`
 
 ```go
 send(c)
@@ -273,7 +273,7 @@ func send(c chan<- int) {
 }
 ```
 
-We create a function with the identifier `receive` that has a single argument that is a `*receiving channel*` (_channel_ that you can only receieve values from). This _channel_ will contain values of type `int`. Inside of this function we _receive_ the value 29 onto our `c` _channel_ and print that value using the `fmt` package
+We create a function with the identifier `receive` that has a single argument that is a `*receiving channel*` (_channel_ that you can only receive values from). This _channel_ will contain values of type `int`. Inside of this function we _receive_ the value 29 onto our `c` _channel_ and print that value using the `fmt` package
 
 ```go
 func receive(c <-chan int) {
@@ -283,7 +283,7 @@ func receive(c <-chan int) {
 
 ## Mutex and Race conditions
 
-So, we have learned about sending and receviing data across _Channels_, but what happens if multiple _Goroutines_ need to access a shared piece of state? The reliability of our state can be comprimised very easily, we do not want that.
+So, we have learned about sending and receiving data across _Channels_, but what happens if multiple _Goroutines_ need to access a shared piece of state? The reliability of our state can be compromised very easily, we do not want that.
 
 Let me show you an example of when multiple _Goroutines_ using a shared piece of state can provide unwanted results
 
@@ -322,11 +322,11 @@ func main() {
 }
 ```
 
-> Note: For the sake of this example, I am going to be using the [runtime]() package to make use of the [`Gosched()`]() method. This method will allow me fire off a new _Goroutine_.
+> Note: For the sake of this example, I am going to be using the [runtime](https://golang.org/pkg/runtime/) package to make use of the [`Gosched()`](https://golang.org/pkg/runtime/#Gosched) method. This method will allow me to fire off a new _Goroutine_.
 
 I want to make sure that I am importing the packages I am going to make use of; therefore, I import `fmt`, `runtime`, and the `sync` package
 
-Inside of `func` `main` we declare a new variable with the identifier `counter` that is assigned to the value `0`
+Inside of `func` `main`, we declare a new variable with the identifier `counter` that is assigned to the value `0`
 
 ```go
 counter := 0
@@ -350,13 +350,13 @@ I am going to use the value of `gs` to iterate; therefore, I want to make sure t
 wg.Add(gs)
 ```
 
-Next, we create a `for` loop that will use the value of `gs` in the `condition statement`. Inside of this `for` loop we create an annoymous _Goroutine_ and immeaditely invoke the _Goroutine_.
+Next, we create a `for` loop that will use the value of `gs` in the `condition statement`. Inside of this `for` loop we create an anonymous _Goroutine_ and immediately invoke the _Goroutine_.
 
-Inside of our annoymous _Goroutine_ we declare a new variable with the identifier `v` and assigned the value of `counter`
+Inside of our anonymous _Goroutine_ we declare a new variable with the identifier `v` and assigned the value of `counter`
 
 We use the `runtime` package to invoke the `Gosched()` method, thus firing a new _Goroutine_
 
-On the next line we increment our `v` variable and assign the `counter` variable to the `v` variable
+On the next line, we increment our `v` variable and assign the `counter` variable to the `v` variable
 
 We use the `fmt` package to print out the value of `counter` and use the `wg` variable to call the `Done()` method which will let the Go runtime know that our `WaitGroup` is complete
 
@@ -393,7 +393,7 @@ Did you notice what our `for` loop prints for the value of `counter`? Currently,
 // count: 1
 ```
 
-Currently, we are immeaditely invoking 5 _Goroutines_ and not telling the Go runtime what to do with them; therefore, they are running, accessing, and updating our `counter` state at random. There is no way to predict the order of these _Goroutines_. There is a way to fix this though!
+Currently, we are immediately invoking 5 _Goroutines_ and not telling the Go runtime what to do with them; therefore, they are running, accessing, and updating our `counter` state at random. There is no way to predict the order of these _Goroutines_. There is a way to fix this though!
 
 The concept of only wanting a single _Goroutine_ to access a piece of state at a time, thus avoiding conflicts is called _Mutual Exclusion_. The traditional name for the data structure that shares this methodology is called a _Mutex_
 
@@ -443,13 +443,13 @@ func main() {
 
 The code above is the same except for in a few places. Let me illuminate the differences in our code while using a _Mutex_
 
-In order for us to use a _Mutex_ we create a new variable with the identifier `mu` that has a value of of a `Mutex` which we get from the `sync` package
+In order for us to use a _Mutex_, we create a new variable with the identifier `mu` that has a value of a `Mutex` which we get from the `sync` package
 
 ```go
 var mu sync.Mutex
 ```
 
-On the first line inside of our annoymous _Goroutine_ we use our `mu` variable to call the `Lock()` method. This method ensures exclusive access to our state. Once we are done updating our state, we call the `Unlock` method which is also supplied from our `mu` variable
+On the first line inside of our anonymous _Goroutine_ we use our `mu` variable to call the `Lock()` method. This method ensures exclusive access to our state. Once we are done updating our state, we call the `Unlock` method which is also supplied from our `mu` variable
 
 ```go
 go func() {
@@ -476,4 +476,6 @@ Now we can see that our `counter` logs look a lot more like what we would expect
 
 ## In Summary
 
-Pretty cool huh? Now we can make great use of _Mutexes_ in our Go programs and ensure that we never contaminate our state and create any race conditions. This concludes my _Learning Go_ series. I hope you have enjoyed reading! Although this is the end of this series, you can expect many more posts on Go in the future! In the meantime, consider subscribing to my newsletter where I announce new posts and helpful tools and tips in the software industry. I occasioanlly throw in a picture or two of my Golden Retievers as well.
+Pretty cool huh? We now understand what a _Channel_, _Buffered Channel_, and a _Directional Channel_ is and how to use them effectively. We also learned about _Mutexes_ and how we can make great use of them in our Go programs to ensure that we never contaminate our state and create any race conditions.
+
+This concludes my _Learning Go_ series. I hope you have enjoyed reading! Although this is the end of this series, you can expect many more posts on Go in the future! In the meantime, consider [subscribing to my newsletter](https://www.martincartledge.io/) where I announce new posts and helpful tools and tips in the software industry. I occasionally throw in a picture or two of my Golden Retrievers as well. 👋🏻
