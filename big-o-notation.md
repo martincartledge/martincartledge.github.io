@@ -7,8 +7,8 @@ description: "Data Structures & Algorithims"
 ## What is Big O Notation?
 
 > the language we use for talking about how long it takes for an algorithm to run
-> 
-What is good code?
+>
+> What is good code?
 
 - readable
 - scalable
@@ -18,12 +18,12 @@ What is good code?
 > depends on the number of inputs
 
 ```js
-const large = new Array(10000).fill('nemo')
+const large = new Array(10000).fill("nemo")
 
 function findNemo(array) {
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === 'nemo') {
-      console.log('found nemo');
+    if (array[i] === "nemo") {
+      console.log("found nemo")
     }
   }
 }
@@ -31,11 +31,10 @@ function findNemo(array) {
 findNemo(large)
 ```
 
-
 ## O(1) Constant Time
 
 ```js
-const boxes = [0,1,2,3,4,5]
+const boxes = [0, 1, 2, 3, 4, 5]
 
 function logTwoBoxes(boxes) {
   console.log(boxes[0]) // O(1)
@@ -48,13 +47,56 @@ logTwoBoxes(boxes) // O(2)
 ## O(n²) Quadratic Time
 
 ```js
-
 ```
 
+## What is Big O Notation?
+
+> the language we use for talking about how long it takes for an algorithm to run
+>
+> What is good code?
+
+- readable
+- scalable
+
+## O(n) Linear Time
+
+> depends on the number of inputs
+
+```js
+const large = new Array(10000).fill("nemo")
+
+function findNemo(array) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === "nemo") {
+      console.log("found nemo")
+    }
+  }
+}
+
+findNemo(large)
+```
+
+## O(1) Constant Time
+
+```js
+const boxes = [0, 1, 2, 3, 4, 5]
+
+function logTwoBoxes(boxes) {
+  console.log(boxes[0]) // O(1)
+  console.log(boxes[1]) // O(1)
+}
+
+logTwoBoxes(boxes) // O(2)
+```
+
+## O(n²) Quadratic Time
+
+```js
+```
 
 ## Simplifying Big O
 
-- Always assume worst-case scenario 
+- Always assume worst-case scenario
 - Remove constants
 - Different terms for inputs
 - Drop non-dominants
@@ -76,7 +118,6 @@ function iterate(items) {
 
 // O(n) + O(n) = O(2n)
 ```
-
 
 ```js
 
@@ -100,9 +141,9 @@ BIG O(3 + 4n) -> simplified -> O(n)
 
 ```js
 function printTwoLists(listOne, listTwo) {
-  listOne.forEach(firstListItem => console.log(firstListItem))
-  
-  listTwo.forEach(secondListItem => console.log(secondListItem))
+  listOne.forEach((firstListItem) => console.log(firstListItem))
+
+  listTwo.forEach((secondListItem) => console.log(secondListItem))
 }
 
 // O(a + b)
