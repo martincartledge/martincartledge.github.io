@@ -30,7 +30,10 @@ This is the second post in my series _Data Structures and Algorithims using Java
 
 ### Push O(1)
 
-> Puts new value at the end of an array
+> Appends a new value at the end of an array and returns the new lenth
+
+- Relies on the `length` property to know where to insert new values
+- If `length` does not exist or can not be converted to a number, `0` is used
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
@@ -44,7 +47,9 @@ console.log(jediCouncil)
 
 ### Pop O(1)
 
-> Remove last item in array
+> Removes the last value in array and returns that value
+
+- If you call on an empty `Array`, `pop` returns `undefined`
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi", "anakin"]
@@ -56,19 +61,48 @@ console.log(jediCouncil)
 // 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi'
 ```
 
-### Unshift O(n)
+### Shift O(n)
 
-> A defintion goes here
+> Removes the first value in array and returns that value
+
+- Shifts the values and their indexes consecutively
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
 
-jediCouncil.unshift("anakin")
+jediCouncil.shift()
 
 console.log(jediCouncil)
 
-// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
+// 'mace windu', 'plo koon', 'ki-adi-mundi'
 ```
+
+First, we use the `const` keyword to delclare a new variable with the identifier `jediCouncil`. The value assigned to `jediCouncil` is an array of values that are of type `string`.
+
+> Note: I am noting the index position of each value, this will help illustrate what `shift` does under the hood later
+
+```js
+const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
+//index: 0 //index: 1    //index: 2  //index: 3
+```
+
+Next, I call the `shift` method on our `jediCouncil` variable.
+
+```js
+jediCouncil.shift()
+```
+
+On the next line I use `console.log` to log the new value of `jediCouncil`. Notice how the index positions have changed. Why is that?
+
+When `shift` is called on our `jediCouncil` array, the value `yoda` is removed. Since this value was in index position `0`, we have to iterate through the array and update each value's index position. This is why the `shift` method has a Big O of `O(n)`.
+
+```js
+console.log(jediCouncil)
+// 'mace windu', 'plo koon', 'ki-adi-mundi'
+// index: 0       index: 1     index: 2
+```
+
+Now we can see that `yoda` has been removed and all of the other values in `jediCouncil` have been _shifted_ over to `1` less index position.
 
 ### Splice O(n)
 
@@ -162,3 +196,119 @@ const wizard = new Wizard("martin", "jedi")
 
 wizard.introduce()
 ```
+
+## Let's Create an Array Data Structure
+
+```js
+class MyArray {
+  constructor() {
+    this.length = 0
+    this.data = {}
+  }
+
+  get(index) {
+    return this.data[index]
+  }
+
+  push(item) {
+    this.data[this.length] = item
+    this.length++
+    return this.length
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1]
+    delete this.data[this.length - 1]
+    this.length--
+    return lastItem
+  }
+
+  delete(index) {
+    const item = this.data[index]
+    this.shiftItems(index)
+  }
+
+  shiftItems(index) {
+    for (let i = index; i < this.length; i++) {
+      this.data[i] = this.data[i + 1]
+    }
+    delete this.data[this.length - 1]
+    this.length--
+  }
+}
+
+const newArray = new MyArray()
+```
+
+Talking about the contructor
+
+```js
+constructor() {
+  this.length = 0;
+  this.data = {};
+}
+```
+
+Talking about the `get` method
+
+```js
+get(index) {
+  return this.data[index];
+}
+```
+
+Talking about the `push` method
+
+```js
+push(item) {
+  this.data[this.length] = item;
+  this.length++;
+  return this.length;
+}
+```
+
+Talking about the `pop` method
+
+```js
+pop() {
+  const lastItem = this.data[this.length - 1];
+  delete this.data[this.length-1];
+  this.length--;
+  return lastItem;
+}
+```
+
+Talking about the `delete` method
+
+```js
+delete(index) {
+  const item = this.data[index];
+  this.shiftItems(index);
+}
+```
+
+Talking about the `shiftItems` method
+
+```js
+shiftItems(index) {
+  for (let i = index; i < this.length; i++) {
+    this.data[i] = this.data[i+1]
+  }
+  delete this.data[this.length-1];
+  this.length--;
+}
+```
+
+## In Summary
+
+### 🦹‍♂️
+
+- Fast data lookups
+- Fast when appending data in `Array` (`push`)
+- Fast when removing last item in `Array` (`pop`)
+- Ordered data
+
+### 🧟‍♂️
+
+- Slow when inserting items
+- Slow when deleteing items
