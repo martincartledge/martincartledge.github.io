@@ -45,11 +45,32 @@ console.log(jediCouncil)
 // 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
 ```
 
+First, we use the `const` keyword to create a new variable with the identifier `jediCouncil`. The value assigned to `jediCouncil` is an `Array` of values that are of type `string`.
+
+```js
+const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
+```
+
+Next, we call the `push` method on the `jediCouncil` `Array` with a single argument `anakin`.
+
+```js
+jediCouncil.push("anakin")
+```
+
+When we log our `jediCouncil` on the next line, we see that the value `anakin` is now the last value in our `jediCouncil` `Array`.
+
+```js
+console.log(jediCouncil)
+// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
+```
+
 ### Pop O(1)
 
 > Removes the last value in array and returns that value
 
 - If you call on an empty `Array`, `pop` returns `undefined`
+
+For this example, we want `anakin` out of the `jediCouncil`, we can use the `pop` method for that:
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi", "anakin"]
@@ -60,6 +81,29 @@ console.log(jediCouncil)
 
 // 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi'
 ```
+
+First, we use the `const` keyword to create a new variable with the identifier `jediCouncil`. The value assigned to `jediCouncil` is an `Array` of values that are of type `string`.
+
+```js
+const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi", "anakin"]
+```
+
+Next, we call the `pop` method on the `jediCouncil` `Array`, we do not need an argument when calling this method.
+
+```js
+jediCouncil.pop()
+```
+
+Now, when we log our `jediCouncil` on the next line, we should see that the value `anakin` is no longer in our `jediCouncil` `Array`
+
+```js
+console.log(jediCouncil)
+// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi'
+```
+
+Later, `anakin` 👋🏻
+
+Using `pop` makes removing the last item from your `Array` very quick and painless.
 
 ### Shift O(n)
 
@@ -106,101 +150,61 @@ Now we can see that `yoda` has been removed and all of the other values in `jedi
 
 ### Splice O(n)
 
-> A defintion goes here
+> Remove, replace, or add new values to an array
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
 
-jediCouncil.push("anakin")
+jediCouncil.splice(4, 0, "obi wan")
 
 console.log(jediCouncil)
 
-// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
+// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'obi wan'
 ```
 
-### Insert O(n)
-
-> A defintion goes here
+First, we use the `const` keyword to create a new variable with the identifier `jediCouncil`. The value assigned to `jediCouncil` is an `Array` of values that are of type `string`.
 
 ```js
 const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
+```
 
-jediCouncil.push("anakin")
+Next, we call the `splice` method on the `jediCouncil` `Array`.
 
+> Note: the `splice` method takes 3 arguments:
+> `start` - this is the index you would like to start changing the array
+> `deleteCount` - this is the number of values you would like to remove from the array (starting from the `start` argument)
+> `items` - this is the values you would like to add to the array, starting from the `start` argument
+> If the `items` argument is empty, the `spice` method will only remove items
+
+We pass 3 arguments to `splice`:
+
+- `5`: we want to start changing the `jediCouncil` array at index position `5`
+- `0`: we do not want to delete anything from `jediCouncil`; therefore, this value is `0`
+- `"obi wan"`: this is the value we would like to add to index position `5`
+
+```js
+jediCouncil.splice(5, 0, "obi wan")
+```
+
+When we log our `jediCouncil` on the next line, we can see that `obi wan` has been added to `jediCouncil` in index position `5`; which, in this case, is the last position.
+
+```js
 console.log(jediCouncil)
-
-// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
+// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'obi wan'
 ```
 
-### Delete O(n)
+Welcome aboard, `obi wan` 👍🏻, I think you will fit in nicely
 
-> A defintion goes here
-
-```js
-const jediCouncil = ["yoda", "mace windu", "plo koon", "ki-adi-mundi"]
-
-jediCouncil.push("anakin")
-
-console.log(jediCouncil)
-
-// 'yoda', 'mace windu', 'plo koon', 'ki-adi-mundi', 'anakin'
-```
-
-## Classes
-
-> A defintion goes here
-
-### Context (this)
-
-> What object are you inside of
-
-```js
-const obj = {
-  a: function () {
-    console.log(this)
-  },
-}
-```
-
-### Instantiation
-
-> Make a copy of an object and reuse the code
-
-```js
-class Player {
-  constructor(name, type) {
-    this.name = name
-    this.type = type
-  }
-  introduce() {
-    console.log(`hi I am ${this.name}, I am a ${this.type}`)
-  }
-}
-```
-
-### super()
-
-> How you get access to class you are extending
-
-```js
-class Wizard extends Player {
-  constructor(name, type) {
-    super(name, type)
-  }
-  play() {
-    console.log(`I am a ${this.type}`)
-  }
-}
-
-const wizard = new Wizard("martin", "jedi")
-
-wizard.introduce()
-```
+Although we did not `shift` any values or their index positions, we always take the worst case when determining Big O; therefore, the Big O of `splice` is `O(n)`
 
 ## Let's Create an Array Data Structure
 
+This section assumes you have some knowledge of how classes work for JavaScript. If classes are new for you, fear not! I will be writing a post on those in the near future. In the meantime, you can read more about them [right here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
+
+We know how the core pieces of an `Array` work, so let's build our own `Array` data structure!
+
 ```js
-class MyArray {
+class MyOwnArray {
   constructor() {
     this.length = 0
     this.data = {}
@@ -237,7 +241,7 @@ class MyArray {
   }
 }
 
-const newArray = new MyArray()
+const myOwnArray = new MyOwnArray()
 ```
 
 Talking about the contructor
