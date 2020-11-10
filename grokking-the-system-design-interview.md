@@ -1,0 +1,59 @@
+#### grokking the system design interview
+
+- requirements clarifications
+  - i.e. twitter
+    - will users of our servie be able to post tweets and follow other people?
+    - should we design to create and display the user's timeline?
+    - will tweets contain photos and videos?
+    - are we focusing on the backend only, or are we developing the frontend too?
+    - will users be able to search tweets?
+    - do we need to display hot trending topics?
+    - will there be any push notification for new or important tweets?
+- back-of-the-envelope estimation
+  - will help later when we think of scaling, partitioning, load balancing, and caching
+  - what scale is expected from the system? (e.g. number of new tweets, number of tweet views, number of timeline generations per sec, etc)
+  - how much storage will we need? we will have different storage requirements if users can have photos or videos in their tweets
+  - what network bandwidth usage are we expecting? this will be crucial in deciding how we will manage traffic and balance load between servers
+- system interface definition
+  - define what APIs are expected from the system, this will establish the exact contract expected from the system and ensure we did not get requirements wrong
+- defining data model
+  - defining early in the interview will clarify how data will flow between different system components
+  - later it will guide for data partitioning and management
+  - you should identify:
+    - various entities of the system
+    - how they will interact with each other
+    - different aspects of data management like storage, transportation, encryption, etc
+  - entities for a twitter-like service:
+    - User: UserId, Name, Email, DoB, CreationData, LastLogin, etc
+    - Tweet: TweetId, Content, TweetLocation, NumberofLikes, TimeStamp, etc
+    - UserFollow: UserID1, UserID2
+    - FavoriteTweets: UserID, TweetID, TimeStamp
+  - what database system should you use?
+  - what kind of block storage should we use to store photos and videos?
+- high-level design
+  - draw a block diagram with 5-6 boxes representing the core components of our system
+  - for twitter:
+    - need multiple application servers to serve all the read/write requests with load balancers in front of them for traffic distributions
+    - if we have a lot more read traffic compared to write we can decide to have separate servers to handle these scenarios
+    - on the backend, we need an efficient database that can store all tweets and support a huge number of reads
+    - also need a distributed file storage system for storing photos and videos
+- detailed design
+  - dig deeper into two or three major components
+  - the interviewer's feedback should guide to what parts of the system need further discussion
+  - present different approaches (pros and cons, why prefer one over the other)
+  - for twitter:
+    - since a lot of data will be stored, how should we partition our data to distribute to multiple databases
+    - should we try to store all data of a user on the same database?
+    - how will we handle hot users who tweet a lot or follow lots of people?
+    - since users' timeline will contain the most recent and relevant tweets, should we try to store our data so that it is optimized for scanning the latest tweets?
+    - how much and at which layer should we introduce cache to speed things up?
+    - what components need better load balancing?
+- identifying and resolving bottlenecks
+  - try to discuss as many bottlenecks as possible and different approaches to mitigate them
+  - for twitter:
+    - is there any single point of failure in our system? what are we doing to mitigate it?
+    - do we have enough replicas of the data so that we can still serve our users if we lose a few servers?
+    - similarly, do we have enough copies of different services running such that a few failures will not cause a total system shutdown?
+    - how are we monitoring the performance of our service? do we get alerts whenever critical components fail or their performance degrades?
+- summary
+  - preparation and being organized during the interview are the keys to success
