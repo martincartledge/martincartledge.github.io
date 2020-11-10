@@ -68,7 +68,7 @@
   - walk through your algorithm to feel out structure (know what variables are and when they change)
 - implement
   - write beautiful code
-    - modularized code `{{1,2,3}, {4,5,6}}` -> `initIncrementalMatrix(int size)`
+    - modularized code `1,2,3,4,5,6` -> `initIncrementalMatrix(int size)`
     - error checks (add `todo` and explain what you would like to test)
     - use other classes/structs where appropriate
     - good variable names
