@@ -221,3 +221,24 @@ N / 2; // 1
 
 The log expresses `2^4` -> `log^2 16 = 4`
 `log^2 N = k` -> `2^k = N`
+
+##### print fibonacci sequence from o to `n`
+
+```js
+function fib(n, memo) {
+  if (n <= 0) return 0;
+  else if (n === 1) return 1;
+  else if (memo[n] > 0) return memo[n];
+
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+
+  return memo[n];
+}
+
+function allFib(n) {
+  const memo = [];
+  for (let i = 0; i < n; i++) {
+    console.log(`${i}: ${fib(i, memo)}`);
+  }
+}
+```
