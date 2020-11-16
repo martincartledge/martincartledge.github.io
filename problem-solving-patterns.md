@@ -117,9 +117,6 @@ function sumZero(arr) {
 ```
 
 ```js
-/*
- WIP
-*/
 function countUniqueValues(arr) {
   let unique = [];
 
@@ -128,6 +125,97 @@ function countUniqueValues(arr) {
       unique.push(value);
     }
   }
-  return arr.length;
+  return unique.length;
+}
+
+function countUniqueValues(arr) {
+  if (arr.length === 0) return 0;
+  let i = 0;
+  for (let j = 1; j < arr.length; j++) {
+    if (arr[i] !== arr[j]) {
+      i++;
+      arr[i] = arr[j];
+    }
+  }
+  return i + 1;
+}
+
+countUniqueValues([1, 1, 2, 2, 3, 4, 4, 4, 5, 7]);
+```
+
+#### sliding window
+
+- this pattern involves creating a window which can either be an array or number from one position to another
+- depending on a certain condition, the window either increases or closes (and a new window is created)
+- very useful for keeping track of a subset of data in an array/string, etc
+
+```js
+/*
+  write a function called maxSubarraySum which accepts an array of integers and a number called n
+  the function should calculate the maximum sum of n consecutive elements in the array
+  maxSubarraySum([1,2,5,2,8,1,5], 2) // 10
+  maxSubarraySum([1,2,5,2,8,1,5], 4) // 17
+  maxSubarraySum([4,2,1,6], 1) // 6
+  maxSubarraySum([4,2,1,6,2], 4) // 13
+  maxSubarraySum([], 4) // null
+*/
+function maxSubarraySum(arr, num) {
+  let maxSum = 0;
+  let tempSum = 0;
+  if (arr.length < num) return null;
+  for (let i = 0; i < num; i++) {
+    maxSum += arr[i];
+  }
+  tempSum = maxSum;
+  for (let i = num; i < array.length; i++) {
+    tempSum = tempSum -= arr[i - num] + arr[i];
+    maxSum = Math.max(maxSum, tempSum);
+  }
+  return maxSum;
+}
+```
+
+#### divide and conquer
+
+- this pattern involves dividing a data set into smaller chunks and then repeating a process with a subset of data
+- this pattern can tremendously decrease time complexity
+
+```js
+/*
+  given a sorted array of integers, write a function called search, that accepts a value and
+  returns the index where the value passed to the function is located
+  if the value is not found, return -1
+
+  search([1,2,3,4,5,6], 4) // 3
+  search([1,2,3,4,5,6], 6) // 5
+  search([1,2,3,4,5,6], 11) // -1
+*/
+// O(n) solution - linear search
+function search(arr, n) {
+  for (let i = 0; i < array.length; i++) {
+    if (arr[i] === n) {
+      return i;
+    }
+  }
+  return -1;
+}
+// log(n) - binary search
+function search(arr, n) {
+  let min = 0;
+  let max = arr.length - 1;
+
+  while (min <= max) {
+    let middle = Math.floor((min + max) / 2);
+    let currentElement = arr[middle];
+
+    if (arr[middle] < n) {
+      min = middle + 1;
+    } else if (arr[middle] > n) {
+      max = middle - 1;
+    } else {
+      return middle;
+    }
+  }
+  return -1;
 }
 ```
