@@ -107,6 +107,44 @@ function averagePair(sortedArr, target) {
 // averagePair([], 5); // false
 ```
 
+##### isSubSequence
+
+- write a function called `isSubsequence`
+- takes two strings and checks whether the characters in the first string form a subsequence of the characters in the second string
+- solution must have a time complexity of `O(n)`
+- solution must have a space complexity of `O(1)`
+
+```js
+function isSubsequence(firstStr, secondStr) {
+  const firstArr = firstStr.split("");
+  const secondArr = secondStr.split("");
+  if (firstArr.length === 0 || secondArr.length === 0) return false;
+
+  let firstIndex = 0;
+
+  let secondIndex = 0;
+
+  const secondArrLength = secondArr.length;
+
+  const matchAmount = firstArr.length;
+
+  let counter = 0;
+
+  while (secondIndex <= secondArrLength) {
+    if (counter === matchAmount) {
+      return true;
+    } else if (firstArr[firstIndex] === secondArr[secondIndex]) {
+      counter++;
+      firstIndex++;
+      secondIndex++;
+    } else if (firstArr[firstIndex] !== secondArr[secondIndex]) {
+      secondIndex++;
+    }
+  }
+  return false;
+}
+```
+
 ### recursion
 
 ##### power
