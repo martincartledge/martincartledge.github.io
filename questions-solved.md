@@ -1,4 +1,4 @@
-### hash maps
+### frequency counter pattern
 
 #### sameFrequency
 
@@ -55,7 +55,6 @@ function areThereDuplicates(...args) {
   for (let value of arr) {
     if (hash[value]) return true;
     hash[value] = (hash[value] += 1) || 1;
-    debugger;
   }
   return false;
 }
@@ -65,6 +64,47 @@ function areThereDuplicates(...args) {
 // areThereDuplicates(1,2,2) // true
 
 // areThereDuplicates('a','b','c','a') // true
+```
+
+### multiple pointers pattern
+
+##### averagePair
+
+- write a function called `averagePair`
+- given a sorted array of integers and a target average, determine if there is a pair of values in the array where the average of the pair equals the target average
+- solution must have a time complexity of `O(n)`
+
+```js
+function averagePair(sortedArr, target) {
+  // if there is not at least two values, we can not take average
+  if (sortedArr.length <= 1) return false;
+
+  let left = 0;
+  let right = sortedArr.length - 1;
+
+  while (left < right) {
+    let sum = (sortedArr[left] + sortedArr[right]) / 2;
+    if (sum === target) {
+      return true;
+    } else if (sum > target) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+
+  return false;
+}
+
+// averagePair([1,2,3], 2.5); // true
+
+// averagePair([1,2,3], 5); // false
+
+// averagePair([1,3,3,5,6,7,10,12,19], 8); // true
+
+// averagePair([-1, 0, 3,4,5,6], 4.1); // false
+
+// averagePair([], 5); // false
 ```
 
 ### recursion
