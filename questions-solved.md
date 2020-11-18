@@ -40,6 +40,33 @@ function sameFrequency(one, two) {
 // sameFrequency(3589578, 5879385) // true
 ```
 
+#### areThereDuplicates
+
+- write a function called `areThereDuplicates`
+- accepts a _variable number of arguments_
+- checks whether there are any duplicates among arguments passed in
+- solution must have a time and space complexity of `O(n)`
+
+```js
+function areThereDuplicates(...args) {
+  const arr = [...args];
+  const hash = {};
+
+  for (let value of arr) {
+    if (hash[value]) return true;
+    hash[value] = (hash[value] += 1) || 1;
+    debugger;
+  }
+  return false;
+}
+
+// areThereDuplicates(1,2,3) // false
+
+// areThereDuplicates(1,2,2) // true
+
+// areThereDuplicates('a','b','c','a') // true
+```
+
 ### recursion
 
 ##### power
