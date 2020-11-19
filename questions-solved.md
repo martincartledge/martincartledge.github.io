@@ -207,3 +207,20 @@ function productOfArray(arr) {
 // productOfArray([1,2,3]) // 6
 // productOfArray([1,2,3,10]) // 60
 ```
+
+### searching algorithms
+
+##### linear search
+
+- write a function called `linearSearch` which takes in an array and a value
+- return the index at which the value exists, if the value does not exist return `-1`
+
+```js
+function linearSearch(arr, val) {
+  if (arr.length === 0) return -1;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === val) return i;
+  }
+  return -1;
+}
+```
