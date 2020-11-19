@@ -224,3 +224,29 @@ function linearSearch(arr, val) {
   return -1;
 }
 ```
+
+##### binary search
+
+- write a function called `binarySearch` which takes in a sorted array and a value
+- return the index at which the value exists, if the value does not exist return `-1`
+
+```js
+function binarySearch(arr, val) {
+  let start = 0;
+  let end = arr.length - 1;
+  let middle = Math.round((start + end) / 2);
+
+  while (arr[middle] !== val && start <= end) {
+    if (val < arr[middle]) end = middle - 1;
+    else start = middle + 1;
+    middle = Math.round((start + end) / 2);
+  }
+  return arr[middle] === val ? middle : -1;
+}
+
+// binarySearch([1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15,16,17,18,19,20], 19) // 18
+// binarySearch([1,2,3,4,5], 7) // -1
+// binarySearch([1,2,3,4,5], 2) // 1
+// binarySearch([1,2,3,4,5], 3) // 2
+// binarySearch([5,6,10,13,14,18,30,35,37,40,44,64,79,84,86,95,96,98,99], 10) // 2
+```
