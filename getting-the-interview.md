@@ -42,59 +42,53 @@ Cons:
 
 ### Mid-sized companies
 
-> Typically 500-5,000 employees, 5+ years old, profitable, more stable
+> Typically 500-5,000 employees, 5+ years old
 
 Pros:
 
-- a pro
-- a pro
-- a pro
+- High chance of the company being profitable (job security)
+- More onboarding resources and documentation
+- Solidified planning strategies and clear goals for each quarter
 
 Cons:
 
-- a con
-- a con
-- a con
+- More process can mean more meetings and less time spent coding
+- A larger team can mean less individual input / direction of a project
+- Can be harder to adopt newer technologies due to legacy applications, etc
 
 ### Large corporations
 
-> Typically 5,000+ employees, 10+ years old, publicly traded, distributed teams
+> Typically 5,000+ employees, 10+ years old
 
 Pros:
 
-- a pro
-- a pro
-- a pro
+- Usually have the resources to pay higher salaries
+- Traditionally more vetted process to get hired; therefore, lots of opportunity to learn from team members
+- Stock options (you benefit when your company benefits)
 
 Cons:
 
-- a con
-- a con
-- a con
+- Tend to feel like you are a small fish in a large pond (contributions are not as tangible)
+- Career advancement (i.e. promotions, switching teams) can be a long-winded process
+- Harder to bond as a team if globally distributed
+
+All of these factors are good things to be mindful of when looking to switch companies or if you are looking to join your first company. A lot of resources have surfaced over the last 5-10 years that help folks get an "inside view" into a company's interview process, culture, and salaries. A few that are particularly useful are:
 
 Helpful tools:
 
-- thing
-- thing
-- thing
+- [Glassdoor](https://www.glassdoor.com/): Employee reviews, interview experiences, and common salaries
+- [Blind](https://www.teamblind.com/): Anonymous employee reviews, interview experiences, common salaries, and employee referrals
+- [Levels.fyi](https://www.levels.fyi/): Title hierarchy, title comparisons to other companies, and common salaries
 
-## Play to strengths
+## Resume
 
-Helpful tools:
+I like to think that everyone that is on the job hunt has a personal billboard that they carry around with them. You can write on it, or decorate it however you like. What you decide to put on your personal billboard will greatly affect your chances of getting an interview or not. Some things to keep in mind when writing a resume are as follows:
 
-- thing
-- thing
-- thing
-
-## Picking companies
-
-Helpful tools:
-
-- [Blind](https://www.teamblind.com/)
-- [Glassdoor](https://www.glassdoor.com/)
-- thing
-
-## Resume and cover letter
+- Keep it short (1 page, 2 pages if you have 10+ years of experience)
+- Cater your resume to the job you want
+- If past technology is not applicable, try to make it applicable or leave it out
+- Write 3-5 bullet points for each job
+- Make your contributions impactful by using metrics (Wrote a function that processed 10,000k data points, Cut down on processing time by 60%)
 
 Helpful tools:
 
