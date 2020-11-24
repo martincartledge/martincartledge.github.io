@@ -5,6 +5,24 @@
 - sorting is an incredibly common task, so it is good to know how it works
 - there are many different ways to sort things, and different techniques have their own advantages and disadvantages
 
+##### time / space complexity
+
+- bubble sort
+  - best: `O(n)`
+  - average: `O(n^2)`
+  - worst: `O(n^2)`
+  - space complexity: `O(1)`
+- insertion sort
+  - best: `O(n)`
+  - average: `O(n^2)`
+  - worst: `O(n^2)`
+  - space complexity: `O(1)`
+- selection sort
+  - best: `O(n^2)`
+  - average: `O(n^2)`
+  - worst: `O(n^2)`
+  - space complexity: `O(1)`
+
 ##### built in javascript sorting
 
 > using the built in `sort` method
