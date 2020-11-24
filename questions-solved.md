@@ -250,3 +250,34 @@ function binarySearch(arr, val) {
 // binarySearch([1,2,3,4,5], 3) // 2
 // binarySearch([5,6,10,13,14,18,30,35,37,40,44,64,79,84,86,95,96,98,99], 10) // 2
 ```
+
+##### sliding window
+
+- Given an array of integers and a number, write a function called `maxSubarraySum`, which finds the maximum sum of a subarray with the length of the number passed to the function.
+
+```js
+function maxSubarraySum(arr, count) {
+  if (arr.length < count) return null;
+
+  let currMax = 0;
+
+  for (let i = 0; i < count; i++) {
+    currMax += arr[i];
+  }
+
+  let maxSoFar = currMax;
+
+  for (let j = count; j < arr.length; j++) {
+    currMax += arr[j] - arr[j - count];
+    maxSoFar = Math.max(currMax, maxSoFar);
+  }
+
+  return maxSoFar;
+}
+
+//   maxSubarraySum([1,2,5,2,8,1,5], 2) // 10
+//   maxSubarraySum([1,2,5,2,8,1,5], 4) // 17
+//   maxSubarraySum([4,2,1,6], 1) // 6
+//   maxSubarraySum([4,2,1,6,2], 4) // 13
+//   maxSubarraySum([], 4) // null
+```
