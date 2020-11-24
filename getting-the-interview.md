@@ -85,16 +85,30 @@ Helpful tools:
 I like to think that everyone that is on the job hunt has a personal billboard that they carry around with them. You can write on it, or decorate it however you like. What you decide to put on your personal billboard will greatly affect your chances of getting an interview or not. Some things to keep in mind when writing a resume are as follows:
 
 - Keep it short (1 page, 2 pages if you have 10+ years of experience)
-- Cater your resume to the job you want
+- Tailor your resume to the job you want
 - If past technology is not applicable, try to make it applicable or leave it out
 - Write 3-5 bullet points for each job
 - Make your contributions impactful by using metrics (Wrote a function that processed 10,000k data points, Cut down on processing time by 60%)
 
+Keep in mind, a recruiter or HR representative will only spend 10-15 seconds scanning your resume, you do not have much time. You want to make sure you include details that will help illustrate that you can help this company. With that being said, a few things you might want to leave out are:
+
+- A personal photo
+  - _Instead_: Make your name and the position you _want_ catch the eye
+- Graph representations of skill level
+  - _Instead_: Try replacing with a list of technologies sorted, starting with highest comfort level
+  - _Or_: List your skills in alphabetical order and make skills you are best at _bold_
+- Listing jobs that are not relevant to the career field
+  - _Instead_: Use that space to expand on the experience you have in the software industry, if you don't have much experience yet, this is a great place to expand on a project(s) you have worked on
+
+### Try it out
+
+Another great way to determine if your resume is conveying what you would like it to is to have a friend read it for 15 seconds. After time is up, take the resume and have them tell you what they remembered from the resume. This can be a company name, skill, or contact information. This is a great trial run to determine what grabs a person's eye when they scan your resume.
+
 Helpful tools:
 
-- thing
-- thing
-- thing
+- [Grammarly](https://www.grammarly.com/)
+- [Google Drive Resume Template (Serif)](https://docs.google.com/document/d/1ARVyybC5qQEiCzUOLElwAdPpKOK0Qf88srr682eHdCQ/edit)
+- [Google Drive Resume Template (Swiss)](https://docs.google.com/document/d/1WR_axh5A9t1jwER_5mFCIcr5I1oNqm4cB1PHAQEEWqc/edit)
 
 ## Set a schedule
 
