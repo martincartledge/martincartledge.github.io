@@ -112,6 +112,33 @@ Helpful tools:
 
 ## Set a schedule
 
+> By failing to prepare you are preparing to fail
+
+Let's just face it, the job hunt is an exhausting and grueling affair for most. I have found that the best way to approach the job search is to have two important things before you start:
+
+- Goals (daily, weekly, and overall)
+- Plan of action (daily and weekly)
+
+### Goals
+
+I know what you are thinking, _ummm, my goal is to get a new job?_ Of course this is the end goal; however, in my experience, spending the time to determine what your goals are early is a great way to feel productive and confident. The reason I broke down these goals into two categories is because it is important to feel like you are being productive every day, even if you are not getting emails or calls back.
+
+Some examples I have used in the past for daily and weekly goals are:
+
+##### Daily
+
+- Submit 10 applications
+- Spend 30 minutes on a side project
+
+##### Weekly
+
+- Schedule a phone interview
+- Spend 2 hours on technical interview prep
+
+These might seem overly simplified and, you're right! That is the idea. You want to make sure you make your daily and weekly goals something that is easily measurable, and _sustainable_.
+
+### Plan of action
+
 Helpful tools:
 
 - thing
