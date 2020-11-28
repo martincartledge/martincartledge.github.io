@@ -137,35 +137,60 @@ Some examples I have used in the past for daily and weekly goals are:
 
 These might seem overly simplified and, you're right! That is the idea. You want to make sure you make your daily and weekly goals something that is easily measurable, and _sustainable_.
 
-### Plan of action
-
-Helpful tools:
-
-- thing
-- thing
-- thing
-
 ## Make the most of your time
 
+So far we have talked about the importance of determining your ideal role, refining your resume, and setting a schedule for yourself. To ensure that these tasks are not wasted effort, you want to make sure you are making the most of your time.
+
+What I mean by that can be thought of as the old saying _Set yourself up for success_ or _Put the right foot forward_. Basically, you want to make sure you are equally balanced in your journey to getting more interviews and being successful at them.
+
+Besides doing the items mentioned above, a few others that can carry great importance are:
+
+- Practice
+- Side projects
+- Online presence
+
+### Practice
+
+Out of all the things I mention in this post, this one should come as least of a surprise.
+
+To get better at coding, problem solving, interviewing, or under water basket weaving you have to _practice_, A LOT. There is not getting around this step. I, like many, have fell victim to a cycle of planning too much, taking too many tutorials, or telling ourselves _I'll start tomorrow_.
+
+For me, this was, and still is the hardest part about preparing for interviews, or quite honestly just being in this industry in general. Things move really quick, and no one wants to feel like the are falling behind. But, tech is a mentally draining profession. It is more than understandable that the thought of practicing coding interview questions in any capacity is exhausting. I have some good news though.
+
+When you think about practicing, try to think of your current skills as water in a bucket. Each time you practice, even something you think is small or not enough, think of that as drops of water that fill your bucket. All experiences, good or bad, frustrating or rewarding fill this bucket up and make _you_ a stronger developer _every day_.
+
+I think a great way to get into the habit of practicing writing code is to give yourself a goal per week. Remember, the ultimate goal is to practice and stay consistent, so avoid setting the bar at an unrealistic level for yourself. All this will do is make you feel bad on days you just don't feel like coding.
+
+_YOU_ are the only person like _YOU_. There will never be anyone else like you, and that is awesome. So be nice to yourself, this stuff is hard. If you make a habit to practice just a little bit, each time that bucket will fill up and you will surprise yourself after just a few weeks of staying consistent. You got this!
+
 Helpful tools:
 
-- thing
-- thing
-- thing
+- [Free Code Camp (of course!)](https://www.freecodecamp.org/)
+- [Leetcode](https://leetcode.com/)
+- [Code Academy](https://www.codecademy.com/)
 
-## Side projects
+### Side projects
+
+This is something else that I am sure you have heard a million times, but I do think these can really help you not stand out as a candidate, but help you stay engaged on days you don't feel like practicing your coding skills.
+
+In my experience, it has been easier to get started when you can think of answers to both of these two questions:
+
+- What tech do I want to learn or get better at?
+- What is a product I really like, or I wish existed?
+
+With the answer to these two questions, you have a framework for your project! You like the new look of twitter? Pick a feature and try to recreate the look and feel of it! Can't find a habit tracker app you like? Try building one yourself!
+
+If you would prefer to contribute to a project that is already established, that's great as well! This can be a daunting task if it is your first time; however, there is a great website that lists tons of projects on Github that are looking for _first time contributors_. [View that right here!](https://firstcontributions.github.io/)
 
 Helpful tools:
 
-- thing
-- thing
-- thing
+- ["12 Great Ideas for Programming Projects That People Will Use" By Filipe Silva](https://medium.com/better-programming/12-ideas-for-programming-projects-too-dangerous-not-to-build-514e3212ab77)
+- ["app-ideas" By Florin Pop](https://github.com/florinpop17/app-ideas)
 
-## Online presence
+### Online presence
 
 Helpful tools:
 
-- [Twitter](https://www.glassdoor.com/)
 - thing
 - thing
 
