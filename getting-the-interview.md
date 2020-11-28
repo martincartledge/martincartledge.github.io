@@ -10,7 +10,7 @@ This is the first post in my series _Interview Insights_. This week, I will shar
 
 This might sound strange, but I think it is a question that is overlooked.
 
-Due to the eclectic nature of our industry, it is common to just apply to _any_ kind of job. This is tricky because, on one hand, you want interviews and experience with different technologies; however, I have found that answering the questions can put you ahead in your search:
+Due to the eclectic nature of our industry, it is common to just apply to _any_ kind of job. This is tricky because, on one hand, you want interviews and experience with different technologies; however, I have found that answering these questions can put you ahead in your search:
 
 > _What kind of developer do I want to be?_
 
@@ -116,7 +116,7 @@ Helpful tools:
 
 Let's just face it, the job hunt is an exhausting and grueling affair for most. I have found that the best way to approach the job search is to have two important things before you start:
 
-- Goals (daily, weekly, and overall)
+- Goals (daily and weekly)
 - Plan of action (daily and weekly)
 
 ### Goals
@@ -153,7 +153,7 @@ Besides doing the items mentioned above, a few others that can carry great impor
 
 Out of all the things I mention in this post, this one should come as the least of a surprise.
 
-To get better at coding, problem-solving, interviewing, or underwater basket weaving you have to _practice_, A LOT. There is no getting around this step. I, like many, have fell victim to a cycle of planning too much, taking too many tutorials, or telling ourselves _I'll start tomorrow_.
+To get better at coding, problem-solving, interviewing, or underwater basket weaving you have to _practice_, A LOT. There is no getting around this step. I, like many, have fell victim to a cycle of planning too much, taking too many tutorials, or telling myself _I'll start tomorrow_.
 
 For me, this was, and still is the hardest part about preparing for interviews, or quite honestly just being in this industry in general. Things move really quickly, and no one wants to feel like they are falling behind. But, tech is a mentally draining profession. It is more than understandable that the thought of practicing coding interview questions in any capacity is exhausting. I have some good news though.
 
@@ -200,8 +200,8 @@ Putting in the extra effort to make your online presence solid can take you a lo
 - Build a portfolio site: This does not have to be an extravagant, complicated website if you do not want it to be. As long as it has contact information, links to your various profiles, and a blurb about yourself you should be good-to-go. This can be a great place to showcase your technical skills or talk about your passions and work history too
 - Personalized URLs: A lot of common websites developers use (Github, LinkedIn, Medium, Dev.to, Twitter, etc) allow you to change your URL, I suggest you make it your user name. I would also suggest to try and use the same name for each website
 - Start a blog: if you are not interested in building projects and would prefer writing, this is a great way to show your skills and build an audience
-- Consistent profile photo: Ideally you want to use a photo that is both professional, but lets your personality shine through as well. Once you find one, try to use that same photo across your websites as well.
-- Social Media: This is certainly not a requirement; however, if you want to leverage social media as a platform for your development, I suggest you tweet about things you learn and try to engage your audience often. Finding the balance of letting your personality show while also adding value via sharing your knowledge can be tricky, but your followers will love it!
+- Consistent profile photo: Ideally you want to use a photo that is professional, but lets your personality shine through as well. Once you find one, try to use that same photo across your websites as well
+- Social Media: This is certainly not a requirement; however, if you want to leverage social media as a platform for your development, I suggest you post about things you learn and try to engage your audience often. Finding the balance of letting your personality show while also adding value via sharing your knowledge can be tricky, but your followers will appreciate it!
 
 ## In Summary
 
