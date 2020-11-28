@@ -1,5 +1,5 @@
 ---
-title: Getting an Interview as a Software Developer
+title: How to Get an Interview as a Software Developer
 date: "2020-11-30T22:40:32.169Z"
 description: "Interview Insights Pt 1 - Getting the Interview"
 ---
@@ -10,11 +10,11 @@ This is the first post in my series _Interview Insights_. This week, I will shar
 
 This might sound strange, but I think it is a question that is overlooked.
 
-Due to the eclectic nature of our industry, it is common to just apply to _any_ kind of job. This is tricky because on one hand, you want interviews and experience with different technologies; however, I have found that answering the questions can put you ahead in your search:
+Due to the eclectic nature of our industry, it is common to just apply to _any_ kind of job. This is tricky because, on one hand, you want interviews and experience with different technologies; however, I have found that answering the questions can put you ahead in your search:
 
 > _What kind of developer do I want to be?_
 
-If you are looking for your first job, this might be the hardest question you have to answer. Although this might seem overly simplified, I do think it is most important to pick a niche of software that make _you happy_. After all, you are the one that will be doing this work 40 hours a week, right?
+If you are looking for your first job, this might be the hardest question you have to answer. Although this might seem overly simplified, I do think it is most important to pick a niche of software that makes _you happy_. After all, you are the one that will be doing this work 40 hours a week, right?
 
 If you are brand new to software development and are not sure what you like best, I suggest browsing [Free Code Camp](https://www.freecodecamp.org/), [Code Academy](https://www.codecademy.com/), [Treehouse](https://teamtreehouse.com/), or [Udemy](https://www.udemy.com/) and take a course that sounds interesting to you!
 
@@ -22,7 +22,7 @@ It is easy to get caught in a state of limbo when you are not sure what to do ne
 
 > _What kind of company do I want to work for?_
 
-This might be another tricky question to answer; however, it can really save you lots os headache down the road. In software development, there are typically three _types_ of companies:
+This might be another tricky question to answer; however, it can really save you lots of headaches down the road. In software development, there are typically three _types_ of companies:
 
 ### Startups
 
@@ -36,7 +36,7 @@ Pros:
 
 Cons:
 
-- Responsible for ("own") more pieces of the code base
+- Responsible for ("own") more pieces of the codebase
 - Processes such as code review and a team code style might not be established
 - Quickly throwing out code you contributed to due to trying other ideas
 
@@ -53,7 +53,7 @@ Pros:
 Cons:
 
 - More process can mean more meetings and less time spent coding
-- A larger team can mean less individual input / direction of a project
+- A larger team can mean less individual input/direction of a project
 - Can be harder to adopt newer technologies due to legacy applications, etc
 
 ### Large corporations
@@ -82,7 +82,7 @@ Helpful tools:
 
 ## Resume
 
-I like to think that everyone that is on the job hunt has a personal billboard that they carry around with them. You can write on it, or decorate it however you like. What you decide to put on your personal billboard will greatly affect your chances of getting an interview or not. Some things to keep in mind when writing a resume are as follows:
+I like to think that every one that is on the job hunt has a personal billboard that they carry around with them. You can write on it, or decorate it however you like. What you decide to put on your personal billboard will greatly affect your chances of getting an interview or not. Some things to keep in mind when writing a resume are as follows:
 
 - Keep it short (1 page, 2 pages if you have 10+ years of experience)
 - Tailor your resume to the job you want
@@ -95,7 +95,7 @@ Keep in mind, a recruiter or HR representative will only spend 10-15 seconds sca
 - A personal photo
   - _Instead_: Make your name and the position you _want_ catch the eye
 - Graph representations of skill level
-  - _Instead_: Try replacing with a list of technologies sorted, starting with highest comfort level
+  - _Instead_: Try replacing with a list of technologies sorted, starting with the highest comfort level
   - _Or_: List your skills in alphabetical order and make skills you are best at _bold_
 - Listing jobs that are not relevant to the career field
   - _Instead_: Use that space to expand on the experience you have in the software industry, if you don't have much experience yet, this is a great place to expand on a project(s) you have worked on
@@ -121,7 +121,7 @@ Let's just face it, the job hunt is an exhausting and grueling affair for most. 
 
 ### Goals
 
-I know what you are thinking, _ummm, my goal is to get a new job?_ Of course this is the end goal; however, in my experience, spending the time to determine what your goals are early is a great way to feel productive and confident. The reason I broke down these goals into two categories is because it is important to feel like you are being productive every day, even if you are not getting emails or calls back.
+I know what you are thinking, _ummm, my goal is to get a new job?_ Of course this is the end goal; however, in my experience, spending the time to determine what your goals are early is a great way to feel productive and confident. The reason I broke down these goals into two categories is that it is important to feel like you are being productive every day, even if you are not getting emails or calls back.
 
 Some examples I have used in the past for daily and weekly goals are:
 
@@ -151,11 +151,11 @@ Besides doing the items mentioned above, a few others that can carry great impor
 
 ### Practice
 
-Out of all the things I mention in this post, this one should come as least of a surprise.
+Out of all the things I mention in this post, this one should come as the least of a surprise.
 
-To get better at coding, problem solving, interviewing, or under water basket weaving you have to _practice_, A LOT. There is not getting around this step. I, like many, have fell victim to a cycle of planning too much, taking too many tutorials, or telling ourselves _I'll start tomorrow_.
+To get better at coding, problem-solving, interviewing, or underwater basket weaving you have to _practice_, A LOT. There is no getting around this step. I, like many, have fell victim to a cycle of planning too much, taking too many tutorials, or telling ourselves _I'll start tomorrow_.
 
-For me, this was, and still is the hardest part about preparing for interviews, or quite honestly just being in this industry in general. Things move really quick, and no one wants to feel like the are falling behind. But, tech is a mentally draining profession. It is more than understandable that the thought of practicing coding interview questions in any capacity is exhausting. I have some good news though.
+For me, this was, and still is the hardest part about preparing for interviews, or quite honestly just being in this industry in general. Things move really quickly, and no one wants to feel like they are falling behind. But, tech is a mentally draining profession. It is more than understandable that the thought of practicing coding interview questions in any capacity is exhausting. I have some good news though.
 
 When you think about practicing, try to think of your current skills as water in a bucket. Each time you practice, even something you think is small or not enough, think of that as drops of water that fill your bucket. All experiences, good or bad, frustrating or rewarding fill this bucket up and make _you_ a stronger developer _every day_.
 
@@ -178,9 +178,9 @@ In my experience, it has been easier to get started when you can think of answer
 - What tech do I want to learn or get better at?
 - What is a product I really like, or I wish existed?
 
-With the answer to these two questions, you have a framework for your project! You like the new look of twitter? Pick a feature and try to recreate the look and feel of it! Can't find a habit tracker app you like? Try building one yourself!
+With the answer to these two questions, you have a framework for your project! Do you like the new look of Twitter? Pick a feature and try to recreate the look and feel of it! Can't find a habit tracker app you like? Try building one yourself!
 
-If you would prefer to contribute to a project that is already established, that's great as well! This can be a daunting task if it is your first time; however, there is a great website that lists tons of projects on Github that are looking for _first time contributors_. [View that right here!](https://firstcontributions.github.io/)
+If you would prefer to contribute to a project that is already established, that's great as well! This can be a daunting task if it is your first time; however, there is a great website that lists tons of projects on Github that are looking for first time contributors. [View that right here!](https://firstcontributions.github.io/)
 
 Helpful tools:
 
@@ -189,9 +189,22 @@ Helpful tools:
 
 ### Online presence
 
-Helpful tools:
+I like to think of the web as another place that allows us to have our own "personal billboard". There are many advantages to having a solid presence online, some of them include:
 
-- thing
-- thing
+- Networking/meeting other developers
+- Showing off projects
+- Potential interest from other companies
+
+Putting in the extra effort to make your online presence solid can take you a long way, and the ways you can achieve this are relatively straight forward. Here are a few things I suggest you do:
+
+- Build a portfolio site: This does not have to be an extravagant, complicated website if you do not want it to be. As long as it has contact information, links to your various profiles, and a blurb about yourself you should be good-to-go. This can be a great place to showcase your technical skills or talk about your passions and work history too
+- Personalized URLs: A lot of common websites developers use (Github, LinkedIn, Medium, Dev.to, Twitter, etc) allow you to change your URL, I suggest you make it your user name. I would also suggest to try and use the same name for each website
+- Start a blog: if you are not interested in building projects and would prefer writing, this is a great way to show your skills and build an audience
+- Consistent profile photo: Ideally you want to use a photo that is both professional, but lets your personality shine through as well. Once you find one, try to use that same photo across your websites as well.
+- Social Media: This is certainly not a requirement; however, if you want to leverage social media as a platform for your development, I suggest you tweet about things you learn and try to engage your audience often. Finding the balance of letting your personality show while also adding value via sharing your knowledge can be tricky, but your followers will love it!
 
 ## In Summary
+
+Whether you are new to the field and looking for your first job, or if you are an experienced developer looking for a new challenge, I hope my insight can help. The job hunt can be a daunting, exhausting process but remember, it is a marathon, not a race. You got this. Consistency is key. Every rejection is an opportunity to improve your skills for the job you were meant for. If you are struggling with any aspect of the job hunt, please feel free to [send me an email](mailto:martin@hey.com).
+
+If you enjoyed this blog, please keep a lookout for my next entry in the _Interview Insights_ series. My next entry will be focused on preparing for technical interviews, look for that in 2 weeks. Thank you for reading!
