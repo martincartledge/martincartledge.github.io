@@ -16,7 +16,32 @@ This is the second post in my series _Interview Insights_. In my last post, I sh
 
 ### Phone screen
 
+> the "tell me about yourself" conversation
+
+After you apply and a company has interest in you, the first step is usually to schedule a _phone interview_. This is usually a pretty relaxed conversation with a member of HR. You can expect them to ask primarily about your job history, what you are looking for next, and most importantly, why you are applying for a position at their company.
+
+Just because this is typically _easier_ than the other phases of the interview process does not mean you should not prepare for it. A few questions to prepare for are:
+
+##### Tell me a little bit about yourself
+
+This is a good time to give your "elevator pitch". A few things you want to mention:
+
+- Ethos or interests you share with the company
+- What excites _you_ about software development
+
+##### What is a recent project you worked on that you are proud of?
+
+- Give a quick overview of what the project is and the problem is solves
+- Mention the technologies you used in this project
+
+##### Why are you looking to leave your current company?
+
+- Turn any potentially negative factor into a positive one
+  - i.e. "I am bored and unsatisfied with the work I do here" -> "I am looking for a new challenge that stretches my programming muscles"
+
 ### Technical phone screen
+
+> the "show me what you got" conversation
 
 ### On site
 
