@@ -272,3 +272,99 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
 
 quickSort([4, 6, 9, 1, 2, 5, 3]);
 ```
+
+##### radix sort
+
+time complexity
+
+`O(nk)`
+
+`n` length of the array
+`k` number of digits(average)
+
+space complexity
+
+`O(n + k)`
+
+> special sorting algorithm that works on lists of numbers
+
+- never makes comparisons between elements
+- more digits means a bigger number
+
+```js
+/*
+  HELPERS
+*/
+
+/*
+  getDigit
+  params: num, place
+  returns the digit in num at the given place value
+*/
+
+function getDigit(num, place) {
+  return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+}
+
+getDigit(7323, 2);
+/*
+7323 / 100
+73.23
+73 % 10
+3
+*/
+
+/*
+  digitCount
+  params: num
+  returns the number of digits in num
+*/
+function digitCount(num) {
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+digitCount(21388);
+/*
+  5
+*/
+
+/*
+  mostDigits
+  params: array of numbers
+  returns the number of digits in the largest numbers in the list
+*/
+
+function mostDigits(arr) {
+  let maxDigits = 0;
+  for (let i = 0; i < arr.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(arr[i]));
+  }
+  return maxDigits;
+}
+/*
+  define a function that accepts list of numbers
+  figure out how many digits the largest number has
+  loop from k = 0 up to this largest number of digits
+  for each iteration of the loop:
+    create buckets for each digit (0 to 9)
+    place each number in the corresponding bucket based on its kth digit
+  replace our existing array with values in our buckets, starting with 0 and going up to 9
+  return list at the end
+*/
+
+function radixSort(arr) {
+  let maxDigitCount = mostDigits(arr);
+  for (let k = 0; k < maxDigitCount; k++) {
+    let digitBuckets = Array.from({ length: 10 }, () => []);
+    for (let i = 0; i < arr.length; i++) {
+      let digit = getDigit(arr[i], k);
+      digitBuckets[digit].push(arr[i]);
+    }
+    arr = [].concat(...digitBuckets);
+  }
+  return arr;
+}
+
+radixSort([23, 345, 5467, 12, 2345, 9852]);
+```
