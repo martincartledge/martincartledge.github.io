@@ -38,6 +38,7 @@ This is a good time to give your "elevator pitch". A few things you want to ment
 
 - Turn any potentially negative factor into a positive one
   - i.e. "I am bored and unsatisfied with the work I do here" -> "I am looking for a new challenge that stretches my programming muscles"
+-
 
 ### Technical phone screen
 
@@ -61,12 +62,28 @@ Interviews for software developer's can be tricky for several reasons, but at th
 
 > embrace what you are comfortable with, stick to what you know
 
+It is fairly common to want to use (or learn) multiple languages in our field; however, when preparing for an interview, it is best to stick with just one. This will help shift your focus from worrying about which language you will use, to thinking of problems you have solved with the language you are most comfortable with.
+
+Once you decide on a language, think of the mechanics the language offers that you could be better with. A good way to determine what to focus on is to think of a feature of the language that would serve you well in an interview.
+
+i.e. You are a JavaScript developer, and you are not at strong with ES6 syntax and features as you would like to be.
+
 ## Preparation tools
 
-> by failing to prepare you are preparing to fail
+Interviews in the tech industry are far from uniform, but I like to think of that as a positive. This keeps things interesting and can allow you to show off your skills in a new way.
+
+When it comes to preparing for an interview, there are two categories of preparation to keep in mind:
+
+#### Company specific topics / questions
+
+#### General topics / questions
+
+Depending on the size and type of company you are interviewing at, the way they interview might differ. I suggest you use websites such as Blind or Glassdoor to gain insight to company-specific interview topics and questions.
 
 ## Mock interviews
 
 > practice without the pressure
+
+[Pramp](pramp.com)
 
 ## In Summary
