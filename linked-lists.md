@@ -16,15 +16,6 @@ common operations
 - finding a node
 - traversing (travelling through) the linked list
 
-##### sub topic
-
-> a definition of the sub topic
-
-- list item to describe sub topic
-- list item to describe sub topic
-- list item to describe sub topic
-- list item to describe sub topic
-
 > linked lists are made up of what elements
 
 `nodes`
