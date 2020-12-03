@@ -1,8 +1,15 @@
-#### Linked List
+#### Singly Linked List
 
 > a data structure that contains a head, tail, and length property
 
 - consists of nodes, and each node has a value and a pointer to another node or null
+
+##### time and space complexity
+
+- insertion `O(1)`
+- removal - `O(n)`
+- searching `O(n)`
+- access `O(n)`
 
 ##### linked lists vs arrays
 
@@ -93,6 +100,110 @@
   }
 ```
 
+##### get
+
+> retrieving a node by it's position in a linked list
+
+```js
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    while(counter !== index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+```
+
+##### set
+
+> changes the value of a node based on it's position in the linked list
+
+```js
+  set(index,value) {
+    const target = this.get(index);
+    if (!target) return false;
+    target.val = value;
+    return true;
+  }
+```
+
+##### insert
+
+> inserts a new node between existing nodes in a linked list
+
+```js
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+
+    if (index === this.length) return !!this.push(value);
+
+    if (index === 0) return !!this.unshift(value);
+
+    let newNode = new Node(value);
+
+    let prevNode = this.get(index-1);
+
+    const temp = prevNode.next;
+
+    prevNode.next = newNode;
+
+    newNode.next = temp;
+
+    this.length++;
+
+    return true;
+  }
+```
+
+##### remove
+
+> removes a node from the linked list at a specific position
+
+```js
+  remove(index) {
+    if (index < 0 || index >= this.length) return null;
+    if (index === this.length - 1) return this.pop();
+    if (index === 0) return this.shift();
+
+    let prevNode = this.get(index-1);
+
+    let removedNode = prevNode.next;
+
+    prevNode.next = removedNode.next;
+
+    this.length--;
+
+    return removedNode;
+  }
+```
+
+##### reverse
+
+> reveres all nodes in a linked list in place
+
+```js
+  reverse() {
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+
+    let next;
+
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+  return this;
+  }
+```
+
 ##### complete singly linked list
 
 ```js
@@ -166,7 +277,81 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    while (counter !== index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+
+  set(index, value) {
+    const target = this.get(index);
+    if (!target) return false;
+    target.val = value;
+    return true;
+  }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+
+    if (index === this.length) return !!this.push(value);
+
+    if (index === 0) return !!this.unshift(value);
+
+    let newNode = new Node(value);
+
+    let prevNode = this.get(index - 1);
+
+    const temp = prevNode.next;
+
+    prevNode.next = newNode;
+
+    newNode.next = temp;
+
+    this.length++;
+
+    return true;
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return null;
+    if (index === this.length - 1) return this.pop();
+    if (index === 0) return this.shift();
+
+    let prevNode = this.get(index - 1);
+
+    let removedNode = prevNode.next;
+
+    prevNode.next = removedNode.next;
+
+    this.length--;
+
+    return removedNode;
+  }
+
+  reverse() {
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+
+    let next;
+
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    return this;
+  }
 }
 
-const list = new SinglyLinkedList();
+var l = new SinglyLinkedList();
 ```
