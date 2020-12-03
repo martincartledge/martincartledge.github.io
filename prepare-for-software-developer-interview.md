@@ -76,14 +76,27 @@ When it comes to preparing for an interview, there are two categories of prepara
 
 #### Company specific topics / questions
 
+Depending on the size and type of company you are interviewing at, the way they interview might differ. I suggest you use websites such as Blind or Glassdoor to gain insight to company-specific interview topics and questions.
+
 #### General topics / questions
 
-Depending on the size and type of company you are interviewing at, the way they interview might differ. I suggest you use websites such as Blind or Glassdoor to gain insight to company-specific interview topics and questions.
+You can expect these questions to touch on your work style, recent achievements, and your technical competency. A few topics that you can expect to be asked about are:
+
+- Tell me about a time that you had to deal with a tricky bug. How did you fix it? What was the outcome?
+- Do you prefer to work by collaborating (pairing) with others or on your own?
 
 ## Mock interviews
 
 > practice without the pressure
 
-[Pramp](pramp.com)
+Have you ever practiced a big presentation for school in front of friends or family? You might have still been nervous but, it sure does help you feel more comfortable speaking about your topic.
+
+Interviewing is also a presentation, and the concept of practice runs are just as important. In the 2020 world, most interviews are completed remotely, which makes performing mock interviews feel more _real_.
+
+If you know someone who is currently in the software industry, I would ask them if they would be willing to set aside an hour or so a week to perform these mock interviews with you. If they currently work in a similar role that you are interviewing for, even better!
+
+A few other options are [Pramp](https://www.pramp.com/) and [CodeInterview](https://codeinterview.io/). These sites allow you to schedule an interview, pick a primary focus (topic), language, and area of expertise (frontend, backend, etc). These platforms also give you more flexibility so you do not have to worry about scheduling time with someone you personally know.
+
+Interviews are nerve racking; however, I am confident as you complete more, your confidence and comfort level will increase.
 
 ## In Summary
