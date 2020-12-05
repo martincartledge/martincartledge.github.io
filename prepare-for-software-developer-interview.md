@@ -44,11 +44,38 @@ This is a good time to give your "elevator pitch". A few things you want to ment
 
 > the "show me what you got" conversation
 
+Generally, this step is a conversation with a senior member of the team you would join, or the manager of that team. You can expect a lot of this conversation to be catered towards two things:
+
+- Recent problems you have experienced in your current position and the solutions you implemented for them
+- General language familiarity (i.e. when would you want to use an array instead of a hash map (object)?)
+
+To help prepare for this interview, I suggest you start to write down answers to these questions. Personally, I have used an excel or google sheet document that consists of 3 columns: _questions_, _answers_, and _notes_. You will find that taking the action of writing your answers down will help you come up with a concise and impactful answer.
+
+There are a lot of resources online that list common interview questions, for [frontend](https://github.com/h5bp/Front-end-Developer-Interview-Questions), [backend](https://github.com/arialdomartini/Back-End-Developer-Interview-Questions), or [fullstack](https://github.com/aershov24/full-stack-interview-questions) roles.
+
+This might seem like a lot of work upfront but trust me, by spending the time to prepare and convert your thoughts to pen and paper will really help you mentally flush out your answers.
+
 ### On site
+
+> the final boss
+
+The final stage of the interview process is usually what is commonly referred to as the _on-site_. This is usually the most in-depth and the most important to perform well at.
+
+Depending on the company this interview can include various elements, but a few that are most common are:
 
 - Virtual pair programming
 - Take home assignments (timed and not timed)
 - White boarding
+
+One of the main questions the company would like to have a good answer for is, _how does this person work?_ The answer to this question is usually echoed through multiple levels as well, i.e. personal, technical, and professional.
+
+Companies seek for this answer by giving the candidate various exercises, technical and interpersonal, to gauge your skills and how well you will fit in at their company.
+
+One of the most common methods of gauging your skills is to pair program with a member of the team you might work with. This session is usually 20 to 30 minutes and the problem you are given is generally something you will see on the job at this company. There are a few things to keep in mind if you have a session like this:
+
+- Try to stay calm and remember that _you are interviewing here for a reason_, they like you and see promise in you
+- Communicate out loud as much as possible, even if you think you are talking too much, it's better to over communicate in these exercises than to sit in silence typing away with the keyboard
+-
 
 ## Soft skills
 
@@ -76,7 +103,7 @@ When it comes to preparing for an interview, there are two categories of prepara
 
 #### Company specific topics / questions
 
-Depending on the size and type of company you are interviewing at, the way they interview might differ. I suggest you use websites such as Blind or Glassdoor to gain insight to company-specific interview topics and questions.
+Depending on the size and type of company you are interviewing at, the way they interview might differ. I suggest you use websites such as [Blind](https://www.teamblind.com/) or [Glassdoor](https://www.glassdoor.com/) to gain insight to company-specific interview topics and questions.
 
 #### General topics / questions
 
