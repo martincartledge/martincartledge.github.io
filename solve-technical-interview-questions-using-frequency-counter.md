@@ -1,12 +1,12 @@
 ---
-title: Problem Solving Patterns for Technical Interviews - Frequency Counter
+title: Problem Solving Patterns for Technical Interviews - the Frequency Counter Pattern Explained
 date: "2020-12-21T22:40:32.169Z"
-description: "Interview Insights Pt 3 - Problem Solving Patterns: Frequency Counter"
+description: "Interview Insights Pt 3 - Problem Solving Patterns - Frequency Counter"
 ---
 
-In my last article, I shared my thoughts on [prepare for a software developer interview](https://www.martincartledge.io/prepare-for-software-developer-interview/). This week, I am going to switch gears a bit and being to talk about common patterns you can use to solve problems in technical interviews. This week I will talk in-depth about the _frequency counter_ pattern.
+In my last article, I shared my thoughts on [prepare for a software developer interview](https://www.martincartledge.io/prepare-for-software-developer-interview/).
 
-## Frequency Counter
+In this article, I am going to switch gears a bit and talk about common patterns you can use to solve problems in technical interviews. We'll discuss the _frequency counter_ pattern in depth to help you tackle it effectively.
 
 ### What is the "Frequency Counter" pattern?
 
@@ -18,11 +18,13 @@ This pattern is often used with an `array` or a `string`, and allows you to avoi
 
 The Frequency Counter pattern is most helpful when you have multiple pieces of data that you want to compare with one another. Let me walk you through an example to see the Frequency Counter in action.
 
-The problem we are trying to solve:
+#### The "sameSquared" exercise
 
-- write a function called `sameSquared` which accepts two arrays
-- the function should return `true` if _every_ value in the first array has it's corresponding value squared in the second array
-- the frequency of the values must be the same
+- Write a function called `sameSquared` which accepts two arrays
+- The function should return `true` if _every_ value in the first array has it's corresponding value squared in the second array
+- The frequency of the values must be the same
+
+#### What is the optimal outcome?
 
 After our function is written, we should expect our `sameSquared` function to return these values.
 
@@ -42,19 +44,25 @@ sameSquared([1, 2, 1], [4, 4, 1]); // false
 sameSquared([2, 3, 6, 8, 8], [64, 36, 4, 9, 64]); // true
 ```
 
-First, using the `function` keyword, we create a function with the identifier `sameSquared`
+#### Getting started
+
+First, using the `function` keyword, we create a function with the identifier `sameSquared`:
 
 ```js
 function sameSquared() {
 ```
 
-Our function `sameSquared` needs two parameters, a first array and a second array. In this example, we are using `[1, 2, 3]` and `[4, 1, 9]`.
+Our function `sameSquared` needs two parameters, a first array and a second array. In this example, we are passing these values `[1, 2, 3]` and `[4, 1, 9]`.
 
 ```js
 function sameSquared(firstArr, secondArr) {
 ```
 
-Inside of our function block, we want to address a few edge cases. First, we need to check that both parameters have truthy values i.e. _not_ `null`, `undefined`, etc. We can check for a falsy value by using the `!` operator. If `firstArr` or `secondArr` is falsy, we return `false`.
+#### Check edge cases
+
+Inside of our function block, we want to address a few edge cases. First, we need to check that both parameters have truthy values i.e. _not_ `null`, `undefined`, and so on.
+
+We can check for a falsy value by using the `!` operator. If `firstArr` or `secondArr` is falsy, we return `false`.
 
 ```js
 function sameSquared(firstArr, secondArr) {
@@ -70,6 +78,8 @@ function sameSquared(firstArr, secondArr) {
   if (!firstArr || !secondArr) return false;
   if (firstArr.length !== secondArr.length) return false;
 ```
+
+#### Build a "dictionary" to avoid nested loops
 
 We need to keep track of all values in at least one of the arrays. To do this, and to avoid a nested loop, we can store these values in a hash table (object). I'll call mine `lookup`.
 
@@ -109,9 +119,11 @@ Once the `firstArr` is finished looping, the `lookup` should contain these value
 }
 ```
 
+#### Compare array values
+
 Now that we have iterated through all of the values in the `firstArr` and stored them as their respective _squared_ value, we want to compare those values to the values in the `secondArr`.
 
-We start by creating another `for of` loop. On the first line inside of our new `for of` block, we write a conditional statement to check if the current value from our `secondArr` is _not_ inside of our `lookup`. If it is not, we stop looping and return `false`;
+We start by creating another `for of` loop. On the first line inside of our new `for of` block, we write a conditional statement to check if the current value from our `secondArr` is _not_ inside of our `lookup`. If it is not, we stop looping and return `false`.
 
 If the value from the `secondArr` is in our `lookup`, we want to decrement the value of that entry. We can do so by using the `-=` assignment operator.
 
@@ -140,6 +152,8 @@ After we are finished looping through the `secondArr`, our `lookup` should have 
 }
 ```
 
+#### Wrapping up our "sameSquared" function
+
 If we finish iterating through the `secondArr` without returning `false`, that means that our `firstArr` contains all values that are in a squared state in the `secondArr`; therefore, we return `true` outside of `for of` loop.
 
 ```js
@@ -159,12 +173,14 @@ function sameSquared(firstArr, secondArr) {
 }
 ```
 
-Let me show you another example, this one is used very commonly in coding assessments, so you might've seen this problem before.
+Let me show you another example, this one is used very commonly in coding assessments (so you might've seen this problem before).
 
-The problem we are trying to solve:
+#### The "isAnagram" exercise
 
-- write a function called `isAnagram` which accepts two strings
-- the function should return `true` if the two strings parameters are [anagrams](https://en.wikipedia.org/wiki/Anagram) of each other
+- Write a function called `isAnagram` which accepts two strings
+- The function should return `true` if the two strings parameters are [anagrams](https://en.wikipedia.org/wiki/Anagram) of each other
+
+#### What is the optimal outcome?
 
 After our function is written, we should expect our `isAnagram` function to return these values.
 
@@ -184,19 +200,25 @@ isAnagram("cat", "tag"); // false
 isAnagram("rat", "tar"); // true
 ```
 
-First, using the `function` keyword, we create a function with the identifier `isAnagram`
+#### Getting started
+
+First, using the `function` keyword, we create a function with the identifier `isAnagram`:
 
 ```js
 function isAnagram() {
 ```
 
-Our function `isAnagram` needs two parameters, a first `string` and a second `string`. In this example, we are using `silent` and `listen`.
+Our function `isAnagram` needs two parameters, a first `string` and a second `string`. In this example, we are passing these values `silent` and `listen`.
 
 ```js
 function isAnagram(firstStr, secondStr) {
 ```
 
-On the first few lines of our function block, we want to address a few edge cases, just like in the first example. Similar to `isAnagram`, we need to check that both parameters have truthy values i.e. _not_ `null`, `undefined`, etc. We can check for a falsy value by using the `!` operator. If `firstStr` or `secondStr` is falsy, we return `false`
+#### Check edge cases
+
+On the first few lines of our function block, we want to address a few edge cases, just like in the first example.
+
+Similar to `isAnagram`, we need to check that both parameters have truthy values i.e. _not_ `null`, `undefined`, etc. We can check for a falsy value by using the `!` operator. If `firstStr` or `secondStr` is falsy, we return `false`.
 
 ```js
 function isAnagram(firstStr, secondStr) {
@@ -212,6 +234,8 @@ function isAnagram(firstStr, secondStr) {
   if (!firstStr || !secondStr) return false;
   if (firstStr.length !== secondStr.length) return false;
 ```
+
+#### Build a "dictionary" to avoid nested loops
 
 Remember, we are using the frequency counter pattern and we need to keep track of all values in at least one of the arrays. Now we know that the best way to handle this is to store these values in a hash table (object). To keep things consistent, I'll call mine `lookup` again.
 
@@ -254,9 +278,11 @@ Once the `firstStr` is finished looping, the `lookup` should contain these value
 }
 ```
 
+#### Compare array values
+
 Now that we have iterated through all of the values in the `firstStr` and stored their value, we want to compare those values to the values in the `secondStr`.
 
-We start by creating another `for of` loop. On the first line inside of our new `for of` block, we write an `if` condition statement to check if the current value from our `secondStr` is _not_ inside of our `lookup`. If it it not, we want to stop iteration and return `false`.
+We start by creating another `for of` loop. On the first line inside of our new `for of` block, we write a conditional statement to check if the current value from our `secondStr` is not inside of our `lookup`. If it is not, we want to stop iteration and return `false`.
 
 Otherwise, if the value from the `secondStr` _is_ in our `lookup`, we want to decrement the value of that entry. We can do so by using the `-=` assignment operator.
 
@@ -290,7 +316,9 @@ After we are finished looping through the `secondStr`, our `lookup` should have 
 }
 ```
 
-If we finish iterating through the `secondStr` without returning `false`, that means that our `firstStr` contains all values that are in the `secondStr`; therefore, we return `true` outside of `for of` loop.
+#### Wrapping up our "isAnagram" function
+
+If we finish iterating through the `secondStr` without returning `false`, that means that our `firstStr` contains all values that are in the `secondStr`. Therefore, we return `true` outside of `for of` loop.
 
 ```js
 function isAnagram(firstStr, secondStr) {
@@ -313,6 +341,6 @@ function isAnagram(firstStr, secondStr) {
 
 ## In Summary
 
-I hope this in-depth overview of the Frequency Counter pattern was helpful. Now, with the knowledge of the Frequency Counter pattern, I am confident that you will be able to impress your interviewer by showcasing your skills at even a higher level.
+I hope this in-depth overview of the Frequency Counter pattern was helpful. Now that you know how the pattern works, I am confident that you will be able to impress your interviewer by showcasing your skills at an even higher level.
 
-In my next entry, I will be discussing another common problem solving pattern called the Sliding Window. Thanks for reading, and happy interviewing!
+In my next article, I will be discussing another common problem-solving pattern called the Sliding Window. Thanks for reading, and happy interviewing!
