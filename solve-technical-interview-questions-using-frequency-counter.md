@@ -260,8 +260,8 @@ function isAnagram(firstStr, secondStr) {
 
   const lookup = {};
 
-  for (value of firstStr) {
-    lookup[value * value] ? (lookup[value * value] += 1) : (lookup[value * value] = 1);
+  for (first of firstStr) {
+    lookup[first] ? (lookup[first] += 1) : (lookup[first] = 1);
   }
 ```
 
