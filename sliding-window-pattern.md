@@ -6,23 +6,17 @@ description: "Interview Insights Pt 4 - Problem Solving Patterns - Sliding Windo
 
 In my last article, I shared my thoughts on [solving technical interview questions using the Frequency Counter pattern](https://www.martincartledge.io/solve-technical-interview-questions-using-frequency-counter/).
 
-In this article, I am going to switch gears a bit and talk about common patterns you can use to solve problems in technical interviews. We'll discuss the _Sliding Window_ pattern in depth to help you tackle it effectively.
+In this article, I am going to talk about another common pattern you can use to solve problems in technical interviews. Today, I am going to discuss the _Sliding Window_ pattern in depth to help you tackle it effectively.
 
 ### What is the "Sliding Window" pattern?
 
-- this pattern involves creating a window which can either be an array or number from one position to another
-- depending on a certain condition, the window either increases or closes (and a new window is created)
+The Sliding Window pattern creates a "window" by using an array or an integer from one position to another.
 
-```js
-/*
-  write a function called maxSubarraySum which accepts an array of integers and a number called n
-  the function should calculate the maximum sum of n consecutive elements in the array
-*/
-```
+Depending on a specified condition, the "window" either increases or closes (and a new window is created).
 
 ### When should I use the Sliding Window pattern?
 
-- very useful for keeping track of a subset of data in an array/string, etc
+The Sliding Window pattern is most helpful when want to keep track of a subset of data in an array.
 
 #### The "maxSubarraySum" exercise
 
