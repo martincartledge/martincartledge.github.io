@@ -228,6 +228,8 @@ the `Location` type defines one `address` field which returns a `String`
 
 now we will see that a field can return an object type of its own
 
+a graphql server can execute queries like these because at each level in the query - it is able to validate the client requirements against the defined schema
+
 ```graphql
 query {
     # !. the shop field returns a `Shop` type
@@ -240,5 +242,187 @@ query {
             address
         }
     }
+}
+```
+
+if you will notice above, we know that our `Shop` type has a `location` field and that our `Location` type has an `address` field; however, where is the `shop` field coming from?
+
+### schema roots
+
+a graphql schema must be defined using type and fields to describe its capabilities
+
+a graphql schema must always define a `Query Root` (a type that defines the entry point to possibilities)
+
+we usually call this type a `Query`
+
+```graphql
+type Query {
+    shop(id: ID): Shop!
+}
+```
+
+the `Query` type is implicitly queried whenever you make a graphql api request
+
+```graphql
+{
+    shop(id: 1) {
+        name
+    }
+}
+```
+
+this is valid because it implicitly asks for the `shop` field on the `Query Root` even though we did not query for that particular field that returned a `Query` type first
+
+a `Query Root` has to be defined on a graphql schema, and there are two other types of roots that can be defined, a `Mutation` and a `Subscription` root
+
+### arguments
+
+```graphql
+type Query {
+    shop(id: ID!): Shop!
+}
+```
+
+a graphql field can define arguments just like a function
+
+the graphql server uses these arguments at the runtime resolution of the field
+
+these fields are defined between parentheses after the field name and you can have as many of them as you like
+
+```graphql
+type Query {
+    shop(owner: String!, name: String!, location: Location): Shop!
+}
+```
+
+arguments, like fields, can define a type which can either be a `scalar` type or an `input` type
+
+input types are similar to types, but they are declared in a different way, using the `input` keyword
+
+```graphql
+type Product {
+    price(format: PriceFormat): Int!
+}
+
+input PriceFormat {
+    displayCents: Boolean!
+    currency: String!
+}
+```
+
+### variables
+
+graphql queries can also define variables that can be used within a query
+
+this allows clients to send variables along with a query and have the graphql server execute it instead of including it directly in the query string itself
+
+```graphql
+query FetchProduct($id: ID!, $format: PriceFormat!) {
+    product(id: $id) {
+        price(format: $format) {
+            name
+        }
+    }
+}
+```
+
+we gave this query an **operation name** (`FetchProduct`)
+
+a client would send this query with variables like this
+
+```json
+{
+  "id": "abc",
+  "format": {
+    "displayCents": true,
+    "currency": "USD"
+  }
+}
+```
+
+### aliases
+
+the server dictates the canonical name of fields but if the client wants to receive fields under another name, they can use _aliases_
+
+```graphql
+query {
+    abcProduct: product(id: "abc") {
+        name
+        price
+    }
+}
+```
+
+above, the client requests the `product` field but defines an `abcProduct` alias
+
+when the client executes the query, it will get back the field as if it was named `abcProduct`
+
+```json
+{
+  "data": {
+    "abcProduct": {
+      "name": "shirt",
+      "price": 25
+    }
+  }
+}
+```
+
+this is useful when requesting the same field multiples times with different arguments
+
+### mutations
+
+> allows writing and modifying data
+
+the entry point to the mutations of a schema is under the `Mutation` root
+
+to access the `mutation` root in a graphql query, use the `mutation` keyword at the top level of a query
+
+```graphql
+mutation {
+    addProduct(name: String!, price: Price!) {
+        product {
+            id
+        }
+    }
+}
+```
+
+we define the `addProduct` mutation in a similiar way that we define fields on the query root
+
+```graphql
+type Mutation {
+    addProduct(name: String!, price: Price!): AddProductPayload 
+}
+
+type AddProductPayload {
+    product: Product!
+}
+```
+
+two things make `mutation` fields different from `query` fields
+- top-level fields under the mutation root are allowed to have side effects and make modifications
+- top-level mutation fields must be executed serially by the server, other fields could be executed in parallel
+
+similarly they
+- take arguments
+- have a return type for clients to query after a mutation is made
+
+### enums
+
+> allow a schema to clearly define a set of values that may be returned, for fields, or passed (arguments)
+
+they come in handy when defining an API that is easy to use by clients
+
+```graphql
+type Shop {
+    # the type of products the shop specializes in
+    type: ShopType!
+}
+
+enum ShopType {
+    APPAREL
+    FOOD
+    ELECTRONICS
 }
 ```
