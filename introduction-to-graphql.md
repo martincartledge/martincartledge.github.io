@@ -426,3 +426,252 @@ enum ShopType {
     ELECTRONICS
 }
 ```
+
+### abstract types
+
+> allow clients to expect the return type of a field to act a certain way, without returning an actual type
+
+there are two ways to return an abstract type for fields, interfaces, and unions
+
+`Interfaces` allow us to define a contract that a concrete type implementing it must answer to
+
+```graphql
+interface Discountable {
+    priceWithDiscounts: Price!
+    priceWithoutDiscounts: Price!
+}
+
+type Product implements Discountable {
+    name: String!
+    priceWithDiscounts: Price!
+    priceWithoutDiscounts: Price!
+}
+
+type GiftCard implements Discountable {
+    code: String!
+    priceWithDiscounts: Price!
+    priceWithoutDiscounts: Price!
+}
+```
+
+we have a `Product` type that implements a `Discountable` `interface`
+
+this means that the `Product` type must define the two `Discountable` fields because by implementing the interface, it must respect the contract
+
+this allows other fields to return `Discountable` directly - letting clients know they may request the fields part of that contract directly on the result (without knowing which `concrete` type will be returned at runtime)
+
+we could have a `discountedItems` field that returns a list of either a `Product` or `GiftCard` type by directly returning an interface type of `Discountable`
+
+```graphql
+type Cart {
+    discountedItems: [Discountable!]!
+}
+```
+
+all types are expected to answer to the `Discountable` contract; therefore, clients can directly ask for both of the price fields
+
+```graphql
+query {
+    cart {
+        discountedItems {
+            priceWithDiscounts
+            priceWithoutDiscounts
+        }
+    }
+}
+```
+
+if a client wants to query the other fields they must specify which `concrete` type they want to select against
+
+you can use _fragment spreads_ or _typed fragments_ for this
+
+```graphql
+query {
+    cart {
+        discountedItems {
+            priceWithDiscounts
+            priceWithoutDiscounts
+            ...on Product {
+                name
+            }
+            ... on GiftCard {
+                code
+            }
+        }
+    }
+}
+```
+
+union types are slightly different
+
+instead of defining a certain contract, union types are more of a bag of disparate objects that a field _could_ return
+
+you define them by using the `union` keyword
+
+```graphql
+union CartItem = Product | GiftCard
+
+type Cart {
+    items: [CartItem]
+}
+```
+
+it defines no contract, only the possible concrete type that could be returned by that field; therefore, clients have to specify the expected concrete type in all cases
+
+```graphql
+query {
+    cart {
+        discountedItems {
+            ... on Product {
+                name
+            }
+            ... on GiftCard {
+                code
+            }
+        }
+    }
+}
+```
+
+abstract types can be useful in graphql schemas; however, they can be easily abused
+
+### fragments
+
+> allow clients to define part of a query to be refused elsewhere
+
+to create an _inline fragment_ to select concrete types this syntax is used `... on Product`
+
+```graphql
+query {
+    products(first: 100) {
+        ...ProductFragment
+    }
+}
+
+fragment ProductFragment on Product {
+    name
+    price
+    variants
+}
+```
+
+a fragment is defined by using the `fragment` keyword, it takes a _name_ and a _location_ where it can be applied, `Product` being the case shown above
+
+### directives
+
+> an annotation that can be used on various graphql primitives
+
+the graphql specification defines two builtin directives that are very useful: `@skip` and `@include`
+
+```graphql
+query MyQuery($shouldInclude: Boolean) {
+    myField @include(if: $shouldInclude)
+}
+```
+
+the `@include` directive ensures that the `myField` field is only queried when the variable `shouldInclude` is `true`
+
+directives provide clients with a way to annotate fields in a way that can modify the execution behavior of a graphql server
+
+directives can also accept arguments, like fields
+
+you can also create custom directives (create a name and determine where the directive can be applied)
+
+```graphql
+"""
+Marks an element of a graphql schema as
+only available with a feature flag activated
+"""
+directive @myDirective(
+    """
+    the identifier of the feature flag that toggles this field
+    """
+    flag: String
+) on FIELD
+```
+
+the directive can be used by clients like this
+
+```graphql
+query {
+    user(id: "1") @myDirective {
+        name
+    }
+}
+```
+
+besides, being applied to queries, directives can also be used with the type system directly
+
+this makes them useful to annotate schemas with metadata
+
+```graphql
+"""
+marks an element of a graphql schema as
+only available with a feature flag activated
+"""
+directive @featureFlagged(
+    """
+    the identifier of the feature flad that toggles this field
+    """
+    flag: String
+) on OBJECT | FIELD_DEFINITION
+```
+
+then we can apply this directive to schema members directly
+
+```graphql
+type SpecialType @featureFlagged(flag: "secret-flag") {
+    secret: String!
+}
+```
+
+### wrapping up (introspection)
+
+with graphql, clients can ask a graphql schema for what is possible to query
+
+graphql schemas also include introspection meta fields which allows clients to fetch almost everything about its type system
+
+```graphql
+query {
+    __schema {
+        types {
+            name
+        }
+    }
+}
+```
+
+```json
+{
+  "data": {
+    "__schema": {
+      "types": [
+        {
+          "name": "Query"
+        },
+        {
+          "name": "Product"
+        },
+      ]
+    }
+  }
+}
+```
+
+this allows clients to discover use cases and it also enables amazing tooling
+
+graphiql - an interactive graphql playground
+
+introspection is used to generate code and to validate queries ahead of time
+
+it is also used by IDEs to validate queries while developing an app
+
+the graphql ecosystem is growing rapidly
+
+### in summary
+
+- a query language for clients to express requirements
+- a type system for servers to express possibilities
+- an introspection system that allows clients to discover these possibilities
+- allowing API providers to design schemas that clients will be able to consumer in the manner they want to
+
