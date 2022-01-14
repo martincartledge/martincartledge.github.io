@@ -212,3 +212,237 @@ in this case, specific naming could have avoided a large deprecation and would h
 
 naming things right can help guide towards the right design, while poor naming can steer an API towards bad design
 
+### descriptions
+
+graphql schema members can be documented using a _description_
+
+this is how it would look using SDL
+
+```graphql
+"""
+An order represents a `Checkout`
+that was paid by a `Customer`
+"""
+type Order {
+    items: [LineItem!]!
+}
+```
+
+descriptions encode this information directly into the schema as opposed to being found in an external source (documentation)
+
+if you are using a tool like graphiql, you can quickly read descriptions along with the schema
+
+it is a good idea to describe all entities in your schema
+
+a good description should clearly convey what a schema type _represents_, what mutations _do_, etc
+
+descriptions can also occasionally reveal inadequate schema design
+
+descriptions are icing on the cake - a client should not have to read descriptions to understand how your API can (and should) be used
+
+an early warning sign to a potentially poor design is a description that explains an edge case, conditionals, or contexual behavior
+
+using descriptions is great; however, do not make your users rely on them to understand your use cases
+
+### using the schema
+
+here, we have a schema with a `Product` type which contains a `price`, `priceInCents`, and `type` field
+
+the `type` field represents the type of `Product` (`apparel`, `food`, `toys`)
+
+```graphql
+type Product {
+    name: String!
+    priceInCents: Int!
+    type: String!
+}
+```
+
+a potential problem here is clients may find it difficult determining _what can come out of this type_
+
+what is the best way to handle the `type` field here?
+
+in this case, assuming the `type` field has a set number of defined items, it would be favorable to "self-document" this schema and use an enum here
+
+```graphql
+enum ProductType {
+    APPAREL
+    FOOD
+    TOYS
+}
+
+type Product {
+    name: String!
+    priceInCents: Int!
+    type: ProductType!
+}
+```
+
+a common design issue is including unstructured data as part of your schema (e.g. using a `String` type with a description that indicates how to parse the field or uses a scalar type like JSON)
+
+```graphql
+type Product {
+    metaAttributes: JSON!
+}
+
+type User {
+    # JSON encoded string with a list of user tags
+    tags: String!
+}
+```
+
+a more favorable approach (in most cases) is to use a stronger schema
+
+```graphql
+type ProductMetaAttribute {
+    key: String!
+    value: String!
+}
+
+type Product {
+    metaAttributes: [ProductMetaAttribute!]!
+}
+```
+
+these look familiar; however, the typed schema allows clients to handle this behavior in a much better way
+
+it also allows for the schema to evolve over time (without the fear of breaking clients)
+
+and finally it lets the server implementation know which fields are used on the `ProductMetaAttribute` type over time
+
+if we use a custom encoding scalar or string, we lose what the typed graphql schema gives us
+
+in some cases, custom scalars can help turn fields that are serialized strings into more useful types
+
+```graphql
+type Product {
+    # Instead of a string description, we use a
+    # custom scalar to indicate to clients
+    # that they can treat the result of this field
+    # as valid markdown
+    description: Markdown
+}
+
+scalar Markdown
+```
+
+these can also be used as input types as well which results in more precise validation
+
+```graphql
+input CreateUser {
+    email: EmailAddress
+}
+
+# A valid email address according to RFC5322
+scalar EmailAddress
+```
+
+if you have the opportunity to use a stronger schema, you should consider doing so
+
+this can mean using more complex object types as opposed to simple scalars, using enum types, and custom scalars when it makes sense to do so
+
+### expressive schemas
+
+graphql gives us the tools to build _expressive APIs_
+
+> an API that allows client developers to easily understand how the API is meant to be used
+
+easy to use, hard to misuse
+
+as mentioned before, the graphql schema allows API providers to express how the API is meant to be used before they even look at documentation (or worse, implementing first)
+
+a good way to build expressive schemas is to use nullability to your advantage
+
+this graphql API provides a way to find a product
+
+a product is referred by their global ID or by their name
+
+you could make a `findProduct` field which (optionally) accepts _both_ and `id` and a `name` field
+
+```graphql
+type Query {
+    # Find a query by id or by name
+    # Passing none or both results
+    # in a NotFound error
+    findProduct(id: ID, name: String): Product
+}
+```
+
+this would solve a client's needs; however, it is not that intuitive
+
+e.g. what if a client provides no arguments or both arguments?
+
+in both cases the server would more than likely return an error
+
+you can solve this without having to explicitly explain any further
+
+```graphql
+type Query {
+    productByID(id: ID!): Product
+    productByName(name: String!): Product
+}
+```
+
+you might be thinking, _why not combine these into one field?_
+
+we should not be afraid of providing different ways to accomplish things in graphql
+
+even if you provided five different ways to fetch a product, this would not add overhead to clients
+
+the client will pick the fields that best suit their use case
+
+now, with each field containing a single required field, our API is very hard to misuse
+
+the schema will instruct clients on how to use the field
+
+---
+
+```graphql
+type Payment {
+    creditCardNumber: String
+    creditCardExp: String
+    giftCardCode: String
+}
+```
+
+this `Payment` type represents a payment made by a customer
+
+the three fields it contains can _potentially_ be filled in (depending on how the order was paid)
+
+if a credit card was used, the `creditCardNumber` and `creditCardExp` fields should be filled in
+
+if a gift card was used, the `gittCardCode` field should be filled in
+
+we can improve this by using a strong schema to represent these rules
+
+```graphql
+type Payment {
+    creditCardNumber: CreditCardNumber
+    creditCardExpiration: CreditCardExpiration
+    giftCardCode: String
+}
+
+# Represents a 16 digit credit card number
+scalar CreditCardNumber
+
+type CreditCardExpiration {
+    isExpired: Boolean!
+    month: Int!
+    year: Int!
+}
+```
+
+here we have addressed a few issues
+- instead of a `String` type credit card expiration (makes it hard for clients to determine which format to provide), we have refactored this into a `CardExpirationDetails` type that has integer fields for both the month and the year. this is more usable than a string type and allows us to add fields later
+
+we could add `isExpired: Boolean` field to help clients with this logic
+
+we also use a custom scalar here for the credit card number which provide more semantics to clients since a credit card number has a particular format
+
+we can still improve this though, notice a lot of fields are nullable, which will make it difficult for the client to know what the payment object will look like at runtime
+
+you can improve this potaential problem like so
+
+```graphql
+
+```
