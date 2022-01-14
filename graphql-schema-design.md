@@ -441,8 +441,125 @@ we also use a custom scalar here for the credit card number which provide more s
 
 we can still improve this though, notice a lot of fields are nullable, which will make it difficult for the client to know what the payment object will look like at runtime
 
-you can improve this potaential problem like so
+you can improve this potential problem like so
 
 ```graphql
+type Payment {
+    creditCard: CreditCard
+    giftCardCode: String
+}
 
+type CreditCard {
+    number: CreditCardNumber!
+    expiration: CreditCardExpiration!
+}
+
+# Represents a 16 digit credit card number
+scalar CreditCardNumber
+
+type CreditCardExpiration {
+    isExpired: Boolean!
+    month: Int!
+    year: Int!
+}
 ```
+
+this is look much better - now we are using an object type that contains all the credit card related input fields
+
+the schema expresses that if a credit card input is passed, it _must contain all the fields_ (as shown by the `number` and `expiration` fields)
+
+previously, you would have had to handle that kind of conditional in the implementation as opposed to letting the schema handle that on its own
+
+a common warning sign of potential refactors is taking a look at field prefixes - if multiple fields on a type share a prefix, chances are they could be under a new object type
+
+this also lets us evolve the schema in a much better way, as opposed to adding more fields at the root (in our case the `Payment` object)
+
+you can think of this principle in these terms
+
+> make impossible states impossible
+
+this is a common saying when it comes to strongly type languages
+
+to apply this methodology, you can look at any given type in your schema and determine if its impossible to have inconsistent information from it
+
+an example
+
+```graphql
+type Cart {
+    paid: Boolean
+    amountPaid: Money
+    items: [CartItem!]!
+}
+```
+
+in this case, it is possible for a client to get data that represents an impossible state (`paid`: `true` and `amountPaid`: `null`)
+
+```json
+{
+  "data": {
+    "cart": {
+      "paid": true,
+      "amountPaid": null,
+      "item": [...]
+    }
+  }
+}
+```
+
+another impossible state would be something like `paid`: `false` and `amountPaid`: `null`
+
+```json
+{
+  "data": {
+    "cart": {
+      "paid": false,
+      "amountPaid": 10000,
+      "item": [...]
+    }
+  }
+}
+```
+
+to fix this you can say that is a `payment` property is on a `cart`, it means that is has been paid for
+
+by doing this you can use nullability to ensure both `paid` and `amountPaid` are present when that is the case
+
+```graphql
+type Cart {
+    payment: Payment
+    items: [CartItem!]!
+}
+
+type Payment {
+    paid: Boolean!
+    amountPaid: Money!
+}
+```
+
+another example of an API that is tricky for a client to use would be something like a `product` field which takes an _optional_ sort argument
+
+this makes sense because you would not want to force all clients to pass a value for sorting if they do not want to sort a particular way
+
+```graphql
+type Query {
+    products(sort: SortOrder): [Product!]!
+}
+```
+
+in this case, the schema does not give you much information about a default sort order; however, there is a way to fix this
+
+graphql provides default values which are valuable when wanting to document the default case in your schema
+
+```graphql
+type Query {
+    products(sort: SortOrder = DESC): [Product!]!
+}
+```
+
+this way, you can avoid setting a default in your resolving logic and instead encode it right into your schema
+
+wrapping up
+- make sure your fields do one thing well and avoid clever or generic fields when possible
+- avoid runtime logic if the schema can enforce it
+- use complex object and input types to represent coupling between fields and arguments (avoid impossible states)
+- use default values to indicate what the default behavior is when using optional inputs and arguments
