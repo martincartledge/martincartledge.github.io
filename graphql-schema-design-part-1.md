@@ -563,3 +563,179 @@ wrapping up
 - avoid runtime logic if the schema can enforce it
 - use complex object and input types to represent coupling between fields and arguments (avoid impossible states)
 - use default values to indicate what the default behavior is when using optional inputs and arguments
+
+### specific or generic
+
+being specific in use cases you provide means you can optomize well for clients interested in that functionality
+
+being too specific for some clients' means it is less customized for other clients
+
+graphql's philosophy is letting clients consume exactly what they need - building a schema with that in mind and creating simple fields that answer clients' specific needs is generally a good idea
+
+fields that are too generic are often times optimized for no one and are harder to reason about
+
+fields should do one thing, and do it really well
+
+an indication that a field might be doing more than one thing is a boolean argument
+
+```graphql
+type Query {
+    posts(first: Int!, includeArchived: Boolean): [Post!]!
+}
+```
+
+instead of making the `posts` field handle both listing archived posts and normal posts, you can separate these into two fields
+
+```graphql
+type Query {
+    posts(first: Int!): [Post!]!
+    archivedPosts(first: Int!): [Post!]!
+}
+```
+
+by splitting these fields into two distinct use cases, your schema is more readable and easier to optimize, easier to cache, and easier to reason about for clients
+
+a more common example of excessive use of generic fields are complex filters
+
+```graphql
+query {
+    posts(where: [
+        { attribute: DATE, gt: "2021-10-04" },
+        { attribute: TITLE, include: "GraphQL" }
+    ]) {
+        id
+        title
+        date
+    }
+}
+```
+
+these filtering syntaxes are close to SQL and are very powerful; however, they should be avoided most of the time
+
+- this is very generic which would force the team maintaining it to handle performance edge cases inside a single resolver
+- it also does not focus on one use case in particular which would make it hard to discover and use on the client as well
+
+if you are implementing a search or a filtering use case, filters can be very useful
+
+try and be conscious of how much you need these generic fields
+
+```graphql
+type Query {
+    filterPostsByTitle(
+        includingTitle: String!,
+        afterDate: DateTime
+    ): [Post!]!
+}
+```
+
+keep in mine: if you are building an API that should support more GQL-like filters for a search interface, going the generic route might make more sense
+
+### anemic graphql
+
+taken from the [anemic domain model](https://martinfowler.com/bliki/AnemicDomainModel.html), popularized by martin fowler
+
+> designing schemas purely as dumb bags of data rather than designing them thinking of actions, use cases, or functionality
+
+```graphql
+type Discount {
+    amount: Money!
+}
+
+type Product {
+    price: Money!
+    discounts: [Discount!]!
+}
+```
+
+the `Product` type represents a product in an e-commerce store, the product has a `price` and a list of `discounts` that are applied
+
+imagine the client wants to display the actual price a customer will have to pay
+
+```js
+const discountAmount = accounts.reduce((amount, discount) => {
+    amount + discount.amount;
+}, 0); 
+
+const totalPrice = product.price - discountAmount;
+```
+
+the client will be able to display the price to customers, until the `Product` type evolves. what if taxes are added to products 
+
+```graphql
+type Product {
+    price: Money!
+    discounts: [Discount!]!
+    taxes: Money!
+}
+```
+
+now the client logic is not valid anymore, we can fix this by exposing what the client is interested in, a `totalPrice`
+
+```graphql
+type Product {
+    price: Money!
+    discounts: [Discount!]!
+    taxes: Money!
+    totalPrice: Money!
+}
+```
+
+now the client gets exactly what they are interested in and can avoid writing and updating brittle code everytime something new is added
+
+in this respect, we have designed our schema according to the domain and _not_ simply exposing data for clients to consume
+
+the same principle can be applied to a `Mutation` as well
+
+```graphql
+type Mutation {
+    updateCheckout(
+        input: UpdateCheckoutInput
+    ): UpdateCheckoutPayload
+}
+
+input UpdateCheckoutInput {
+    email: Email
+    address: Address
+    items: [ItemInput!]
+    creditCard: CreditCard
+    billingAddress: Address
+}
+```
+
+there are a few problems with this approach
+- the mutation focuses too much on data and not behaviors (client would need to guess how to make a specific action) e.g. what if adding an item to our checkout actually reqiures updates to other attributes? our client would only learn of this via a runtime error, or by updating the wrong state (and forgetting to update an attribute)
+- adding cognitive overload to clients due to them having to select a set of fields to update when wanting to make a certain action e.g. add to cart
+- focusing too much on the shape of the internal data of checkout, not the behaviors of a checkout (not explicitly indicating that it is even possible to do these actions)
+- having to make everything nullable which makes the schema less expressive
+
+here is a fine-grained approach
+
+```graphql
+type Mutation {
+    addItemToCheckout(
+        input: AddItemToCheckoutInput
+    ): AddItemToCheckoutPayload
+}
+
+input AddItemToCheckoutInput {
+    checkoutID: ID!
+    item: ItemInput!
+}
+```
+
+some improvements:
+- the schema is strongly typed and nothing is optional in this mutation. the client knows exactly what to provide to add an item to a checkout
+- no more guessing, no more searching for which data to update, now we add an item. the client does not care about which data needs to be updated in these cases, just to add an item
+- the potential for errors is greatly reduced, the resolver can return finer-grained errors
+- it is no longer possible for the client to get into a weird state by using this mutation (it is now handled by a resolver)
+
+a side effect of this design is the server-side implementation of these kinds of mutations is generally nicer to understand and write because it focuses on one thing, and the input and payload are predictive. it is also easier to see which events should be triggered by certain mutations
+
+### relay specification
+
+> a javascript client for graphql, a powerful abstraction for building client applications consuming graphql
+
+it makes a few assumptions about the graphql api it interacts with:
+- a method to re-fetch objects using a global identifier
+- a `Connection` concept that helps paginate through datasets
+- a specific structure for mutations
