@@ -1,4 +1,4 @@
-# GraphQL Schema Design
+# GraphQL Schema Design Pt 1
 
 > APIS should be easy to use and hard to misuse
 
