@@ -236,3 +236,43 @@ even if you are using offset based pagination, `edge` types are still a good ide
 using the underlying type directly in a list type is rarely what you want, some fields are specific to a type's membership in a collection
 
 ### custom connection fields
+
+providers often provide a few fields along with connection and edge types
+
+clients often find the `edges` `{ node }` syntax overly verbose
+
+some providers will offer this without the `edges` part and get all nodes directly
+
+you get the benefits of paginated lists without the verbosity of the `edges` pattern
+
+```graphql
+query {
+    products(first: 100) {
+        nodes {
+            name
+        }
+    }
+}
+```
+
+if you want to implement this helper field, you need to ensure that you provide _both options_
+
+the `egde` pattern provides a lot of advantages when it comes to designing relationships
+
+another commonly added field to connections is a `totalCount` field, this allows clients to request the total amount of nodes (before pagination) in the list
+
+avoid using this by default; however, as computing a `totalCount` on large sets can be very slow
+
+another thing to consider is that once it is implemented it can be very hard to remove or maintain if performance issues are a reality
+
+### pagination summary
+
+- common page number links (used for pagination) are easy to implement with offset-based pagination
+- cursor-based pagination is geared more towards "infinite list" use cases
+- if you have to support pagination, reach for offset pagination first (but be aware of potential drawbacks in the future)
+- it is encouraged to use the _connection style_ pattern, even with offset pagination, this allows you to better represent relationships as opposed to simple list types
+- cursor pagination:
+  - generally a great choice for accuracy and performance
+  - let's Relay clients seamlessly integrate with your API
+  - the most common pattern in the graphql space
+  - connection pattern allows you to design more complex use cases (thanks to `Connection` and `Edge` types)
