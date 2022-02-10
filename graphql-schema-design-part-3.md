@@ -305,3 +305,48 @@ type ContentFeedCard implements SocialMediaFeedCard {
 this schema is much clearer for clients to understand, and we can now understand the different types that might be coming our way
 
 you also do not need nullable fields anymore and all potential types do not allow for any illegal states
+
+
+### union or interface?
+
+graphql has two kinds of abstract types: union types and interface types
+
+when should you use them?
+
+`interfaces` should be used when providing a common contract for things that _share behaviors_
+
+`unions` should be used when a certain field could return different types (but these types do not necessarily share common behaviors)
+
+#### do not overuse interfaces
+
+interfaces are great to create stronger contracts in your schema, but they are over-relied on sometimes (a common example is using them for common fields)
+
+if multiple types share a few fields but _do not share common behavior_, avoid the temptation to throw an interface into the mix
+
+a good interface should _mean something_ to the API consumers; therefore, describing and providing a common way to do or behave a certain way
+
+a good way to determine if your interfaces are relying too much on categorizing objects and grouping by similar attributes as opposed to interactions and behaviors is to check your _naming_ of these interfaces in your schema
+
+if you are using interfaces that do not have a strong meaning in the schema, the naming might be awkward and/or meaningless e.g. `ItemInterface`
+
+this interface might share common fields initially, but will become difficult to maintain overtime as _items_ evolve e.g. cart items, checkout items, and order items
+
+### abstract types and api evolution
+
+abstract types give the impression that it will be easier to evolve your API over time and, in some cases that is true
+
+e.g. if a field returns an interface type (and you follow [Liskov's substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)), adding a new object type which implements an interface _should not_ cause client applications to behave differently
+
+while this is true for interfaces, this is less true for unions
+
+unions allow completely disjoint types
+
+adding union members and interface implementations are not breaking changes in the strict sense (a client might not immediately break as if we removed a field definition); however, it is still tricky to make these changes in most cases and should be considered to be a _dangerous change_
+
+graphql clients are not forced into selected all union possibilities or all concrete types on an interface
+
+### designing for static queries
+
+
+
+graphql clients should code defensively against new cases and graphql servers should be cautious of adding types that may affect important client logic
