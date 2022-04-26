@@ -347,6 +347,95 @@ graphql clients are not forced into selected all union possibilities or all conc
 
 ### designing for static queries
 
-
-
 graphql clients should code defensively against new cases and graphql servers should be cautious of adding types that may affect important client logic
+
+it is tempting to use SDKs, query builders, etc 
+
+e.g.
+
+```graphql
+query.products(first: 10).fields(["name", "price"])
+```
+
+a better way is to define the graphql query like below
+
+```graphql
+query {
+    products(first: 10) {
+        name
+        price
+    }
+}
+```
+
+the example above is *explicit* and informs the client of *what* data is being asked for, as well as the shape of query will look like at runtime
+
+you should strive to keep queries *static*
+
+> static query:
+> a query that does not change based on any variable, condition, or state of the program
+
+advantages:
+- looking at source code gives developers a good idea of what the data requirements are for the client
+- give operation names to queries (this simplifies server-side logging and query analysis) e.g. `query FetchProducts { products { name } }`
+- it allows for better client-side tooling (IDE support, linting, etc)
+- enables the server to save queries server-side
+- use standard and specified language to interact with graphql servers (language-agnostic)
+
+dynamic example:
+
+```javascript
+const productFields = products.map((id, index) => {
+    return `product${index}: product(id: "${id}") { name }`;
+})
+
+const query = `
+    query {
+        ${productFields}.join('\n')
+    }
+`
+```
+
+the example above has a list of product `id`s and build a graphql query to fetch the product object associated with each `id`
+
+at runtime the query would look like this
+
+```graphql
+query {
+    product0: product(id: "abc") { name }
+    product1: product(id: "def") { name }
+    product2: product(id: "ghi") { name }
+    product3: product(id: "klm") { name }
+}
+```
+
+the problem:
+- the code above does not contain the full graphql query; therefore, it is hard to see what would actually be sent once the code is live
+- the query string changes depending on how many product `id`s are in the list at runtime (it uses *field aliases* `product0`, `product1`, etc to do so)
+
+we can avoid this and keep a *consistent* query by using *variables*
+
+```graphql
+query FetchProducts($ids: [ID!]!) {
+    products(ids: $ids) {
+        name
+        price
+    }
+}
+```
+
+by doing this, the query string never changes (but the client can fetch as many products as they want by supplying a different set of variables)
+
+it is helpful to offer a plural version of most fields (and a way to fetch a single entity if needed as well)
+
+clients can provide a single value to a list type argument in graphql
+
+```graphql
+query {
+    # this is valid 
+    products(ids: "abc") {
+        name
+        price
+    }
+}
+```
