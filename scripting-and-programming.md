@@ -150,6 +150,21 @@ classRoster.remove(“A3”);
 - One zip file with all files
 - Include screenshot of the console run
 
+
+### Hello World
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << “Hello world!” << endl;
+  return 0;
+}
+``` 
+
+> Note: a return value of `0` signals to the operating system that everything went smoothly. By default a C++ program will _always_ return `0` if there is _not_ a return value at the end of the `main` function
+
 ### Basic input
 
 Below, the `>>` operator is used to get an input value and will also put that value into the `x` variable 
@@ -172,3 +187,166 @@ Returning a `0` indicates that there was an error within the program.
 
 > `cin` is a class of `iostream` and is used to get input from input devices such as keyboards, etc
 
+The hash (`#`) signifies the start of a preprocessor command
+
+`#include` copies and pastes the entire text of the file specified between the angle brackets into the source code, for this example, the file is `iostream`.This file comes with the C++ compiler. This is short for, _input-output-streams_. It is responsible for displaying and getting text from the user.
+
+_include_ allows you to include functionality without having to copy and paste into the source code every time. _include_ can be used for standard code provided by the compiler and reusable files created by you
+
+`main()`
+
+- The starting point for all C++ programs
+- Called by the operating system
+
+`cin` and `cout`
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << “Hello World!” << endl;
+  return 0;
+}
+```
+
+> `cout`: character output
+
+> `cin`: character input
+
+> Most function calls take the form of: `object.function_name(argument1, argument2)`
+
+`<<` behave like functions
+
+### Variables
+
+#### Declaring variables
+
+`<variable_type>` `<variable_name`
+
+```c++
+int myInt;
+```
+
+#### Assigning variables
+
+```c++
+int myInt = 0;
+```
+
+### Variable types
+
+`int`
+
+Total range of a variable
+```
+2^16 = 65536 bits
+```
+
+Divided by two, `32768`
+
+That would make the range: `-32768` to `32767` (Not `32768`, `1` place is taken by `0`)
+
+
+`integer`
+- has no decimal places
+- has different types
+
+`short`
+- usually a 16-bit integer
+
+```c++
+short variable1;
+short int variable2;
+signed short variable3;
+```
+
+`long`
+
+- 32-bit number
+
+`char`
+- 8-bit integer
+- _unsigned_ `char` can store between 0 and 255
+- _signed_ `char` can store between -128 and 127
+- _unsigned_ chars are commonly used to store text in ASCII format
+- Can be initialized to hold a number or character, but will only store the ASCII value
+
+
+`float`
+- Floating point numbers
+- Storage size of 4 bytes
+- Can hold decimal places
+- Have a fixed size in memory
+- Usually stores a good approximation of a decimal value, _not_ the exact value
+
+`double`
+- Can store decimal places
+- Store more information than `float`
+- Storage size of 8 bytes
+- Still only stores an approximation of a decimal value, however more precise than `float`
+
+`bool`
+- Storage size of 1 byte
+- `true`: any number other than 0
+- `false`: the number 0
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    //define your variables here
+    int intNumber = 30;
+    float floatNumber = 30.78;
+    double doubleNumber = 45.1234;
+    bool boolean = true;
+    char charName = ‘u’;
+    cout << “Value of Integer is: “;
+    //cout your integer variable here
+    cout << intNumber << endl;
+    cout << “Value of Float is: “;
+    //cout your float variable here
+    cout << floatNumber << endl;
+    cout << “Value of Double is: “ ;
+    //cout your double variable here
+    cout << doubleNumber << endl;
+    cout << “Value of Char is: “;
+    //cout your char variable here
+    cout << charName << endl;
+    cout << “Value of Bool is: “;
+    //cout bool double variable here
+    cout <<  boolean << endl;
+    return 0;
+}
+``` 
+
+Using `cin` and `cout` to take input from user
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  string name;
+  string address;
+  string phoneNumber;
+
+  cout << “Enter your name” << endl;
+  cin >> name;
+
+  cout << “Enter your address”  << endl;
+  cin >> address;
+
+  cout << “Enter your phone number” << endl;
+  cin >> phoneNumber;
+  
+  cout << “Name is:” << name;
+  cout << “Address is:” << address;
+  cout << “Phone number is:” << phoneNumber;
+  return 0;
+}
+```
+
+### Maths, using basic operators
