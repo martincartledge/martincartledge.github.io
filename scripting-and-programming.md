@@ -349,4 +349,247 @@ int main() {
 }
 ```
 
-### Maths, using basic operators
+### Useful operators
+
+`!` logical not
+
+`~` bitwise not
+
+`*` Indirection (dereference)
+
+`&` address of
+
+`new`, `new[]` dynamic memory allocation
+
+`delete`, `delete[]` dynamic memory allocation
+
+`+=`, `-=` assignment by sum and difference
+
+`*=`, `/=`, `%=` assignment by product, quotient, and remainder
+
+`<<=`, `>>=` assignment by bitwise left shift and right shift
+
+`&=`, `^=`, `|=` assignment by bitwise, XOR, and OR
+
+`?:` ternary conditional
+
+### if/else, switch statements
+
+#### if/else statements
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int x = 7;
+  if (x == 7) {
+    cout << “Value of x is 7” << endl;
+  } else {
+    cout << “Value of x is not 7” << `endl;
+  } 
+  return 0;
+}
+```
+
+#### switch statements
+
+```c++
+#include <iostream>
+using namespace std;
+int main() {
+  int x = 2;
+  int temp;
+  switch (x) {
+  case 1:
+    temp = 1;
+    break;
+  case 2:
+    temp = 2;
+    break;
+  default:
+    temp = 3;
+    break;
+  }
+  cout << “Value of temp is: ”<< temp << endl;
+  return 0;
+}
+```
+
+### `for`, `while` and `do-while` loops
+
+`while` loops
+
+```c++
+#include <iostream>
+using namespace std;
+int main() {
+  int x = 4;
+  int y;
+  int iterations = 1;
+  
+  while (x == 4) {
+    y += x;
+    
+    x += 1;
+    
+    iterations++;
+  }
+  
+  cout << “The value of x is: “<< x << endl;
+  cout << “The value of y is: “<< y << endl;
+  return 0;
+}
+```
+
+`do-while` loops
+
+- Nearly identical to `while` loop
+- Checks conditional statements after the first run
+
+```c++
+#include <iostream>
+using namespace std;
+int main() {
+  int number = 5;
+  
+  do {
+    cout << “Value of number is: “ << number << endl;
+    number++;
+  } while (number <= 9);
+  
+  return 0;
+}
+``` 
+
+`for` loops
+
+```c++
+for (expression for initialization; expression for testing; expression for updating) {
+
+}
+```
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  for (int i = 0; i < 10; i++) {
+    cout << “The value of I is: “ << i << endl;
+  }
+  return 0;
+}
+```
+
+### Functions and recursion
+
+#### Functions
+
+- Every C++ program must have a `main()` function, it is the entry point
+- Include parameters in the `main()` function to allow input from the command line
+
+```c++
+int main(int argc, char * const argv[]) {
+  …
+}
+``` 
+
+- When using parameters with `main()`, every group of characters (separated by space) is saved inside of the `argv` array
+
+```
+program.exe text 1234
+``` 
+
+`argc: 3`
+
+`argv: {program.exe, text, 234}`
+
+
+`definition`
+
+```c++
+void testFunction(int num1, int num2) {}
+```
+
+`declaration`
+
+```c++
+int testFunction(int, int);
+```
+
+#### Parameters
+
+##### Pass by value
+
+- Happens by default
+- Value of variable is passed, not the variable itself
+- Original is not altered in any way
+
+##### Pass by reference
+
+- Function is given the address of the variable, giving direct access to information
+- Use `&` after the data type in the function definition to allow direct access
+- A `&` must be present in every forward declaration as well
+
+```c++
+testFunction(num1, 23);
+``` 
+
+```c++
+void testFunction(int& arg1, int arg2)
+```
+
+```c++
+#include <iostream>
+using namespace std;
+
+void testFunction(int& arg1, int arg2) {
+  arg1 = arg2;
+  // no return in void functions
+}
+
+int main() {
+  int num1 = 4;
+  
+  cout << “num1 before passing to testFunction is: “ << num1 << endl;
+  
+  testFunction(num1, 23);
+  
+  cout << “Value of num1 is now: “ << num1 << endl;
+  
+  return 0;
+}
+```
+
+##### Default parameters
+
+```c++
+int addTwoInts(int arg1 = 4, int arg2 = 5);
+```
+
+#### Recursion
+
+```c++
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+  if (n == 1 || n == 0) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+}
+
+int main() {
+  int temp = factorial(4);
+  
+  cout << “The value of the factorial computed is: “ << temp << endl;
+  
+  return 0;
+}
+```
+
+### Pointers and arrays
+
