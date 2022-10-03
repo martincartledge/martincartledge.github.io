@@ -593,3 +593,238 @@ int main() {
 
 ### Pointers and arrays
 
+#### Pointers
+
+> A variable that stores the address in memory of another variable and can be used to manipulate that variable
+
+Pointers hold two pieces of information:
+- The memory address, the value of the pointer
+- The data type of the variable pointed to
+
+#### Dereferencing pointers
+
+> Dereferencing a pointer allows access to the value of the variable at the pointer’s address
+
+```c++
+void f(int* p) {
+  int n = *p;
+}
+``` 
+
+> All data stored in a program is stored in computer memory
+
+#### Declaring pointers
+
+```c++
+int *ptr;
+
+struct coord *pCrd;
+
+void *vp;
+```
+
+> Pointers are not guaranteed to be initialized, only use them when they point to an existing object
+
+
+#### Arrays
+
+> Collection of similar data types under the same name
+
+```c++
+dataType arrayName[arraySize]
+
+int arr[5] = {1,2,3,4,5};
+
+int arr2[] = {1,2,3,4}; // compiler assumes size of 4 without specificity
+```
+
+> If you try to access an element outside of its bound, the compiler might not throw an error, however the value will be undefined
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int arr[5] = {1,2,3,4,5};
+  
+  cout << “The value of arr[6] is: “ << arr[6] << endl;
+  
+  return 0;
+}
+
+// The value of arr[6] is: -814033152
+```
+
+The output is a garbage value at `arr[6]`, which is an index of out of bounds
+
+#### Accessing array values in loops
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int arr[5] = {};
+  
+  int num = 1;
+  
+  for (int i = 0; i < 5; i++) {
+    arr[i] = num;
+    num++;
+    cout << “The value of arr[“<< i <<“] is equal to: “ << arr[i] << endl; 
+  }
+  
+  return 0;
+}
+
+// The value of arr[0] is equal to: 1
+// The value of arr[1] is equal to: 2
+// The value of arr[2] is equal to: 3
+// The value of arr[3] is equal to: 4
+// The value of arr[4] is equal to: 5
+```
+
+#### Changing array values
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int arr[5] = {1,2,3,4,5};
+  
+  cout << “The value of arr[1] originally is: “ << arr[1] << endl;
+  // 2
+  arr[1] = 420;
+  
+  cout << “The value of arr[1] after is: “ << arr[1] << endl;
+  // 420
+  return 0;
+}
+```
+
+#### Pointer implementation
+
+##### Allocating variables
+
+> An object, variable, or array can be created using the `new` operator, and freed with the `delete` operator
+
+```c++
+int *ptr = new int;
+
+delete ptr;
+```
+
+> The `new` operator allocates an object from the heap and optionally initializes it
+
+> When you have finished using it you should `delete` it. If you don’t, the pointed memory is inaccessible and will result in a memory leak
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int *ptr; // create a pointer named ptr
+  
+  int num = 4; // initializing a int type variable named num with a value of 4
+  
+  cout << “The integer input is: “ << num << endl;
+  
+  ptr = new int[num]; // using new to initialize the ptr array with size num which will dynamically allocate memory in the heap
+  
+  cout << “Input ” << num << “ integers\n”;
+  
+  for (int i = 0; i < num; i++) {
+    ptr[i] = i + 1; // assigning value i + 1 to the index i of the ptr array
+    cin >> ptr[i]; // cin this value
+  }
+  cout << “Elements entered by you are\n”;
+  
+  for (int i = 0; i < num; i++) {
+    cout << ptr[i] << endl;
+  }
+  
+  delete[] ptr;
+  
+  return 0;
+}
+```
+
+- Allocating memory using `new` remains allocated until the program exits, although you can explicitly deallocate using `delete` beforehand
+- In the example above, memory would have been deallocated once `main()` exited, however, using deleting `ptr` beforehand is considered good practice
+
+
+##### Referencing variables
+
+> The `&` operator is used to reference an object
+
+Then using the `&` operator on an object, you are provided with a pointer to that object
+
+The new pointer can be used as a parameter or be assigned to a variable
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int num;
+  
+  int *ptr;
+  
+  ptr = &num;
+  
+  cout << “Address stored in ptr is: “ << ptr << endl;
+  
+  *ptr = 7;
+  
+  cout << “Value of num is: “ << num << endl;
+  
+  return 0; 
+}
+
+// Address stored in ptr is: 0x7fff192223fc
+// value of num is: 7
+```
+
+##### Pointers to arrays
+
+> C++ allows you to create arrays, then use pointers to carry out operations in those arrays
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  // declare an array
+  int arr[4];
+  // declare a pointer
+  int *ptr;
+  // make the pointer point to the first element of the arr array
+  ptr = arr;
+  // set the value of the first element of arr, `arr[0]` to `3`
+  *ptr = 3;
+  // increment the pointer to point to second element
+  ptr++;
+  // update the value of the second element in the array `arr`
+  *ptr = 5;
+  // directly store a value at an index, you need the address first
+  ptr = &arr[3];
+  // store `10` at index `arr[3]`
+  *ptr = 10;
+  // move pointer back to `arr[0]`
+  ptr = arr;
+  // store value at index `arr[2]`
+  *(ptr+2) = 8;
+  // display everything within the array
+  for (int i = 0; i < 4; i++) {
+    cout << “The value at arr[“<< i <<”] is “ << arr[i] << endl;
+  }
+  
+  return 0;
+}
+
+// value at arr[0] is: 3
+// value at arr[1] is: 5
+// value at arr[2] is: 8
+// value at arr[3] is: 10
+``` 
