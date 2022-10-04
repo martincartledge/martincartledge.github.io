@@ -827,4 +827,99 @@ int main() {
 // value at arr[1] is: 5
 // value at arr[2] is: 8
 // value at arr[3] is: 10
-``` 
+```
+
+#### Multi-dimensional arrays
+
+> An array that allows nesting arrays
+
+```c++
+int grid[3][3];
+```
+
+The above will allocate 3*3 elements in one memory block
+
+A multi-dimensional array is not a pointer-to-a-pointer
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  // an array with 3 rows and 3 columns
+  int grid[3][3];
+  
+  // setting the value of each array element
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      grid[i][j] = i + j;
+      cout << “grid[“ << i << “][“ << j << “]: “ << grid[i][j] << endl;
+    }
+  }
+  
+  return 0;
+}
+
+// grid[0][0]: 0
+// grid[0][1]: 1
+// grid[0][2]: 2
+// grid[1][0]: 1
+// grid[1][1]: 2
+// grid[1][2]: 3
+// grid[2][0]: 2
+// grid[2][1]: 3
+// grid[2][2]: 4
+```
+
+#### Pointer to pointer
+
+A pointer contains a reference to another variable, it may also point to another pointer
+
+```c++
+int **pptr;
+```
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+  int x = 1;
+  int *ptr1;
+  int **ptr2;
+  
+  ptr1 = &x; // getting the address of x
+  ptr2 = &ptr1; // getting the address of ptr1
+  
+  cout << “Value of x is: “ << x << endl;
+  
+  // the value being pointed to by ptr1
+  cout << The value being pointed to by ptr1: “ << *ptr1 << endl;
+  
+  // the address being pointed to by ptr2
+  cout << “The address being pointed to by ptr2: “ << *ptr2 << endl;
+  
+  // the value being pointed to by ptr2
+  cout << “The value being pointed to by ptr2: “ << **ptr2 << endl;
+  
+  return 0;
+}
+
+// Value of x is: 1
+// The value being pointed to by ptr1: 1
+// The address being pointed to by ptr2: 0x7ffc16070684
+// The value being pointed to by ptr2: 1
+```
+
+#### Linked List
+
+The above allows for the implementation of a linked list:
+
+```c++
+class LinkedListOfIntsNode {
+  int value;
+  LinkedListOfIntsNode *next_node;
+};
+```
+
+`LinkedListOfIntsNode` can be thought of a chain, each pointing to its neighbor to the right. You can traverse this list using `next_node`
