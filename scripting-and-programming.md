@@ -1055,7 +1055,7 @@ int main() {
 
 #### Member functions
 
-- Declared int eh class definition
+- Declared in the class definition
 - Identify the class in which the function is a member
 
 ```c++
