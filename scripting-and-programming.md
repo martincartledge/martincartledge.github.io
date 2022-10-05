@@ -923,3 +923,268 @@ class LinkedListOfIntsNode {
 ```
 
 `LinkedListOfIntsNode` can be thought of a chain, each pointing to its neighbor to the right. You can traverse this list using `next_node`
+
+#### Pointer to a function
+
+> A pointer contains a reference, it may also point to a function
+
+The syntax for declaring a function pointer is:
+
+```
+functionType (pointer to function)(datatype);
+```
+
+```c++
+void (*fp)(float);
+```
+
+`*fp` is a pointer to a function that takes a `float` type argument and returns `void`
+
+```c++
+#include <iostream>
+using namespace std;
+
+void (*fp)();
+
+void foobar() {
+  std::cout << “Hello from foobar()” << std::endl;
+}
+
+int main() {
+  // initialize the function pointer by giving it the address of the function `foobar`
+  fp = &foobar;
+  
+  fp();
+}
+```
+
+### Classes
+
+> Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
+
+```c++
+class Dog {
+  public: 
+    char name[25];
+    string gender;
+    int age;
+    int size;
+    bool healthy;
+};
+
+int main() {
+  // creating an object of Dog class
+  Dog dogObj;
+  
+  // using the dot operator to access members of a class
+  dobObj.gender;
+}
+```
+
+#### Private members
+
+> By default all members declared within a class are `private`
+
+- They can only be referenced within the definitions of member functions
+- If a `private` variable is accessed directly, it will result in a compiler error
+- Can be variables or functions
+
+```c++
+#include <iostream>
+using namespace std;
+
+class Dog {
+  private:
+    char name[25];
+    string gender;
+    int age;
+    int size;
+    bool healthy;
+};
+
+int main() {
+  Dog dogObj;
+  dogObj.name;
+}
+``` 
+
+The code above results in an error due to private members of the class being accessed directly:
+
+```
+main.cpp: In function ‘int main()’:
+main.cpp:6:17: error: ‘char Dog::name [25]’ is private
+     char name[25];
+                 ^
+main.cpp:16:10: error: within this context
+   dogObj.name;  //this will give an error as data members are private 
+```
+
+#### Public members
+
+> Members of a class that can be accessed from outside of the class
+
+```c++
+#include <iostream>
+using namespace std;
+class Dog
+{
+public:
+    string name = “Nikita”;
+    string gender  = “Female”;
+    int age = 3;
+    int size = 70;
+    bool healthy = true;
+};
+
+
+int main() {
+  Dog dogObj;
+  cout << “Dog name is: “<<dogObj.name<<endl;
+  cout << “Dog gender is: “<<dogObj.gender<<endl;
+  cout << “Dog age is: “<<dogObj.age<<endl;
+  cout << “Dog size is: “<<dogObj.size<<endl;
+  cout << “Is dog healthy: “ <<dogObj.healthy<<endl;
+}
+
+// Dog name is: Nikita
+// Dog gender is: Female
+// Dog age is: 3
+// Dog size is: 70
+// Is dog healthy: 1
+```
+
+#### Member functions
+
+- Declared int eh class definition
+- Identify the class in which the function is a member
+
+```c++
+class DayOfYear {
+  public:
+    void output();
+    int month;
+    int day;
+};
+
+// indicates function output is a member of the DayOfYear class
+void DayOfYear::output() {
+  cout << “Month = “ << month << endl;
+  cout << “Day = “ << day << endl; 
+}
+
+int main() {
+  // declaring multiple objects of class DayOfYear
+  // birthday and today have their own versions of class member variables
+  DayOfYear birthday, today;
+  
+  birthday.month = 10;
+  birthday.day = 4;
+  
+  cout << “Your birthday date is: “ << endl;
+  
+  birthday.output();
+  
+  cout << Today’s date is: “ << endl;
+  
+  today.month = 10;
+  
+  today.day = 5;
+  
+  today.output();
+}
+
+// Your birthday date is: 
+// Month = 10
+// Day = 4
+// Today’s date is: 
+// Month = 10
+// Day = 5
+```
+
+#### Setters and Getters
+
+> `public` member functions used to `set` and `get` `private` member variables
+
+```c++
+
+#include <iostream>
+using namespace std;
+
+class DayOfYear {
+  public:
+    int myVar;
+    void output();
+    
+    void set(int new_month, int new_day);
+    // Precondition: new_month and new_day form a possible date
+    // Postcondition: The date is reset according to the arguments
+    
+    int get_month();
+    // Returns the month
+    
+    int get_day();
+    // Returns the day
+    
+    private:
+      void check_date();
+      int month;
+      int day;
+};
+
+int main() {
+  DayOfYear today, birthday;
+  
+  today.set(10, 5);
+  
+  cout << “Today’s date is: “;
+  
+  today.output();
+  
+  birthday.set(10, 4);
+  
+  cout << “Birthday date is: “;
+  
+  birthday.output();
+  
+  if (today.get_month() == birthday.get_month() && today.get_day() == birthday.get_day())
+    cout << “Happy Birthday!\n”;
+  else
+    cout << “It’s not your birthday\n”; 
+  
+  return 0;
+}
+
+void DayOfYear::output() {
+  cout << “Month = “ << month
+       << “ Day = “ << day << endl; 
+}
+
+void DayOfYear::set(int new_month, int new_day) {
+  month = new_month;
+  day = new_day;
+  check_date();
+}
+
+void DayOfYear::check_date() {
+  if ((month < 1) || (month > 12) || (day < 1) || (day > 31)) {
+    cout << “Illegal date.\n”;
+    exit(1);
+  }
+}
+
+int DayOfYear::get_month() {
+  return month;
+}
+
+int DayOfYear::get_day() {
+  return day;
+}
+
+
+// Today’s date is: Month = 10 Day = 5
+// Birthday date is: Month = 10 Day = 4
+// It’s not your birthday
+```
+
+#### Constructors
+
