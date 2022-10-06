@@ -1188,3 +1188,258 @@ int DayOfYear::get_day() {
 
 #### Constructors
 
+- Automatically called when an object of the class is declared
+- Member function, usually `public`
+- Can be used to initialize member variables when an object is declared
+
+> A constructor’s name must be the same as the name of the class it is declared in
+
+> A constructor cannot return a value
+
+> No return type, even `void`, can be used while declaring a constructor
+
+##### Constructor declaration
+
+```c++
+class DayOfYear {
+  public:
+    DayOfYear(int new_month, int new_day);
+  private:
+    int month;
+    int day; 
+};
+``` 
+
+##### Constructor definition
+
+```c++
+#include <iostream>
+using namespace std;
+
+class DayOfYear {
+  public:
+    // declaring constructor
+    DayOfYear(int new_month, int new_day);
+    // default constructor without parameters
+    DayOfYear();
+    int myVar;
+    void output();
+    int get_month();
+    int get_day();
+  
+  private:
+    void check_date();
+    int month;
+    int day;
+    
+    
+  int main() {
+    // creating object and calling constructor
+    DayOfYear birthday(11, 23);
+    // creating object and calling default constructor 
+    DayOfYear today;
+    
+    cout << “Birthday day is: “ << birthday.get_day() << endl;
+    
+    count << “Birthday month is: “ << birthday.get_month() << endl;
+    
+    cout << “Today the day is: “ << today.get_day() << endl;
+    
+    cout << “today the month is: “ today.get_month() << endl;
+    
+    return 0;
+  }
+  
+  // defining constructor
+  // class name and constructor are the same name
+  DayOfYear::DayOfYear(int new_month, int new_day) {
+    month = new_month;
+    day = new_day;
+  }
+  // defining default constructor
+  DayOfYear::DayOfYear() {
+    month = 0;
+    day = 0;
+  }
+  // returns private variable month
+  int DayOfYear::get_month() {
+    return month;
+  }
+  // returns private variable day
+  int DayOfYear::get_day() {
+    return day;
+  }
+}
+```
+
+##### Constructor overloading
+
+> Constructors can be overloaded by defining constructors with different parameters list
+
+```c++
+DayOfYear(); // default
+DayOfYear(int newmonth, int newday); // passing two int parameters
+DayOfYear(double newmonth, double newday); // passing two double parameters
+DayOfYear(float newday); // passing a float parameter
+```
+
+#### Inheritance
+
+- Provides a way to create a new class from an existing class
+- New class is a specialized version of the existing class
+
+> Base class (parent): inherited by child class
+
+> Derived class (child): inherits from the base class
+
+```c++
+// base class
+class Student {
+ // body
+}
+// derived class
+class UnderGrad : public Student {
+  // body
+}
+```
+
+> Inheritance is a relationship between classes
+
+> An object of the derived class is an object of the base class
+
+> A derived object has all characteristics of the base class
+
+An object of child class has:
+- All members defined in the child class
+- All members declared in the parent class
+ 
+An object of child can use:
+- All `public` members defined in the child class
+- All `public` members defined in the parent class
+
+##### Protected members
+
+> `protected` member access specification: similar to `private`, but accessible by objects of a derived class
+
+##### Class access specifiers
+
+> `public`: the object of the derived class can be treated as an object of the base class
+
+> `protected`: more restrictive than `public`, but allows derived class to know details of parents
+
+> `private`: prevents objects of the derived class to be treated as objects of base class
+
+base class `Shape` and derived class `Square`
+
+```c++
+#include <iostream>
+using namespace std;
+
+// base class
+class Shape {
+  public:
+    // default constructor
+    Shape() {
+      length = 0;
+    }
+   void setlength(int l) {
+      length = l;
+   }
+    protected:
+      int length;
+};
+
+// derived class
+class Square: public Shape {
+  public:
+    // declaring and initializing derived class constructor
+    Square() : Shape() {
+      length = 0;
+    }
+    int get_Area() {
+      return (length * length);
+    }
+};
+
+int main(void) {
+  // making object of child class Square 
+  Square sq;
+  // setting length equal to 5
+  sq.setlength(5);
+  
+  cout << “Total area of square is: “ << sq.get_Area() << endl;
+  
+  return 0;
+}
+
+// Total are of square is: 25
+``` 
+
+#### Polymorphism and virtual functions
+
+> Virtual function: a member function which is declared in the base class using the keyword `virtual` and is re-defined (overridden) by the derived class
+
+> Polymorphism: the ability to take many forms. It happens when a hierarchy of classes which are all related to each other by inheritance
+
+##### Without virtual functions
+
+```c++
+#include <iostream>
+using namespace std;
+
+// base class
+class Shape {
+  public:
+    Shape(int l, int w) {
+      length = l;
+      width = w;
+    }
+    
+    int get_Area() {
+      cout << This is a call to parent class area” << endl;
+    }
+    
+  protected:
+    int length, width;
+};
+
+class Square: public Shape {
+  public:
+    // declaring and initialing derived class constructor
+    Square(int l = 0, int w = 0) : Shape(l, w){}
+    
+    int get_Area() {
+      cout << “square area: “ << length * width << endl;
+      return (length * width);
+    }
+};
+
+// derived class
+class Rectangle: public Shape {
+  public:
+    // declaring and initializing a derived class constructor
+    Rectangle(int l = 0, int w = 0) : Shape(l, w) {}
+    int get_Area() {
+      cout << “Rectangle area: “ << length * width << endl;
+      return (length * width);
+    }
+};
+
+int main(void) {
+  Shape *s;
+  // making object of child class Square
+  Square sq(5, 5);
+  // making an object of child class Rectangle
+  Rectangle rec(4, 5);
+  
+  s = &sq;
+  
+  s -> get_Area();
+  
+  s = &rec;
+  
+  s -> get_Area();
+  
+  return 0;
+}
+```
