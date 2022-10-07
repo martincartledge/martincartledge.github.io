@@ -1442,4 +1442,223 @@ int main(void) {
   
   return 0;
 }
+
+// This is call to parent class area
+// This is call to parent class area
+```
+
+The above does not call `get_Area()` from either child class, but rather only calls `get_Area()` defined in the base class
+
+This is called `static linkage`; the call to `get_Area()` is only set once by the compiler in the base class
+
+You can avoid this by using `virtual` functions
+
+##### Using `virtual` functions
+
+- Defined in the base class
+- Another version in the derived class
+- Allows for the selection of the function you want to call at any point based on the kind of object that is called
+
+```c++
+#include <iostream>
+using namespace std;
+
+// Base class
+class Shape {
+  public:
+    // default constructor
+    Shape(int l, int w) {
+      length = l;
+      width = w;
+    }
+    
+    // `get_Area()` is now a `virtual` function
+    virtual int get_Area() {
+      cout << “This ia a call to the parent class” << endl;
+    }
+    
+  protected:
+    int length, width;
+};
+
+// Derived class
+class Square: public Shape {
+  public:
+    // declaring and constructing derived class constructor
+    Square(int l = 0, int w = 0) : Shape(l, w) {}
+    
+    int get_Area() {
+      cout << “Square area: “ << length * width << endl;
+      return (length * width);
+    }
+};
+
+// Derived class
+class Rectangle: public Shape {
+  public:
+    Rectangle(int l = 0, int w = 0) : Shape(l, w) {}
+    
+    int get_Area() {
+      cout << “Rectangle area: “ << length * width << endl;
+    }
+};
+
+int main(void) {
+  Shape *s;
+  // Making object of child class Square
+  Square sq(5, 5);
+  // Making object of child class Rectangle
+  Rectangle rec(4, 5);
+  
+  s = &sq;
+  s -> get_Area();
+  s = &rec;
+  s -> get_Area();
+  
+  return 0;
+}
+
+// Square area: 25
+// Rectangle area: 20
+```
+
+When the addresses of the objects are stored in `*s`, the respective `get_Area()` is called since the compiler looked at the contents of the pointer, rather than its type.
+
+#### Templates
+
+> Mechanism used to implement generic code that behaves the same way in different situations
+
+Non-generic example
+
+```c++
+#include <iostream>
+using namespace std;
+
+int multiply(int x, int y) {
+  return (x * y);
+}
+
+double multiply(double x, double y) {
+  return (x * y);
+}
+
+int main() {
+  int temp1;
+  double temp2;
+  
+  temp1 = multiply(4, 5);
+  temp2 = multiply(4.5, 5.5);
+  
+  cout << “Value of temp1 is: “ << temp1 << endl;
+  
+  cout << “Value of temp2 is: “ temp2 << endl;
+  
+  return 0;
+}
+```
+
+Declaration
+
+```c++
+template<class Type>
+// or
+template<typename Type>
+```
+
+`class` and `typename` have the same meaning in this case, however, some compilers may replace the words with each other
+
+`Type` is our generic data type, and when the template is used, it would be as if `Type` was a `typedef` for your datatype
+
+Generic example
+
+```c++
+#include <iostream>
+using namespace std;
+
+template<Class Type>
+Type multiply(Type x, Type y) {
+  return (x * y);
+}
+
+int main() {
+  int result = multiply<int>(2, 5);
+  
+  cout << “Result when integers are passed is: “ << result << endl;
+  
+  double result2 = multiply<double>(2.5, 5.5);
+  
+  cout << “Result when double values are passed is: “ << result2 << endl;
+  
+  return 0; 
+}
+```
+
+> For a template with three types, `First`, `Second`, and `Third`:
+
+```c++
+template<class First, class Second, class Third>
+```
+
+##### Class templates
+
+> Classes that can have members of the generic type
+
+```c++
+template<Class T>
+class Score {
+  private:
+    T scorenumber;
+  public:
+    Score(T args) {
+      scorenumber = args;
+    }
+};
+```
+
+The variable `scorenumber` could be an `int`, `float`, or `double`
+
+Declaring the object
+
+```c++
+Score<int> myscore(40);
+// or
+Score<double> myscore(23.9)
+```
+
+Another example
+
+```c++
+#include <iostream>
+using namespace std;
+
+template<class T>
+class myvalues {
+  // teo values of type T
+  T myval1, myval2;
+  public:
+    myvalues(T arg1, T arg2) {
+      myval1 = arg1;
+      myval2 = arg2;
+    }
+    T max();
+};
+
+template<class T>
+T myvalues<T>::max() {
+  if (myval1 > myval2) {
+    return myval1;
+  } else {
+    return myval2;
+  }
+}
+
+int main() {
+  myvalues<int> obj(20, 50);
+  
+  cout << “Max value is: “ << obj.max();
+  
+  return 0;
+}
+
+// Max value is: 50
 ```
