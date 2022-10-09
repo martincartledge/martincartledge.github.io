@@ -34,7 +34,7 @@ Migrate student system to a new platform using c++
 **Output:** 
 
 ```c++
-const string studentData[] = 
+const char studentData[] = 
 {“A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY”, “A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK”, “A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE”, “A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY”, “A5,[firstname],[lastname],[emailaddress],[age], [numberofdaystocomplete3courses],SOFTWARE”
 ``` 
 
@@ -80,13 +80,13 @@ const string studentData[] =
 - Define the following functions:
  
 ```c++
-public void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram)
+public void add(char studentID, char firstName, char lastName, char emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram)
 ``` 
 - This function _sets_ the instance variables mentioned above and updates the roster
 
 
 ```c++
-public void remove(string studentID)
+public void remove(char studentID)
 ``` 
 - This function removes students from the roster by `studentID`
 - If the `studentID` _does not_ exist, the function prints an error message indicating that `the student was not found`
@@ -102,7 +102,7 @@ A1 [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]daysInCourse
 - `printAll()` should loop through _all_ students in the `classRosterArray` and call `print()` for each student
 
 ```c++
-public void printAverageDaysInCourse(string studentID)
+public void printAverageDaysInCourse(char studentID)
 ``` 
 - This function correctly prints a student’s average number of days in three courses
 - The student is identified by the `studentID` parameter\
@@ -329,9 +329,9 @@ Using `cin` and `cout` to take input from user
 using namespace std;
 
 int main() {
-  string name;
-  string address;
-  string phoneNumber;
+  char name;
+  char address;
+  char phoneNumber;
 
   cout << “Enter your name” << endl;
   cin >> name;
@@ -966,7 +966,7 @@ int main() {
 class Dog {
   public: 
     char name[25];
-    string gender;
+    char gender;
     int age;
     int size;
     bool healthy;
@@ -996,7 +996,7 @@ using namespace std;
 class Dog {
   private:
     char name[25];
-    string gender;
+    char gender;
     int age;
     int size;
     bool healthy;
@@ -1029,8 +1029,8 @@ using namespace std;
 class Dog
 {
 public:
-    string name = “Nikita”;
-    string gender  = “Female”;
+    char name = “Nikita”;
+    char gender  = “Female”;
     int age = 3;
     int size = 70;
     bool healthy = true;
