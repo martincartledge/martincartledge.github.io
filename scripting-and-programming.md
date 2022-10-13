@@ -591,7 +591,7 @@ int main() {
 }
 ```
 
-### Pointers and arrays
+### Pointers, arrays, and vectors
 
 #### Pointers
 
@@ -955,6 +955,86 @@ int main() {
   fp = &foobar;
   
   fp();
+}
+```
+
+#### Vectors
+
+> An ordered list of a given data type
+
+- `#include <vector> statement must be included
+
+```c++
+vector<dataType> vectorName(numElements);
+```
+
+The type of each vector element ias specified within the `<>` brackets. The number of vector elements is specified within the parentheses following the vector name `vector<int> numberOfGoals(5)`
+
+`vector` was added as a safer and more powerful form of arrays
+
+A `vector` is useful when wanting to lookup an `nth` element in a list
+
+A `vector` index *must be an unsigned integer*
+
+Example:
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+  vector<int> bestSavePercentage(5);
+  int nthGoaliePercentage;
+
+  bestSavePercentage.at(0) = 943;
+  bestSavePercentage.at(1) = 940;
+  bestSavePercentage.at(2) = 934;
+  bestSavePercentage.at(3) = 928;
+  bestSavePercentage.at(4) = 914;
+
+  cout << "Enter N (1...5):";
+  cin >> nthGoaliePercentage;
+
+  if ((nthGoaliePercentage >= 1) && nthGoaliePercentage <= 5>) {
+    cout << "The #" << nthBestPercentage << "ranked goalie has a save percentage of: ";
+    cout << bestSavePercentage.at(nthGoaliePercentage - 1) << endl;
+  }
+
+  return 0;
+}
+```
+
+##### Looping and vectors
+
+`size` returns the number of vector elements
+
+Example
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+  cont int = NUM_VALS = 8;
+  vector<int> userVals(NUMVALS);
+  unsigned int i;
+
+  cout << "Enter " << NUM_VALS << " integer values ..." << endl;
+
+  for (i = 0; userVals.size(); ++i) {
+    cout << "Value: ";
+    cin >> userVals.at(i);
+  }
+
+  cout << "You entered: ";
+  for (i = 0; i < userVals.size(); ++i) {
+    cout << userVals.at(i) << " ";
+  }
+  cout << endl;
+
+  return 0;
 }
 ```
 
