@@ -1038,6 +1038,151 @@ int main() {
 }
 ```
 
+All `vector` elements are initialized with a value of `0`
+
+`vector` elements can be initialized with another single value
+
+Example
+
+```c++
+vector<int> myVector(3, 1);
+```
+
+This will create a `vector`, `myVector` with three elements, all with a value of `-1`
+
+To initialize with each element having its own value, you can use braces `{}` syntax
+
+Example
+
+```c++
+vector<int> goalieSaves = {21, 30, 18};
+```
+
+In the case above, a `vector` size is not needed as it is automatically assigned
+
+##### Code challenge
+
+```
+Write three statements to print the first three elements of vector runTimes. Follow each with a newline. Ex: If runTimes = {800, 775, 790, 805, 808}, print:
+800 
+775 
+790
+```
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 5;
+   vector<int> runTimes(NUM_VALS);
+   unsigned int i;
+
+   // Populate vector
+   for (i = 0; i < runTimes.size(); ++i) {
+      cin >> runTimes.at(i);
+   }
+
+   cout << runTimes.at(0) << endl;
+   cout << runTimes.at(1) << endl;
+   cout << runTimes.at(2) << endl;
+
+   return 0;
+}
+```
+
+Common loop structure for `vector`
+
+```c++
+for (i = 0; i< vector.size(); ++i) {
+  // access vector by vector.at(i)
+}
+```
+
+##### Code challenge
+
+```
+Write a for loop to print all NUM_VALS elements of vector courseGrades, following each with a space (including the last). Print forwards, then backwards. End with newline. Ex: If courseGrades = {7, 9, 11, 10}, print:
+7 9 11 10 
+10 11 9 7 
+```
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 4;
+   vector<int> courseGrades(NUM_VALS);
+   int i;
+
+   for (i = 0; i < courseGrades.size(); ++i) {
+      cin >> courseGrades.at(i);
+   }
+
+   for (i = 0; i < NUM_VALS; ++i) {
+      cout << courseGrades.at(i) << " ";
+   }
+   
+   cout << endl;
+   
+   for (i = courseGrades.size() - 1; i >= 0; --i) {
+      cout << courseGrades.at(i) << " ";   
+   }
+   
+   cout << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+```
+Find the average of the vector's element values
+```
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int VALS_SIZE = 6;
+   vector<int> valsVctr(VALS_SIZE);
+   unsigned int i;
+   int sumVal;
+   int avgVal;
+
+   valsVctr.at(0) = 30;
+   valsVctr.at(1) = 20;
+   valsVctr.at(2) = 20;
+   valsVctr.at(3) = 15;
+   valsVctr.at(4) = 5;
+   valsVctr.at(5) = 10;
+
+   sumVal = 0;
+   avgVal = 0;
+   for (i = 0; i < valsVctr.size(); ++i) {
+      sumVal = sumVal + valsVctr.at(i);   
+   }
+
+   avgVal = sumVal / VALS_SIZE;
+
+   cout << "Avg: " << avgVal << endl;
+
+   return 0;
+}
+```
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
