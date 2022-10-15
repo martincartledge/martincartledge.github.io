@@ -1183,6 +1183,215 @@ int main() {
 }
 ```
 
+##### Code challenge
+
+Assign numMatches with the number of elements in userValues that equal matchValue. userValues has NUM_VALS elements. Ex: If userValues is {2, 2, 1, 2} and matchValue is 2 , then numMatches should be 3.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 4;
+   int matchValue;
+   unsigned int i;
+   int numMatches = -99; // Assign numMatches with 0 before your for loop
+   vector<int> userValues(NUM_VALS);
+
+   cin >> matchValue;
+
+   for (i = 0; i < userValues.size(); ++i) {
+      cin >> userValues.at(i);
+   }
+
+   /* Your solution goes here  */
+   numMatches = 0;
+   for (i = 0; i < userValues.size(); ++i) {
+      if (userValues.at(i) == matchValue) {
+         numMatches = numMatches + 1;   
+      }
+   }
+
+   cout << "matchValue: " << matchValue << ", numMatches: " << numMatches << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Write a for loop to populate vector userGuesses with NUM_GUESSES integers. Read integers using cin. Ex: If NUM_GUESSES is 3 and user enters 9 5 2, then userGuesses is {9, 5, 2}.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_GUESSES = 3;
+   vector<int> userGuesses(NUM_GUESSES);
+   unsigned int i;
+
+   for (i = 0; i < NUM_GUESSES; ++i) {
+      cin >> userGuesses.at(i);         
+   }
+
+   for (i = 0; i < userGuesses.size(); ++i) {
+      cout << userGuesses.at(i) << " ";
+   }
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Vector testGrades contains NUM_VALS test scores. Write a for loop that sets sumExtra to the total extra credit received. Full credit is 100, so anything over 100 is extra credit. Ex: If testGrades = {101, 83, 107, 90}, then sumExtra = 8, because 1 + 0 + 7 + 0 is 8.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 4;
+   vector<int> testGrades(NUM_VALS);
+   unsigned int i;
+   int sumExtra = -9999; // Assign sumExtra with 0 before your for loop
+
+   for (i = 0; i < testGrades.size(); ++i) {
+      cin >> testGrades.at(i);
+   }
+
+   sumExtra = 0;
+   for (i = 0; i < testGrades.size(); ++i) {
+         if (testGrades.at(i) > 100) {
+            sumExtra = sumExtra + testGrades.at(i) - 100;
+         }
+   }
+
+   cout << "sumExtra: " << sumExtra << endl;
+   return 0;
+}
+```
+
+##### Code challenge
+
+Write a for loop to print all NUM_VALS elements of vector hourlyTemp. Separate elements with a comma and space. Ex: If hourlyTemp = {90, 92, 94, 95}, print:
+90, 92, 94, 95
+Your code's output should end with the last element, without a subsequent comma, space, or newline.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 4;
+   unsigned int i;
+   vector<int> hourlyTemp(NUM_VALS);
+
+   for (i = 0; i < hourlyTemp.size(); ++i) {
+      cin >> hourlyTemp.at(i);
+   }
+
+   for (i = 0; i < hourlyTemp.size(); ++i) {
+      if (i == hourlyTemp.size() - 1) {
+         cout << hourlyTemp.at(i);   
+      } else {
+         cout << hourlyTemp.at(i) << ", ";   
+      }
+   }
+
+   cout << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Add each element in origList with the corresponding value in offsetAmount. Print each sum followed by a space. Ex: If origList = {40, 50, 60, 70} and offsetAmount = {5, 7, 3, 0}, print:
+45 57 63 70   
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_VALS = 4;
+   vector<int> origList(NUM_VALS);
+   vector<int> offsetAmount(NUM_VALS);
+   unsigned int i;
+
+   for (i = 0; i < origList.size(); ++i) {
+      cin >> origList.at(i);
+   }
+
+   for (i = 0; i < offsetAmount.size(); ++i) {
+      cin >> offsetAmount.at(i);
+   }
+   
+   for (i = 0; i < origList.size(); ++i) {
+      cout << origList.at(i) + offsetAmount.at(i) << " ";      
+   }
+
+   cout << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+For any element in keysList with a value greater than 100, print the corresponding value in itemsList, followed by a space. Ex: If keysList = {42, 105, 101, 100} and itemsList = {10, 20, 30, 40}, print:
+20 30 
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int SIZE_LIST = 4;
+   vector<int> keysList(SIZE_LIST);
+   vector<int> itemsList(SIZE_LIST);
+   unsigned int i;
+
+   for (i = 0; i < keysList.size(); ++i) {
+      cin >> keysList.at(i);
+   }
+
+   for (i = 0; i < itemsList.size(); ++i) {
+      cin >> itemsList.at(i);
+   }
+
+   for (i = 0; i < keysList.size(); ++i) {
+      if (keysList.at(i) > 100) {
+         cout << itemsList.at(i) << " ";   
+      }   
+   }
+
+   cout << endl;
+
+   return 0;
+}
+```
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
