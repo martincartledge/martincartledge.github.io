@@ -1392,6 +1392,180 @@ int main() {
 }
 ```
 
+#### Resize
+
+The size of a list is not always known during compile time, due to this, a size is not commonly included in the declaration.
+
+A `vector` size *can* however be set or changed during execution using `resize(n)`
+
+`resize` can be called *multiple* times
+
+If the new size is larger, elements are added to the end of the `vector`
+
+If the new size is *smaller*, `resize` deletes elements from the end of the list
+
+##### Code challenge
+
+Assign currentSize with the size of the sensorReadings vector.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   vector<int> sensorReadings(4);
+   int currentSize;
+   int input;
+   cin >> input;
+
+   sensorReadings.resize(input);
+
+   currentSize = sensorReadings.size();
+
+   cout << "Number of elements: " << currentSize << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Resize vector countDown to have newSize elements. Populate the vector with integers {newSize, newSize - 1, …, 1}. Ex: If newSize = 3, then countDown = {3, 2, 1}, and the sample program outputs:
+`3 2 1 Go!`
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   vector<int> countDown(0);
+   int newSize;
+   unsigned int i;
+
+   cin >> newSize;
+
+   countDown.resize(newSize);
+   
+   for (i = 0; i < countDown.size(); ++i) {
+      countDown.at(i) = newSize;
+      newSize = newSize - 1;
+   }
+
+   for (i = 0; i < countDown.size(); ++i) {
+      cout << countDown.at(i) << " ";
+   }
+   cout << "Go!" << endl;
+
+   return 0;
+}
+```
+
+#### `push_back`
+
+> `void push_back(cont int newVal);
+
+The `push_back` function is used to append a new element to the end of an existing `vector`
+
+##### `back()`
+
+> `int back()`
+
+Returns a `vector`'s last element, the `vector` is unchanged
+
+##### `pop_back()`
+
+> `void pop_back()`
+
+Removes the last element
+
+##### Code challenge
+
+Read integers from input and store each integer into a vector until -1 is read. Do not store -1 into the vector. Then, output all values in the vector (except the last value) each multiplied by the last value in the vector. Output each value on a new line.
+
+Ex: If the input is -98 55 -73 1 -1, the output is:
+
+-98
+55
+-73
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   int input;
+   vector<int> inputList;
+   unsigned i;
+   
+   cin >> input;
+   
+   while (input != -1) {
+      inputList.push_back(input);
+      cin >> input;
+   }
+   
+   int lastItem = inputList.at(inputList.size() - 1);
+   
+   for (i = 0; i < inputList.size() - 1; ++i) {
+      cout << inputList.at(i) * lastItem << endl;   
+   }
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Read integers from input and store each integer into a vector until 0 is read. Do not store 0 into the vector. Then, output all values in the vector in reverse order, each on a new line.
+
+Ex: If the input is 74 92 -50 -17 0, the output is:
+
+```
+-17
+-50
+92
+74
+```
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   int input;
+   vector<int> inputList;
+   unsigned i;
+   
+   cin >> input;
+   
+   while (input != 0) {
+      inputList.push_back(input);
+      cin >> input;
+   } 
+   
+   for (i = inputList.size() - 1; i >= 0; --i) {
+      cout << inputList.at(i) << endl;
+   }
+
+   return 0;
+}
+
+// Exited with return code -6 (SIGABRT).
+// terminate called after throwing an instance of  'std::out_of_range'
+//  what():  vector::_M_range_check: __n (which is 4294967295) >= this->size() (which is 4)
+```
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
