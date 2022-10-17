@@ -1566,6 +1566,140 @@ int main() {
 //  what():  vector::_M_range_check: __n (which is 4294967295) >= this->size() (which is 4)
 ```
 
+##### Code challenge
+
+Write a statement to print "Last mpg reading: " followed by the value of mpgTracker's last element. End with newline. Ex: If mpgTracker = {17, 19, 20}, print:
+Last mpg reading: 20
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_ELEMENTS = 3;
+   vector<int> mpgTracker(NUM_ELEMENTS);
+   int i;
+
+   for (i = 0; i < mpgTracker.size(); ++i) {
+      cin >> mpgTracker.at(i);
+   }
+
+   int lastElement = mpgTracker.at(mpgTracker.size() - 1);
+   
+   cout << "Last mpg reading: " << lastElement << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Remove the last element from vector ticketList.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_ELEMENTS = 3;
+   vector<int> ticketList(NUM_ELEMENTS);
+   unsigned int i;
+
+   for (i = 0; i < ticketList.size(); ++i) {
+      cin >> ticketList.at(i);
+   }
+
+   ticketList.pop_back();
+
+   for (i = 0; i < ticketList.size(); ++i) {
+      cout << ticketList.at(i) << " ";
+   }
+   cout << endl;
+
+   return 0;
+}
+```
+
+##### Code challenge
+
+Modifying a vector during iteration: double each number in the vector.
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int NUM_ELEMENTS = 5;         // Number of elements
+   vector<int> userVals(NUM_ELEMENTS); // User values
+   unsigned int i;                     // Loop index
+   
+   // Prompt user to populate vector
+   cout << "Enter " << NUM_ELEMENTS << " integer values..." << endl;
+   for (i = 0; i < userVals.size(); ++i) {
+      cout << "Value: " << endl;
+      cin >> userVals.at(i);
+   }
+
+   for (i = 0; i < userVals.size() - 1; ++i) {
+      userVals.at(i) = userVals.at(i) * userVals.at(i);
+   }  
+   
+   // Print numbers
+   cout << "New values:";
+   for (i = 0; i < userVals.size(); ++i) {
+      cout << " " << userVals.at(i);
+   }
+   cout << endl;
+   
+   return 0;
+}
+```
+
+##### Code challenge
+
+Write a loop that subtracts 1 from each element in lowerScores if the original element was greater than 0, and otherwise just assigns the element with 0. Ex: lowerScores = {5, 0, 2, -3} becomes {4, 0, 1, 0}.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int SCORES_SIZE = 4;
+   vector<int> lowerScores(SCORES_SIZE);
+   unsigned int i;
+
+   for (i = 0; i < lowerScores.size(); ++i) {
+      cin >> lowerScores.at(i);
+   }
+
+   for (i = 0; i < lowerScores.size(); ++i) {
+      if (lowerScores.at(i) > 0) {
+         lowerScores.at(i) = lowerScores.at(i) - 1;   
+      } else {
+         lowerScores.at(i) = 0;
+      }
+   }
+
+   for (i = 0; i < lowerScores.size(); ++i) {
+      cout << lowerScores.at(i) << " ";
+   }
+   cout << endl;
+
+   return 0;
+}
+```
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
