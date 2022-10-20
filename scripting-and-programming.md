@@ -1700,6 +1700,41 @@ int main() {
 }
 ```
 
+##### Code challenge
+
+Write a loop that sets newScores to oldScores shifted once left, with element 0 copied to the end. Ex: If oldScores = {10, 20, 30, 40}, then newScores = {20, 30, 40, 10}.
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+   const int SCORES_SIZE = 4;
+   vector<int> oldScores(SCORES_SIZE);
+   vector<int> newScores(SCORES_SIZE);
+   unsigned int i;
+
+   for (i = 0; i < oldScores.size(); ++i) {
+      cin >> oldScores.at(i);
+   }
+   
+   for (i = 0; i < newScores.size(); ++i) {
+      newScores.at(i) = oldScores.at(i + 1);
+   }
+   
+   newScores.at(SCORES_SIZE - 1) = oldScores.at(0);
+
+   for (i = 0; i < newScores.size(); ++i) {
+      cout << newScores.at(i) << " ";
+   }
+   cout << endl;
+
+   return 0;
+}
+```
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
