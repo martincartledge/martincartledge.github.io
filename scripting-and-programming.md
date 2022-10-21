@@ -1803,6 +1803,80 @@ int main() {
 }
 ```
 
+### Output and input streams
+
+> An `ostream`, output stream, is a class that supports output via `#include <iostream>`. The namespace `std` can also be used.
+
+`ostream` provides the `<<` operator, commonly referred to as the insertion operator
+
+> `cout` is a predefined `ostream` object (`ostream cout;`) in the iostream library
+
+> An `istream`, input stream, is a class that supports input via `#include <iostream>`
+
+`istream` provides the `>>` operator, extraction operator
+
+#### Manipulator
+
+> A function that overloads the insertion operator or extraction operator to adjust the way output appears
+
+Manipulators are defined in the `iomanip` and `ios` libraries in namespace `std`
+
+##### Floating-point manipulators
+
+###### Code challenge
+
+Write a single statement that prints outsideTemperature with 4 digits. End with newline. Sample output with input 103.45632:
+103.5
+
+###### Solution
+
+```c++
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+   double outsideTemperature;
+
+   cin >> outsideTemperature;
+
+   cout << setprecision(4) << outsideTemperature << endl;
+
+   return 0;
+}
+```
+
+###### Code challenge
+
+Write a single statement that prints outsideTemperature with 2 digits in the fraction (after the decimal point). End with a newline. Sample output with input 103.45632:
+103.46
+
+###### Solution
+
+```c++
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+   double outsideTemperature;
+
+   cin >> outsideTemperature;
+
+   cout << fixed << setprecision(2) << outsideTemperature << endl;
+
+   return 0;
+}
+```
+
+##### Text-alignment manipulators
+
+TBD
+
+##### Buffer manipulators
+
+TBD
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
