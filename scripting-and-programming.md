@@ -1869,13 +1869,71 @@ int main() {
 }
 ```
 
-##### Text-alignment manipulators
+#### Input string stream
 
-TBD
+> Read input from a string (type `istringstream`) as opposed to standard input (from the keyboard)
 
-##### Buffer manipulators
+`istringstream myStringStream(myInputString)`
 
-TBD
+##### `getline()`
+
+> Function that reads an input line into a string (`myStringStream.str(myInputString)`)
+
+- `str()` copies the string into the stream's buffer
+- `clear()` is needed to reset the state of the stream. This is so subsequent extractions that at the beginning of the input strings
+
+##### End of an input stream
+
+> Input streams have a boolean function, `eof()` (end of file), that returns `true` when the end of the stream has been reached
+
+`myStringStream` implicitly calls `eof()`
+
+```c++
+while (myStringStream >> data) {
+  ...
+}
+```
+
+##### Code challenge
+
+Write code that uses the input string stream inSS to read input data from string userInput, and updates variables userMonth, userDate, and userYear. Sample output if the input is "Jan 12 1992":
+Month: Jan
+Date: 12
+Year: 1992
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+int main() {
+   istringstream inSS;
+   string userInput;
+   string userMonth;
+   int userDate;
+   int userYear;
+
+   getline(cin, userInput);
+   inSS.str(userInput);
+
+   inSS >> userMonth >> userDate >> userYear;
+
+   cout << "Month: " << userMonth << endl
+        << "Date: " << userDate << endl
+        << "Year: " << userYear << endl;
+
+   return 0;
+}
+```
+
+#### Output string stream
+
+> Can insert characters into a string buffer (type `ostringstream`) as opposed to the screen
+
+
 
 ### Classes
 
