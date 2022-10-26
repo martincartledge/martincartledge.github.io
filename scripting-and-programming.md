@@ -1060,8 +1060,6 @@ vector<int> goalieSaves = {21, 30, 18};
 
 In the case above, a `vector` size is not needed as it is automatically assigned
 
-##### Code challenge
-
 ```
 Write three statements to print the first three elements of vector runTimes. Follow each with a newline. Ex: If runTimes = {800, 775, 790, 805, 808}, print:
 800 
@@ -2107,6 +2105,8 @@ int main() {
 }
 ```
 
+
+
 ### Classes
 
 > Independent, self-managing modules and their interactions. An object is an instance of mentioned module, and a class is its definition
@@ -2430,6 +2430,113 @@ DayOfYear(); // default
 DayOfYear(int newmonth, int newday); // passing two int parameters
 DayOfYear(double newmonth, double newday); // passing two double parameters
 DayOfYear(float newday); // passing a float parameter
+```
+
+#### Derived classes
+
+> A class that is derived from another class (base / super class)
+
+The derived class inherits the properties of the base class, this is called *inheritance*
+
+You declare a derived class by placing a `:` after the derived class name
+
+```c++
+// base class
+class Jedi {
+  public:
+    void SetName(string newName) {
+      name = newName;
+    }
+
+    void SetLightsaberColor(string newLightsaberColor) {
+        lightsaberColor = newLightsaberColor;
+    }
+
+    void PrintJedi() {
+      cout << name << "" << lightsaberColor << endl;
+    }
+
+    private:
+      string name;
+      string lightsaberColor;
+};
+// derived class
+class ObiWan : public Jedi {
+  public:
+    void SetCatchPhrase(string newCatchPhrase) {
+      catchPhrase = newCatchPhrase;
+    }
+
+    string GetCatchPhrase() {
+      return catchPhrase;
+    }
+
+  private:
+    string catchPhrase;
+};
+```
+
+##### Code challenge
+
+Assign courseStudent's name with Smith, age with 20, and ID with 9999. Use the PrintAll() member function and a separate cout statement to output courseStudents's data. End with a newline. Sample output from the given program:
+
+`Name: Smith, Age: 20, ID: 9999`
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+   public:
+      void SetName(string userName) {
+         lastName  = userName;
+      }
+
+      void SetAge(int numYears) {
+         ageYears = numYears;
+      }
+
+      // Other parts omitted
+
+      void PrintAll() {
+         cout << "Name: " << lastName;
+         cout << ", Age: "  << ageYears;
+      }
+
+   private:
+      int ageYears;
+      string lastName;
+};
+
+class Student: public Person {
+   public:
+      void SetID(int studentId) {
+         idNum = studentId;
+      }
+
+      int GetID() {
+         return idNum;
+      }
+
+   private:
+      int idNum;
+};
+
+int main() {
+   Student courseStudent;
+
+   courseStudent.SetName("Smith");
+   courseStudent.SetAge(20);
+   courseStudent.SetID(9999);
+   
+   courseStudent.PrintAll();
+   cout << ", ID: " << courseStudent.GetID() << endl;
+
+   return 0;
+}
 ```
 
 #### Inheritance
