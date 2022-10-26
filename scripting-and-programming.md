@@ -1933,7 +1933,179 @@ int main() {
 
 > Can insert characters into a string buffer (type `ostringstream`) as opposed to the screen
 
+```c++
+#include <iostream>
+#include <string>
+#include <sstream>
 
+int main() {
+  ostreamstring outputStringStream;
+  string completeString;
+  string jediName;
+  string lightsaberColor;
+  int jediAge;
+
+  cout << "Enter your \"Name, Lightsaber Color, and Age\": " << endl;
+
+  cin >> jediName;
+  cin >> lightsaberColor;
+  cin >> jediAge;
+
+  outputStringStream << jediName << " " <<  lightsaberColor << " " << jediAge;
+
+  if (jediName === "Anakin") {
+    outputStringStream << " (on the counci, but not a jedi master)";
+  }
+
+  completeString = outputStringStream.str();
+
+  cout << "Jedi Profile: " << completeString << endl;
+
+  return 0;
+}
+```
+
+- Use the `cout` `<<` operator to write to the internal buffer
+- `.str()` returns the output string stream's buffer as a single string
+
+##### Code challenge
+
+Write code that inserts userItem into the output string stream itemsOSS until the user enters "Exit". Each item should be followed by a space. Sample output if user input is "red purple yellow Exit":
+red purple yellow
+
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+int main() {
+   string userItem;
+   ostringstream itemsOSS;
+
+   cout << "Enter items (type Exit to quit):" << endl;
+   cin >> userItem;
+
+   while (userItem != "Exit") {
+
+      itemsOSS << userItem << " ";
+
+      cin >> userItem;
+   }
+
+   cout << itemsOSS.str() << endl;
+
+   return 0;
+}
+```
+
+#### File input
+
+You can create input streams that come from a file, rather than a predefined input stream `cin` that comes from standard input (keyboard)
+
+`fstream` type for file stream
+
+`ifstream` type for input file stream
+
+You can use a user entered string as a filename:
+
+`cin >> filename`
+
+##### Input stream errors
+
+> Occurs when an insertion or extraction fails
+
+> Errors can also occur due to an extracted value being too small or large to fit into a given variable
+
+> While in error state, extractions might be skipped, variables might be set to 0, variables might be set to a maximum value of the variable's given type
+
+`goodbit good()`:
+
+No error flags have been set, the stream is good
+
+`eofbit eof()`:
+
+Indicates if end-of-file reached on extraction
+
+`failbit fail()`:
+
+Indicates a logical error for the previous extraction or iteration operation
+
+`badbit bad()`:
+
+Indicates an error that happened during reading or writing the stream, the stream is bad. Further operations in the stream will also fail
+
+#### File output
+
+`ofstream`, output file stream, is a class that supports writing to a file
+
+The `ofstream` class inherits from the `ostream` class
+
+- `open()` is used to open the file
+- `is_open()` is used to check if the file was successfully opened
+- `close()` is used to close the file once all data is written
+
+#### Overloading stream operators
+
+`<<` is an insertion operator
+
+`>>` is an extraction operator
+
+> A c++ class can overload the insertion operator by creating a member function named `operator<<`
+
+##### WaitingLine Class example
+
+```c++
+class WaitingLine {
+  public:
+    WaitingLine& operator<<(const string& name) {
+      // add name to the end of the line
+      line.push(name);
+
+      cout << name << " enters the back of the line" << endl;
+      // returns pointer of this (WaitingLine class instance)
+      return *this;
+    }
+    WaitingLine& operator>>(string& frontName) {
+      // copy the name at the front of the line to frontName, then remove it
+      frontName = line.front();
+      line.pop();
+      // returns a pointer of this (WaitingLine class instance)
+      return *this;
+    }
+
+    queue<string> line;
+}
+
+int main() {
+  WaitingLine line1;
+
+  line1 << "Obi-wan";
+  line1 << "Anakin";
+  line1 << "Yoda";
+
+  string jedi;
+  for (int i = 0; i < 3; i++) {
+    line1 >> jedi;
+    cout << jedi << " exits the front of the line" << endl;
+  }
+  // add to the back of the line
+  line1 << "Mace Windu";
+  line1 << "Plo Koon";
+
+  for (int i = 0; i < 3; i++) {
+    line1 >> jedi;
+    cout << name " exits the front of the line" << endl;
+  }
+
+  cout << "Exiting main" << endl;
+
+  return 0;
+}
+```
 
 ### Classes
 
