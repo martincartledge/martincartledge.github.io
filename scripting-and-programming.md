@@ -2539,6 +2539,95 @@ int main() {
 }
 ```
 
+#### Class defintions
+
+There are three primary class definitions that express the level of privacy of a class' members
+
+`public`: public -> public | protected -> protected
+
+> public and protected members of a base class are accessible within the confines of their privacy state within a derived class
+
+`protected`: public -> protected | protected -> protected
+
+> public and protected members of the base class are accessible as protecetd members of a derived class
+
+`private`: public -> private | protected -> private
+
+> public and protected members of the base class are accessible as private members of a dervied class
+
+#### Override member functions
+
+> A derived class defines a member function with the same name and parameters as the base class' function
+
+The `override` keyword can only be used when overriding a virtual function
+
+##### Code challenge
+
+Define a member function PrintAll() for class PetData that prints output as follows with inputs "Fluffy", 5, and 4444. Hint: Make use of the base class' PrintAll() function.
+
+`Name: Fluffy, Age: 5, ID: 4444`
+
+##### Solution
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class AnimalData {
+public:
+   void SetName(string givenName) {
+      fullName = givenName;
+   };
+   void SetAge(int numYears) {
+      ageYears = numYears;
+   };
+
+   void PrintAll() {
+      cout << "Name: "  << fullName;
+      cout << ", Age: " << ageYears;
+   };
+
+private:
+   int    ageYears;
+   string fullName;
+};
+
+class PetData: public AnimalData {
+public:
+   void SetID(int petID) {
+      idNum = petID;
+   };
+   
+   void PrintAll() {
+      AnimalData::PrintAll();
+      cout << ", ID: " << idNum;
+   }
+
+private:
+   int idNum;
+};
+
+int main() {
+   PetData userPet;
+   string userName;
+   int userAge;
+   int userID;
+
+   cin >> userName;
+   cin >> userAge;
+   cin >> userID;
+
+   userPet.SetName(userName);
+   userPet.SetAge (userAge);
+   userPet.SetID  (userID);
+   userPet.PrintAll();
+   cout << endl;
+
+   return 0;
+}
+```
+
 #### Inheritance
 
 - Provides a way to create a new class from an existing class
@@ -2632,6 +2721,13 @@ int main(void) {
 ``` 
 
 #### Polymorphism and virtual functions
+
+> The process of determining which program behavior to execute depending on data types
+
+There are two main types of Polymorphism:
+
+- `Compile-time`: when the compiler determines which fucntion to call at compile-time
+- `Runtime`: when the compiler is unable to determine which function to call at compile-time; therefore, the decision is made while the program runs
 
 > Virtual function: a member function which is declared in the base class using the keyword `virtual` and is re-defined (overridden) by the derived class
 
