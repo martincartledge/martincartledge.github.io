@@ -18,3 +18,23 @@
 - Normalization (and three forms)
 - ER diagrams
 - Business intelligence and data mining
+
+SQL structured query language
+> formulate questions a database can respond to
+
+Used as data manpulation language, DML
+- CRUD
+
+Used as a data definition language, DDL
+- Edit structure (schema)
+
+SQL statements:
+- Whitespace independent
+- Composed of clauses
+- Keywords tell database to take action
+
+`LIKE`
+- Match a charcter within a field
+- The beginning, middle, or end
+- Use the `%` operator, i.e. `LIKE 'M%'`, `LIKE '%A%'`, `LIKE '%N'`
+
