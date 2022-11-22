@@ -22,6 +22,30 @@
 SQL structured query language
 > formulate questions a database can respond to
 
+Data
+
+> numeric, textual, visual, or audio information that describes real-world systems
+
+- Scope: amount of data produced and collected can vary
+- Format: can be produced as numbers, text, images, audio, or video
+- Access: private and public
+
+Database
+
+> collection of data in a structured format
+
+Database system
+
+> (database management system, DBMS) software that reads and writes data in a database
+
+Query
+
+> a request to retrieve or change data in a database
+
+Query language
+
+> A specialize programming language designed specifically for database systems
+
 Used as data manpulation language, DML
 - CRUD
 
@@ -93,4 +117,27 @@ SELECT states.division, people.team, COUNT(people.team)
 FROM states
 JOIN people ON states.state_abbrev=people.state_code
 GROUP BY states.division, people.team;
+```
+
+#### Primary keys
+
+> a field in a table that uniquely identifies the table records
+
+- Must contain a unique value for each row
+- It cannot contain `null` values
+
+`SHOW`
+
+> displays info contained in the database and its tables
+
+`SHOW TABLES`
+
+> command used to display all tables within the current MySQL database
+
+`SHOW COLUMNS`
+
+> displays information about the columns within a table
+
+```sql
+SHOW COLUMNS FROM tableName
 ```
