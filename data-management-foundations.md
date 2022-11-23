@@ -141,3 +141,106 @@ GROUP BY states.division, people.team;
 ```sql
 SHOW COLUMNS FROM tableName
 ```
+
+#### Transactions
+
+> group of queries that must be completed or rejected as a whole
+
+- ensure all transactions are processed completely or not at all
+- prevent conflicts between concurrent transactions
+- ensure transaction results are never lost
+
+#### Architecture
+
+> describes the internal components and the relationships between components
+
+Query processor
+
+> interprets queries, creates a plan to modify the database or retrieve datam and returns query results to the application
+
+Storage manager
+
+> translates the query processor instructions into low-level file system commands that modify or retrieve data
+
+Transaction manager
+
+> ensures transactions are properly executed
+
+Log
+
+> a file containing a complete record of all inserts, updates, and deletes processed by the database
+
+Catalog (data dictionary)
+
+> directory of tables, columns, indexes, and other database objects
+
+#### Column data types
+
+`INT` stores integer values
+
+`DECIMAL` store fractional numeric values
+
+`VARCHAR` stores textual values
+
+`DATE` stores year, month, and day
+
+#### Database design
+
+> specification of database objects, tables, columns, data types, and indexes
+
+Entity
+
+> a person, place, activity, or thing
+
+Relationship
+
+> a link between entities
+
+Attribute
+
+> a descriptive property of an entity
+
+Entities, relationships, and attributes are depicted in *ER diagrams*
+
+- Rectangles represent entities, entity names appear at the top of the rectanges
+- Lines between rectangles represent relationships
+- Text inside rectangles and below entity names represent attributes
+
+Three phases:
+- Analysis, specifies database requirements without regard to a database system
+- Logical design, 
+- Physical design
+
+#### Logical design
+
+> phase that implements database requirements in a specific database system
+
+Key 
+
+> a colum used to identify individual rows of a table
+
+Logical design is depicted in a *table diagram*
+
+- Rectangles represent tables, table names appear at the top of rectangles
+- Text within rectangles and below table names represent columns
+- Solid bullets • indicate key columns
+- Empty bullets and arrows -> <- indicate columns that refer to *keys*
+
+Schema
+
+> the logical design, specified in SQL and depicted in a table diagram
+
+#### Physical design
+
+> Phase that adds indexes and specifies how tables are organized on storage media
+
+Data independence
+
+> the principle that physical design never affects query results
+
+- allows designers to tune query performance without changes to the application program
+- when designers modify indexes or row order, applications run slower or faster
+
+### API, Application Programming Interface
+
+> library of procedures or classes that link a hosts programming language to a database
