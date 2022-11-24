@@ -244,3 +244,79 @@ Data independence
 ### API, Application Programming Interface
 
 > library of procedures or classes that link a hosts programming language to a database
+
+### Relational model
+
+> a database model based on the following mathematical principles:
+
+- data structure that prescibes how data is ogranized
+- operations that manipulate data structures
+- rules that govern valid relational data
+
+Relational data structures and operations are based on *set theory*
+
+Set
+
+> collection of values or elements with no inherent order
+
+The relational data structure is based on three mathematical concepts:
+
+- domain: named set of possible database values
+- tuple: a finite sequence of values, drawn from a fixed domain `integers, dictionarywords logicalvalues`
+- relation: named set of tuples, drawn from the same sequence of domains
+
+Relational terms
+
+| Mathematical | Database  | Files     |
+| ------------ | --------- | --------- |
+| Domain       | Data type | Data type |
+| Tuple        | Rpw       | Record    |
+| Relation     | Table     | File      |
+| Attribute    | Column    | Field     |
+
+Datbase model
+
+> a conceptual framework for database software
+
+### Relational operations
+
+- select: selects a subset of rows of a table
+- project: eliminates one or more columns of a table
+- product: lists all possible combinations of rows or tables
+- join: a product operation followed by a select operation
+- union: combines two tables by selecting all rows of both tables
+- intersect: combines two tables by selecting only rows common to both tables
+- difference: combines two tables by selecting rows that appear in one table but not the other
+
+The result of relational operations is always a table
+
+### Relational rules (integrity rules)
+
+> logical constraints that ensure data is valid and conforms to business policy
+
+##### structural rules
+
+> relational rules that govern data in every relational database
+
+- unique primary key: all tables should have a column with no repeated values
+- unique column names: different columns of the same table must have different names
+- no duplicate rows: no two rows of the same table may have identical values in all columns
+
+##### business rules
+
+> relational rules specific to a particular database and application
+
+- unique column names: in a particular column, values may not be repeated
+- no missing values: in a particular column, all rows must have known values
+- delete cascade: when a row is deleted, automatically delete all related row
+
+
+### Data types
+
+- integer: positive and negative integers, `INT` (4 bytes), `SMALLINT` (2 bytes)
+- decimal: numbers with fractional values, `FLOAT`, `DECIMAL`
+- character: textual characters, `CHAR` (fixed string of characters), `VARCHAR` (string of variable length up to a specified max size)
+- time: represent time, date, or both, `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`
+- binary: stores data as it appears in memory or computer files, `BLOB`, `BINARY`, `VARBINARY`, `IMAGE`
+- spatial: store geometic information, lines, polygons, map coordinates, `POLYGON`, `POINT`, `GEOMETRY`
+- document: textual data in a structured format i.e. XML or JSON
