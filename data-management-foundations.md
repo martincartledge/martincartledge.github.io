@@ -320,3 +320,59 @@ The result of relational operations is always a table
 - binary: stores data as it appears in memory or computer files, `BLOB`, `BINARY`, `VARBINARY`, `IMAGE`
 - spatial: store geometic information, lines, polygons, map coordinates, `POLYGON`, `POINT`, `GEOMETRY`
 - document: textual data in a structured format i.e. XML or JSON
+
+### Null values
+
+> Null is a special value that represents missing data
+
+Modify the SELECT statement to only select songs that have a NULL Title value.
+
+```sql
+CREATE TABLE Song (
+  ID INT,
+  Title VARCHAR(60),
+  Artist VARCHAR(60),
+  ReleaseYear INT,
+  PRIMARY KEY (ID)
+);
+
+INSERT INTO Song VALUES
+  (100, 'Hey Jude', 'Beatles', 1968),
+  (200, NULL, 'Taylor Swift', 2008),
+  (300, 'Need You Now', NULL, 2011),
+  (400, 'That\'s The Way Love Goes', NULL, 1993),
+  (500, NULL, 'Nirvana', 1991);
+
+SELECT *
+FROM Song
+WHERE Title IS NULL;
+```
+
+### Primary Keys
+
+> A column or group of columns used to identify a row
+
+#### Composite primary keys
+
+> primary key that consists of multiple columns
+
+- Denoted with parentheses
+- When grouped together, column values must be unique
+- Columns cannot contain `null`
+- Composite primary keys must be minimal
+
+#### Minimal primary key
+
+> All columns are necessary for uniqueness
+
+- When any column is removed from a minimal composite primary key, the resulting simple or composite column is no longer unique
+
+### Foreign keys
+
+> a column or group of columns that refer to a primary key
+
+- Values can be repeated
+- Values can be `null`
+- Non-null foreign key values must match unique primary key value
+
+
