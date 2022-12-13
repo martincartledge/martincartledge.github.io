@@ -375,4 +375,60 @@ WHERE Title IS NULL;
 - Values can be `null`
 - Non-null foreign key values must match unique primary key value
 
+#### Referential integrity
 
+> requires that all foreign keys must be `null` or match a primary key value
+
+- In relation databases, foreign keys must obey referential integrity at all times
+
+Can be violated in four ways:
+
+- A primary key is updated
+- A foreign key is updated
+- A row containing a primary key is deleted
+- A row containing a foreign key is inserted
+
+Databases can automatically correct referential integrity violations with any of the following four actions:
+
+- `RESTRICT` rejects an insert, update, delete that violates referential integrity
+- `SET NULL` set invalid foreign keys to `null`
+- `SET DEFAULT` sets invalid foreign keys to a default primary value
+- `CASCADE` propagates primary key changes to foreign keys
+
+`RESTRICT` is applied when no action is specified
+
+`SET NULL` cannot be used when a foreign key is not allowed
+
+The value specified for `SET DEFAULT` must be a valid primary key
+
+### Inner and outer joins
+
+> a `SELECT` statement that combines data from two tables, the left and the right table, into a single result
+
+Tables are combined by comparing columns from the left and right tables with the `=` operator
+
+The columns data types have to be comparable
+
+Typically, a join compares a foreign key of one table to the primary key of another, this is not required though
+
+In cases that columns names are the same, a prefix of the table name should be used
+
+```sql
+SELECT Council.Name, Jedi.Name
+FROM Council, Jedi
+WHERE Council.ID = Jedi.ID;
+```
+
+#### Left and right joins
+
+##### Left join
+
+> Selects all left table rows, but only matching right table rows
+
+##### Right join
+
+> Selects all right table rows, but only matching left table rows
+
+##### Outer join
+
+> Any join that selects unmatched rows, including left, right , and full joins
