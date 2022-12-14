@@ -432,3 +432,57 @@ WHERE Council.ID = Jedi.ID;
 ##### Outer join
 
 > Any join that selects unmatched rows, including left, right , and full joins
+
+##### Special cases
+
+- Can be used as inner, left, right, or full join
+
+> Equijoin: compares columns of two tables using the `=` operator (most joins are equijoins)
+
+> Non-equijoin: compares columns with an operator other than `=`, such as `>` or `<`
+
+##### Self-join
+
+> A table is joined to itself, can compare any columns of a table as long as the columns have comparable data types
+
+###### Alias
+
+- Important in self-join to distinguish between left and right tables
+
+> Alias: a temp name assigned to a column or table
+
+##### Cross-join
+
+> Combines two tables without comparing them
+
+- Does not use `WHERE` or `ON` clauses, uses `CROSS JOIN` instead
+- All possible combinations of rows fro both tables appear in the result
+
+### View tables
+
+> a table name associated with a `SELECT` statement, called the `view query`
+
+- The `CREATE VIEW` statement creates a new table and specifies the view name, query, and optionally column names
+
+```sql
+CREATE VIEW ViewName [ ( Column1, Column2 ) ]
+AS SelectStatement;
+```
+
+> Base table: table specified in the views query `FROM` clause
+
+> Materialized view: a view for which data is stored at all times
+
+Advantages of views:
+
+- Protect sensitive data
+- Save complex queries
+- Save optomized queries
+
+#### Updating views
+
+Some potential problems when updating a view are the following:
+
+- Primary keys: an insert to a view generates a `NULL` primary key value, primary keys cannot be `NULL`, therefore the insert is not allowed
+- Aggragate values, an update or an insert may create a new aggragate value, which must be converted to many base tables values. The conversion would be undefined, thus making the update or insert not allowed
+- Join views, a delete might delete foreign key rows or primary key rows, this would result in the delete being undefined and therefore not allowed
